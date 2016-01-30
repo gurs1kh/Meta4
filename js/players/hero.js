@@ -1,13 +1,15 @@
 function Hero(game, x, y) {
-	Player.call(this, game, x, y, 34 * 1.5, 32 * 1.5, 200); 
-	
 	var sheet = ASSET_MANAGER.getAsset("img/sheet5.png");
-    this.animation = new Animation(sheet, 94, 128, 33.3, 32, 0.02, 1, true, false);
+	var frameWidth = 33.3;
+	var frameHeight = 32; 
+	Player.call(this, game, x, y, frameWidth, frameHeight, 200); 
+	
+    this.animation = new Animation(sheet, 94, 128, frameWidth, frameHeight, 0.02, 1, true, false);
     
-    this.forwardAnimation = new Animation(sheet, 94, 128, 33.3, 32, 0.2, 3, true, false);
-    this.backwardAnimation = new Animation(sheet, 94.5, 224, 33.3, 32, 0.2, 3, true, false);
-    this.leftAnimation = new Animation(sheet, 94, 160, 33.3, 32, 0.2, 3, true, false);
-    this.rightAnimation = new Animation(sheet, 94, 192, 33.3, 32, 0.2, 3, true, false);
+    this.forwardAnimation = new Animation(sheet, 94, 128, frameWidth, frameHeight, 0.2, 3, true, false);
+    this.backwardAnimation = new Animation(sheet, 94.5, 224, frameWidth, frameHeight, 0.2, 3, true, false);
+    this.leftAnimation = new Animation(sheet, 94, 160, frameWidth, frameHeight, 0.2, 3, true, false);
+    this.rightAnimation = new Animation(sheet, 94, 192, frameWidth, frameHeight, 0.2, 3, true, false);
     
     this.boxes = true;
 }
@@ -18,25 +20,25 @@ Hero.prototype.constructor = Hero;
 Hero.prototype.update = function() {
     if (this.game.a) {
       this.wleft = true;
-      this.x = this.x - 1.5;
+      this.x--;
     }
     else this.wleft = false;
     
     if (this.game.w) {
       this.wbackward = true;
-      this.y = this.y - 1.5;
+      this.y--;
     }
     else this.wbackward = false;
     
     if (this.game.s) {
       this.wforward = true;
-      this.y = this.y + 1.5;
+      this.y++;
     }
     else this.wforward = false;
     
     if (this.game.d) {
       this.wright = true;
-      this.x = this.x + 1.5;
+      this.x++;
     }
     else this.wright = false;
     
@@ -71,19 +73,19 @@ Hero.prototype.update = function() {
 Hero.prototype.draw = function(ctx) {
   
     if (this.wforward) {
-      this.forwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
+      this.forwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
     }
     else if (this.wbackward) {
-      this.backwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
+      this.backwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     }
     else if (this.wleft) {
-      this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
+      this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     }    
     else if (this.wright) {
-      this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
+      this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     }
     else {
-        this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
+        this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     }
     if (this.boxes) {
       ctx.strokeStyle = "red";

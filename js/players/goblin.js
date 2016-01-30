@@ -1,13 +1,15 @@
 function Goblin(game, x, y) {
-	Player.call(this, game, x, y, 34 * 1.5, 32 * 1.5, 100);
-    
 	var sheet = ASSET_MANAGER.getAsset("img/sheet2.png");
-    this.animation = new Animation(sheet, 94, 128, 33.3, 32, 0.02, 1, true, false);
+	var frameWidth = 33.3;
+	var frameHeight = 32;
+	Player.call(this, game, x, y, frameWidth, frameHeight, 200); 
+	
+	this.animation = new Animation(sheet, 94, 128, frameWidth, frameHeight, 0.02, 1, true, false);
     
-    this.forwardAnimation = new Animation(sheet, 94, 128, 33.3, 32, 0.2, 3, true, false);
-    this.backwardAnimation = new Animation(sheet, 94.5, 224, 33.3, 32, 0.2, 3, true, false);
-    this.leftAnimation = new Animation(sheet, 94, 160, 33.3, 32, 0.2, 3, true, false);
-    this.rightAnimation = new Animation(sheet, 94, 192, 33.3, 32, 0.2, 3, true, false);
+    this.forwardAnimation = new Animation(sheet, 94, 128, frameWidth, frameHeight, 0.2, 3, true, false);
+    this.backwardAnimation = new Animation(sheet, 94.5, 224, frameWidth, frameHeight, 0.2, 3, true, false);
+    this.leftAnimation = new Animation(sheet, 94, 160, frameWidth, frameHeight, 0.2, 3, true, false);
+    this.rightAnimation = new Animation(sheet, 94, 192, frameWidth, frameHeight, 0.2, 3, true, false);
     
     this.seesHero = false;
     this.atStarting = true;
@@ -86,19 +88,19 @@ Goblin.prototype.update = function() {
 Goblin.prototype.draw = function(ctx) {
   
     if (this.wforward) {
-      this.forwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
+      this.forwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     }
     else if (this.wbackward) {
-      this.backwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
+      this.backwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     }
     else if (this.wleft) {
-      this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
+      this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     }    
     else if (this.wright) {
-      this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
+      this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     }
     else {
-      this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1.5);
+      this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale);
     }
     if (this.boxes) {
       ctx.strokeStyle = "red";
