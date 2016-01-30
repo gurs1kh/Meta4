@@ -1,4 +1,6 @@
-function Hero(game) {
+function Hero(game, x, y) {
+	Player.call(this, game, x, y, 34 * 1.5, 32 * 1.5, 200); 
+	
 	var sheet = ASSET_MANAGER.getAsset("img/sheet5.png");
     this.animation = new Animation(sheet, 94, 128, 33.3, 32, 0.02, 1, true, false);
     
@@ -7,28 +9,13 @@ function Hero(game) {
     this.leftAnimation = new Animation(sheet, 94, 160, 33.3, 32, 0.2, 3, true, false);
     this.rightAnimation = new Animation(sheet, 94, 192, 33.3, 32, 0.2, 3, true, false);
     
-    this.wforward = false;
-    this.wbackward = false;
-    this.wleft = false;
-    this.wright = false;
-    
-    this.radius = 100;
-    this.ground = 400;
-    this.x = 400;
-    this.y = 400;
-    
     this.boxes = true;
-    this.boundingBox = new BoundingBox(this.x + 5, this.y, this.animation.frameWidth + 8, this.animation.frameHeight + 15);
-    this.viewingCircle = new ViewingCircle(this.boundingBox.x + this.boundingBox.width / 2, this.boundingBox.y + this.boundingBox.height / 2, 200);
-    
-    Entity.call(this, game, this.x, this.y);
 }
 
-Hero.prototype = new Entity();
+Hero.prototype = new Player();
 Hero.prototype.constructor = Hero;
 
 Hero.prototype.update = function() {
-  
     if (this.game.a) {
       this.wleft = true;
       this.x = this.x - 1.5;
@@ -55,16 +42,16 @@ Hero.prototype.update = function() {
     
     for (var i = 0; i < this.game.enemies.length; i++) {
       var enemy = this.game.enemies[i];
-      if(this.boundingBox.collide(enemy.boundingBox)) {
+      if (this.collide(enemy)) {
         this.removeFromWorld = true;
         enemy.seesHero = false;
-        if (enemy.x !== enemy.startingX && enemy.y !== enemy.startingY) {
+        if(enemy.x !== enemy.startingX && enemy.y !== enemy.startingY) {
           enemy.walkTowardX = enemy.startingX;
           enemy.walkTowardY = enemy.startingY;
           enemy.atStarting = false;
         }
       }
-      else if(this.viewingCircle.collide(enemy.boundingBox)) {
+      else if(this.canSee(enemy)) {
         enemy.seesHero = true;
         enemy.walkTowardX = this.x;
         enemy.walkTowardY = this.y;
@@ -78,8 +65,6 @@ Hero.prototype.update = function() {
       }
     }
     
-    this.boundingBox = new BoundingBox(this.x + 5, this.y, this.animation.frameWidth + 8, this.animation.frameHeight + 15);
-    this.viewingCircle = new ViewingCircle(this.boundingBox.x + this.boundingBox.width / 2, this.boundingBox.y + this.boundingBox.height / 2, 200);
     Entity.prototype.update.call(this);
 }
 
@@ -102,10 +87,10 @@ Hero.prototype.draw = function(ctx) {
     }
     if (this.boxes) {
       ctx.strokeStyle = "red";
-      ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.width, this.boundingBox.height);
+      ctx.strokeRect(this.x, this.y, this.width, this.height);
       ctx.strokeStyle = "green";
       ctx.beginPath()
-      ctx.arc(this.viewingCircle.x, this.viewingCircle.y, this.viewingCircle.radius, 0, 2*Math.PI);
+      ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.visualRadius, 0, 2*Math.PI);
       ctx.stroke();
     }
     Entity.prototype.draw.call(this);

@@ -1,4 +1,6 @@
-function Goblin(game) {
+function Goblin(game, x, y) {
+	Player.call(this, game, x, y, 34 * 1.5, 32 * 1.5, 100);
+    
 	var sheet = ASSET_MANAGER.getAsset("img/sheet2.png");
     this.animation = new Animation(sheet, 94, 128, 33.3, 32, 0.02, 1, true, false);
     
@@ -7,32 +9,16 @@ function Goblin(game) {
     this.leftAnimation = new Animation(sheet, 94, 160, 33.3, 32, 0.2, 3, true, false);
     this.rightAnimation = new Animation(sheet, 94, 192, 33.3, 32, 0.2, 3, true, false);
     
-    this.wforward = false;
-    this.wbackward = false;
-    this.wleft = false;
-    this.wright = false;
-    
     this.seesHero = false;
     this.atStarting = true;
     this.walkTowardX = 0;
     this.walkTowardY = 0;
-    
-    this.radius = 100;
-    this.ground = 400;
-    this.x = 200;
-    this.y = 100;
-    
+       
     this.startingX = this.x;
     this.startingY = this.y;
     
     this.boxes = true;
-    this.boundingBox = new BoundingBox(this.x + 5, this.y, this.animation.frameWidth + 8, this.animation.frameHeight + 15);
-    
-    Entity.call(this, game, this.x, this.y); 
 }
-
-Goblin.prototype = new Entity();
-Goblin.prototype.constructor = Goblin;
 
 Goblin.prototype.update = function() {
   this.wforward = false;
@@ -116,7 +102,7 @@ Goblin.prototype.draw = function(ctx) {
     }
     if (this.boxes) {
       ctx.strokeStyle = "red";
-      ctx.strokeRect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.width, this.boundingBox.height);
+      ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
 
     Entity.prototype.draw.call(this);
