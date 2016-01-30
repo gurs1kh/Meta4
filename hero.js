@@ -1,11 +1,11 @@
 function Hero(game) {
-  
-    this.animation = new Animation(ASSET_MANAGER.getAsset("enemyPractice/public_html/img/sheet5.png"), 94, 128, 33.3, 32, 0.02, 1, true, false);
+	var sheet = ASSET_MANAGER.getAsset("img/sheet5.png");
+    this.animation = new Animation(sheet, 94, 128, 33.3, 32, 0.02, 1, true, false);
     
-    this.forwardAnimation = new Animation(ASSET_MANAGER.getAsset("enemyPractice/public_html/img/sheet5.png"), 94, 128, 33.3, 32, 0.2, 3, true, false);
-    this.backwardAnimation = new Animation(ASSET_MANAGER.getAsset("enemyPractice/public_html/img/sheet5.png"), 94.5, 224, 33.3, 32, 0.2, 3, true, false);
-    this.leftAnimation = new Animation(ASSET_MANAGER.getAsset("enemyPractice/public_html/img/sheet5.png"), 94, 160, 33.3, 32, 0.2, 3, true, false);
-    this.rightAnimation = new Animation(ASSET_MANAGER.getAsset("enemyPractice/public_html/img/sheet5.png"), 94, 192, 33.3, 32, 0.2, 3, true, false);
+    this.forwardAnimation = new Animation(sheet, 94, 128, 33.3, 32, 0.2, 3, true, false);
+    this.backwardAnimation = new Animation(sheet, 94.5, 224, 33.3, 32, 0.2, 3, true, false);
+    this.leftAnimation = new Animation(sheet, 94, 160, 33.3, 32, 0.2, 3, true, false);
+    this.rightAnimation = new Animation(sheet, 94, 192, 33.3, 32, 0.2, 3, true, false);
     
     this.wforward = false;
     this.wbackward = false;
@@ -19,7 +19,6 @@ function Hero(game) {
     
     this.boxes = true;
     this.boundingBox = new BoundingBox(this.x + 5, this.y, this.animation.frameWidth + 8, this.animation.frameHeight + 15);
-    
     this.viewingCircle = new ViewingCircle(this.boundingBox.x + this.boundingBox.width / 2, this.boundingBox.y + this.boundingBox.height / 2, 200);
     
     Entity.call(this, game, this.x, this.y);

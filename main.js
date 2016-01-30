@@ -1,8 +1,3 @@
-
-
-
-
-
 // the "main" code begins here
 
 var ASSET_MANAGER = new AssetManager();
@@ -11,7 +6,7 @@ ASSET_MANAGER.queueDownload("img/sheet2.png");
 ASSET_MANAGER.queueDownload("img/sheet5.png");
 
 ASSET_MANAGER.downloadAll(function () {
-    console.log("starting up da sheild");
+    console.log("starting up da shield");
     var canvas = document.getElementById('gameWorld');
     var ctx = canvas.getContext('2d');
 
