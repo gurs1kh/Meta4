@@ -21,7 +21,7 @@ Hero.prototype.update = function() {
     if (this.game.a) {
       this.wleft = true;
       this.x--;
-    }
+    } 
     else this.wleft = false;
     
     if (this.game.w) {
@@ -39,7 +39,7 @@ Hero.prototype.update = function() {
     if (this.game.d) {
       this.wright = true;
       this.x++;
-    }
+    } 
     else this.wright = false;
     
     for (var i = 0; i < this.game.enemies.length; i++) {
@@ -52,8 +52,7 @@ Hero.prototype.update = function() {
           enemy.walkTowardY = enemy.startingY;
           enemy.atStarting = false;
         }
-      }
-      else if(this.canSee(enemy)) {
+      } else if(this.canSee(enemy)) {
         enemy.seesHero = true;
         enemy.walkTowardX = this.x;
         enemy.walkTowardY = this.y;
@@ -71,20 +70,15 @@ Hero.prototype.update = function() {
 }
 
 Hero.prototype.draw = function(ctx) {
-  
     if (this.wforward) {
       this.forwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
-    }
-    else if (this.wbackward) {
+    } else if (this.wbackward) {
       this.backwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    }
-    else if (this.wleft) {
+    } else if (this.wleft) {
       this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    }    
-    else if (this.wright) {
+    } else if (this.wright) {
       this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    }
-    else {
+    } else {
         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     }
     if (this.boxes) {
