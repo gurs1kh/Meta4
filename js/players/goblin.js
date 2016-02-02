@@ -81,7 +81,6 @@ Goblin.prototype.update = function() {
 		this.wright = false;
 	}
 	
-	this.boundingBox = new BoundingBox(this.x + 5, this.y, this.animation.frameWidth + 8, this.animation.frameHeight + 15);
 	Entity.prototype.update.call(this);
 }
 
