@@ -13,14 +13,14 @@ ASSET_MANAGER.downloadAll(function () {
 	
 	var gameEngine = new GameEngine();
 	var enemies = [];
-	var bg = new Background(gameEngine);
+	//var bg = new Background(gameEngine);
 	var hero = new Hero(gameEngine, 250, 250);
 	var goblin = new Goblin(gameEngine, 100, 50);
 	
 	enemies.push(goblin);
 	console.log(hero);
 	gameEngine.enemies = enemies;
-	gameEngine.addEntity(bg);
+	//gameEngine.addEntity(bg);
 	gameEngine.addEntity(hero);
 	gameEngine.addEntity(goblin);
 	
