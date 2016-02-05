@@ -28,10 +28,12 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
 	var locY = y;
 	var drawW = Math.min(this.frameWidth * scaleBy, ctx.canvas.width);
 	var drawH = Math.min(this.frameHeight * scaleBy, ctx.canvas.height);
+	var cropW = drawW / scaleBy;
+	var cropH = drawH / scaleBy;
 	ctx.drawImage(this.spriteSheet,
 				  index * this.frameWidth + this.startX,
 				  this.startY,
-				  this.frameWidth, this.frameHeight,
+				  cropW, cropH,
 				  locX, locY, drawW, drawH);
 }
 
