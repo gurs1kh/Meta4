@@ -26,13 +26,13 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
 	
 	var locX = x;
 	var locY = y;
+	var drawW = Math.min(this.frameWidth * scaleBy, ctx.canvas.width);
+	var drawH = Math.min(this.frameHeight * scaleBy, ctx.canvas.height);
 	ctx.drawImage(this.spriteSheet,
 				  index * this.frameWidth + this.startX,
 				  this.startY,
 				  this.frameWidth, this.frameHeight,
-				  locX, locY,
-				  this.frameWidth * scaleBy,
-				  this.frameHeight * scaleBy);
+				  locX, locY, drawW, drawH);
 }
 
 Animation.prototype.currentFrame = function () {
