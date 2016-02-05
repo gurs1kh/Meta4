@@ -1,10 +1,10 @@
-function Player(game, x, y, width, height, visualRadius) {
+function Player(game, x, y, width, height, radius) {
 	Entity.call(this, game, x, y);
 	this.x = x;
 	this.y = y;
 	this.width = width;
 	this.height = height;
-	this.visualRadius = visualRadius;
+	this.radius = radius;
 	
 	this.wforward = false;
 	this.wbackward = false;
@@ -36,8 +36,28 @@ Player.prototype.canSee = function(other) {
 	var distanceC2 = Math.sqrt(((otherRight - midX) * (otherRight - midX)) + ((otherTop - midY) * (otherTop - midY)));
 	var distanceC3 = Math.sqrt(((otherLeft - midX) * (otherLeft - midX)) + ((otherBottom - midY) * (otherBottom - midY)));
 	var distanceC4 = Math.sqrt(((otherRight - midX) * (otherRight - midX)) + ((otherBottom - midY) * (otherBottom - midY)));
-	if (distanceC1 < this.visualRadius || distanceC2 < this.visualRadius || distanceC3 < this.visualRadius || distanceC4 < this.visualRadius) {
-	return true;
+	return (distanceC1 < this.radius || distanceC2 < this.radius || distanceC3 < this.radius || distanceC4 < this.radius);	
+}
+
+Player.prototype.draw = function(ctx) {
+	if (this.wforward) {
+		this.forwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
+	} else if (this.wbackward) {
+		this.backwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+	} else if (this.wleft) {
+		this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+	} else if (this.wright) {
+		this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+	} else {
+		this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
 	}
-	return false;
+	if (this.boxes) {
+	  ctx.strokeStyle = "red";
+	  ctx.strokeRect(this.x, this.y, this.width, this.height);
+	  ctx.strokeStyle = "green";
+	  ctx.beginPath()
+	  ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.radius, 0, 2*Math.PI);
+	  ctx.stroke();
+	}
+	Entity.prototype.draw.call(this);
 }

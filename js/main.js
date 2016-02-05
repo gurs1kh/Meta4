@@ -4,6 +4,7 @@ var ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("img/sheet3.png");
 ASSET_MANAGER.queueDownload("img/sheet5.png");
+ASSET_MANAGER.queueDownload("img/META4map-min2.png");
 
 ASSET_MANAGER.downloadAll(function () {
 	console.log("starting up da shield");
@@ -11,19 +12,21 @@ ASSET_MANAGER.downloadAll(function () {
 	var ctx = canvas.getContext('2d');
 	ctx.scale(1.5, 1.5);
 	
-	var gameEngine = new GameEngine();
+	var game = new GameEngine();
 	var enemies = [];
-	//var bg = new Background(gameEngine);
-	var hero = new Hero(gameEngine, 250, 250);
-	var goblin = new Goblin(gameEngine, 100, 50);
+	var map = new Map(game);
+	game.hero = new Hero(game, 250, 250);
+	var goblin = new Goblin(game, 100, 50);
+	game.camera = new Camera(game);
 	
 	enemies.push(goblin);
-	console.log(hero);
-	gameEngine.enemies = enemies;
-	//gameEngine.addEntity(bg);
-	gameEngine.addEntity(hero);
-	gameEngine.addEntity(goblin);
+	console.log(game.hero);
+	game.enemies = enemies;
+	game.addEntity(map);
+	game.addEntity(game.hero);
+	game.addEntity(goblin);
+	game.addEntity(game.camera);
 	
-	gameEngine.init(ctx);
-	gameEngine.start();
+	game.init(ctx);
+	game.start();
 });

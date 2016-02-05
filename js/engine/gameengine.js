@@ -1,6 +1,6 @@
 // This game shell was happily copied from Googler Seth Ladd's "Bad Aliens" game and his Google IO talk in 2011
 
-window.requestAnimFrame = (function () {
+window.requestAnimationFrame = (function () {
 	return window.requestAnimationFrame ||
 	window.webkitRequestAnimationFrame ||
 	window.mozRequestAnimationFrame ||
@@ -53,7 +53,7 @@ GameEngine.prototype.start = function () {
 	var that = this;
 	(function gameLoop() {
 		that.loop();
-		requestAnimFrame(gameLoop, that.ctx.canvas);
+		requestAnimationFrame(gameLoop, that.ctx.canvas);
 	})();
 }
 
@@ -86,6 +86,9 @@ GameEngine.prototype.addEntity = function (entity) {
 GameEngine.prototype.draw = function () {
 	this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 	this.ctx.save();
+	var transX = -(this.hero.x - 250);
+	var transY = -(this.hero.y - 250);
+	this.ctx.translate(transX, transY);
 	for (var i = 0; i < this.entities.length; i++) {
 		this.entities[i].draw(this.ctx);
 	}

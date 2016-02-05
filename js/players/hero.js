@@ -10,8 +10,9 @@ function Hero(game, x, y) {
     this.backwardAnimation = new Animation(sheet, 94.5, 224, frameWidth, frameHeight, 0.2, 3, true, false);
     this.leftAnimation = new Animation(sheet, 94, 160, frameWidth, frameHeight, 0.2, 3, true, false);
     this.rightAnimation = new Animation(sheet, 94, 192, frameWidth, frameHeight, 0.2, 3, true, false);
-    
-    this.boxes = true;
+    this.speed = 1;
+	
+	this.boxes = true;
 }
 
 Hero.prototype = new Player();
@@ -20,25 +21,25 @@ Hero.prototype.constructor = Hero;
 Hero.prototype.update = function() {
     if (this.game.a) {
       this.wleft = true;
-      this.x--;
+      this.x -= this.speed;
     } 
     else this.wleft = false;
     
     if (this.game.w) {
       this.wbackward = true;
-      this.y--;
+      this.y -= this.speed;
     }
     else this.wbackward = false;
     
     if (this.game.s) {
       this.wforward = true;
-      this.y++;
+      this.y += this.speed;
     }
     else this.wforward = false;
     
     if (this.game.d) {
       this.wright = true;
-      this.x++;
+      this.x += this.speed;
     } 
     else this.wright = false;
     
@@ -67,27 +68,4 @@ Hero.prototype.update = function() {
     }
     
     Entity.prototype.update.call(this);
-}
-
-Hero.prototype.draw = function(ctx) {
-    if (this.wforward) {
-      this.forwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
-    } else if (this.wbackward) {
-      this.backwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    } else if (this.wleft) {
-      this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    } else if (this.wright) {
-      this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    } else {
-        this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    }
-    if (this.boxes) {
-      ctx.strokeStyle = "red";
-      ctx.strokeRect(this.x, this.y, this.width, this.height);
-      ctx.strokeStyle = "green";
-      ctx.beginPath()
-      ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.visualRadius, 0, 2*Math.PI);
-      ctx.stroke();
-    }
-    Entity.prototype.draw.call(this);
 }
