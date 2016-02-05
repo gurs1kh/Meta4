@@ -1,5 +1,5 @@
 function Goblin(game, x, y) {
-	var sheet = ASSET_MANAGER.getAsset("img/sheet2.png");
+	var sheet = ASSET_MANAGER.getAsset("img/sheet3.png");
 	var frameWidth = 33.3;
 	var frameHeight = 32;
 	Player.call(this, game, x, y, frameWidth, frameHeight, 200);

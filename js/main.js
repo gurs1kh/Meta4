@@ -2,7 +2,7 @@
 
 var ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("img/sheet2.png");
+ASSET_MANAGER.queueDownload("img/sheet3.png");
 ASSET_MANAGER.queueDownload("img/sheet5.png");
 
 ASSET_MANAGER.downloadAll(function () {
