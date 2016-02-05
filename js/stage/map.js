@@ -1,7 +1,7 @@
 function Map(game) {
 	Entity.call(this, game, 0, 400);
 	var sheet = ASSET_MANAGER.getAsset("img/META4map-min2.png");
-	this.animation = new Animation(sheet, 0, 0, 12800, 12800, 1, 1, true, false);
+	this.animation = new Animation(sheet, 0, 0, 3864, 3904, 1, 1, true, false);
 	
 }
 
