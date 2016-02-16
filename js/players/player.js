@@ -55,8 +55,12 @@ Player.prototype.draw = function(ctx) {
 	  ctx.strokeStyle = "red";
 	  ctx.strokeRect(this.x, this.y, this.width, this.height);
 	  ctx.strokeStyle = "green";
-	  ctx.beginPath()
+	  ctx.beginPath();
 	  ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.radius, 0, 2*Math.PI);
+	  ctx.stroke();
+	  ctx.strokeStyle = "white";
+	  ctx.beginPath();
+	  ctx.arc(this.x + this.width / 2, this.y + this.height, 2, 0, 2*Math.PI);
 	  ctx.stroke();
 	}
 	Entity.prototype.draw.call(this);

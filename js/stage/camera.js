@@ -1,19 +1,13 @@
-function Camera(game) {
-	Entity.call(this, game, 0, 0);
-	// this.width = game.ctx.canvas.width;
-	// this.height = game.ctx.canvas.height;
+function Camera(game, width, height) {
+	Entity.call(this, game, game.hero.x || 0, game.hero.y || 0);
+	this.width = width;
+	this.height = height;
 }
 
 Camera.prototype = new Entity();
 Camera.prototype.constructor = Camera;
 
 Camera.prototype.update = function() {
-	if (this.game.a) this.x -= this.game.hero.speed;
-    if (this.game.w) this.y -= this.game.hero.speed;    
-    if (this.game.s) this.y += this.game.hero.speed;
-    if (this.game.d) this.x += this.game.hero.speed;
-}
-
-Camera.prototype.draw = function(ctx) {
-	
+	this.x = this.game.hero.x;
+	this.y = this.game.hero.y;
 }
