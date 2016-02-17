@@ -10,7 +10,7 @@ function Hero(game, x, y) {
     this.backwardAnimation = new Animation(sheet, 94.5, 224, frameWidth, frameHeight, 0.2, 3, true, false);
     this.leftAnimation = new Animation(sheet, 94, 160, frameWidth, frameHeight, 0.2, 3, true, false);
     this.rightAnimation = new Animation(sheet, 94, 192, frameWidth, frameHeight, 0.2, 3, true, false);
-    this.speed = 1;
+    this.speed = 2;
 	
 	this.boxes = true;
 }
