@@ -19,7 +19,47 @@ Hero.prototype = new Player();
 Hero.prototype.constructor = Hero;
 
 Hero.prototype.update = function() {
-	var prevX = this.x + this.width / 2;
+	
+	var velocity = {x:0, y:0};
+	if (this.game.a) {
+      this.wleft = true;
+      velocity.x -= this.speed;
+    } 
+    else this.wleft = false;
+    
+    if (this.game.w) {
+      this.wbackward = true;
+      velocity.y -= this.speed;
+    }
+    else this.wbackward = false;
+    
+    if (this.game.s) {
+      this.wforward = true;
+      velocity.y += this.speed;
+    }
+    else this.wforward = false;
+    
+    if (this.game.d) {
+      this.wright = true;
+      velocity.x += this.speed;
+    } 
+    else this.wright = false;
+	
+	if (velocity.x || velocity.y) {
+		var player = this;
+		var feetX = this.x + this.width / 2;
+		var feetY = this.y + this.height;
+		var intersects = this.game.map.boundLines.filter(function(line) {
+			var intersect = checkLineIntersection(feetX, feetY, feetX + velocity.x, feetY + velocity.y, line.x1, line.y1, line.x2, line.y2);
+			return intersect.onLine1 && intersect.onLine2;
+		});
+		if (!intersects.length) {
+			this.x += velocity.x;
+			this.y += velocity.y;
+		}
+	}
+	
+	/*var prevX = this.x + this.width / 2;
 	var prevY = this.y + this.height;
 	var velocity = {x:0, y:0};
     if (this.game.a) {
@@ -55,24 +95,30 @@ Hero.prototype.update = function() {
 	// if (this.x + this.width > bounds.x + bounds.width) this.x = bounds.x + bounds.width;
 	// if (this.y + this.height > bounds.y + bounds.height) this.y = bounds.y + bounds.height;
     var boundLines = this.game.map.boundLines;
+	var changeX = 0;
+	var changeY = 0;
 	for(var i = 0; i < boundLines.length; i++) {
 		var line = boundLines[i];
-		var intersect = checkLineIntersection(prevX, prevY, feetX, feetY, line.x1, line.y1, line.x2, line.y2);
+		var intersect = checkLineIntersection(feetX - this.speed, feetY - this.speed, feetX + this.speed, feetY + this.speed, line.x1, line.y1, line.x2, line.y2);
 		if (intersect.onLine1 && intersect.onLine2) {
 			console.log(i, line, intersect);
+			
 			feetX = intersect.x;
 			feetY = intersect.y;
 			
-			if (line.top) feetY += 2;
-			if (line.bottom) feetY -= 2;
-			if (line.left) feetX += 2;
-			if (line.right) feetX -= 2;
+			
+			if (line.top) changeY += 2.1;
+			if (line.bottom) changeY -= 2,1;
+			if (line.left) changeX += 2.1;
+			if (line.right) changeX -= 2.1;
 		}
 	}
+	feetX += changeX;
+	feetY += changeY;
 	
 	this.x = feetX - this.width / 2;
 	this.y = feetY - this.height;
-	
+	*/
 	for (var i = 0; i < this.game.enemies.length; i++) {
       var enemy = this.game.enemies[i];
       if (this.collide(enemy)) {

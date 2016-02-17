@@ -6,7 +6,6 @@ function Map(game) {
 						{x1:325, y1:6070, x2:6075, y2:6070, bottom:true},
 						{x1:6070, y1:6075, x2:6070, y2:325, right:true},
 						{x1:6085, y1:330, x2:315, y2:330, top:true},
-						{x1:320, y1:350, x2:350, y2:320, top:true, left:true},
 						
 						{x1:2670, y1:2326, x2:2328, y2:2671, bottom:true, right:true},
 						{x1:2328, y1:2671, x2:2328, y2:3728, right:true},
