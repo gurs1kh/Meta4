@@ -8,6 +8,6 @@ Camera.prototype = new Entity();
 Camera.prototype.constructor = Camera;
 
 Camera.prototype.update = function() {
-	this.x = this.game.hero.x;
-	this.y = this.game.hero.y;
+	this.x = this.game.hero.x + this.game.hero.width / 2;
+	this.y = this.game.hero.y + this.game.hero.height / 2;
 }
