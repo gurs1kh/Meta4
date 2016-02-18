@@ -1,8 +1,8 @@
 function Goblin(game, x, y) {
-	var sheet = ASSET_MANAGER.getAsset("img/sheet2.png");
+	var sheet = ASSET_MANAGER.getAsset("img/sheet3.png");
 	var frameWidth = 33.3;
 	var frameHeight = 32;
-	Player.call(this, game, x, y, frameWidth, frameHeight, 200);
+	Player.call(this, game, x, y, frameWidth, frameHeight, 0);
 	
 	this.animation = new Animation(sheet, 94, 128, frameWidth, frameHeight, 0.02, 1, true, false);
 	
@@ -18,9 +18,15 @@ function Goblin(game, x, y) {
 	
 	this.startingX = this.x;
 	this.startingY = this.y;
+        
+        this.hitpoints = 100;
+        this.canBeHit = 1;
 	
-	this.boxes = true;
+	this.boxes = false;
 }
+
+Goblin.prototype = new Player();
+Goblin.prototype.constructor = Goblin;
 
 Goblin.prototype.update = function() {
 	this.wforward = false;
@@ -30,7 +36,8 @@ Goblin.prototype.update = function() {
 	//if the goblin is within the viewing circle
 	if (this.seesHero || !this.atStarting) {
 		//if the goblin and destination are on the same y axis
-		if (this.walkTowardY === this.y) {
+                ///**************************************************************************************TODO: changed this line*/
+                 if (this.walkTowardY < this.y + 1 && this.walkTowardY > this.y - 1) {
 			//if the destination is to the left of the goblin
 			if (this.walkTowardX < this.x) {
 				this.wleft = true;
@@ -82,24 +89,4 @@ Goblin.prototype.update = function() {
 	}
 	
 	Entity.prototype.update.call(this);
-}
-
-Goblin.prototype.draw = function(ctx) {
-	if (this.wforward) {
-		this.forwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-	} else if (this.wbackward) {
-		this.backwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-	} else if (this.wleft) {
-		this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-	} else if (this.wright) {
-		this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-	} else {
-		this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale);
-	}
-	if (this.boxes) {
-		ctx.strokeStyle = "red";
-		ctx.strokeRect(this.x, this.y, this.width, this.height);
-	}
-	
-	Entity.prototype.draw.call(this);
 }

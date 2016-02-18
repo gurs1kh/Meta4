@@ -1,29 +1,67 @@
 // the "main" code begins here
+window.onload = function () {
+  ASSET_MANAGER = new AssetManager();
 
-var ASSET_MANAGER = new AssetManager();
+  ASSET_MANAGER.queueDownload("img/sheet3.png");
+  ASSET_MANAGER.queueDownload("img/sheet5.png");
+  ASSET_MANAGER.queueDownload("img/META4map.gif");
+  ASSET_MANAGER.queueDownload("img/weaponsheet2.png");
+  ASSET_MANAGER.queueDownload("img/weaponsheet2_flipped.png");
+  ASSET_MANAGER.queueDownload("img/weaponsheet1_flipped-rotated.png");
+  ASSET_MANAGER.queueDownload("img/weaponsheet1_flipped-rotated_2.png");
+  ASSET_MANAGER.queueDownload("img/arrow.png");
+  ASSET_MANAGER.queueDownload("img/bows.png");
 
-ASSET_MANAGER.queueDownload("img/sheet2.png");
-ASSET_MANAGER.queueDownload("img/sheet5.png");
+  ASSET_MANAGER.downloadAll(function () {
+//	console.log("starting up da shield");
+    var canvas = document.getElementById('gameWorld');
+    var ctx = canvas.getContext('2d');
+//	ctx.scale(1.5, 1.5);
 
-ASSET_MANAGER.downloadAll(function () {
-	console.log("starting up da shield");
-	var canvas = document.getElementById('gameWorld');
-	var ctx = canvas.getContext('2d');
-	ctx.scale(1.5, 1.5);
-	
-	var gameEngine = new GameEngine();
-	var enemies = [];
-	var bg = new Background(gameEngine);
-	var hero = new Hero(gameEngine, 250, 250);
-	var goblin = new Goblin(gameEngine, 100, 50);
-	
-	enemies.push(goblin);
-	console.log(hero);
-	gameEngine.enemies = enemies;
-	gameEngine.addEntity(bg);
-	gameEngine.addEntity(hero);
-	gameEngine.addEntity(goblin);
-	
-	gameEngine.init(ctx);
-	gameEngine.start();
-});
+    var game = new GameEngine();
+    var enemies = [];
+    game.map = new Map(game);
+    game.hero = new Hero(game, 3180, 4100);
+    game.camera = new Camera(game, canvas.width, canvas.height);
+    var goblin = new Goblin(game, 2900, 4100);
+
+    enemies.push(goblin);
+    console.log(game.hero);
+    game.enemies = enemies;
+    game.addEntity(game.map);
+    game.addEntity(game.hero);
+    game.addEntity(game.hero.weapon);
+    game.addEntity(goblin);
+    game.addEntity(game.camera);
+    var weapon = new Weapon(game, 3300, 4150);
+    weapon.meleeWeaponLevel = 1;
+    weapon.pickedUp = false;
+    setWidthHeight(weapon);
+    setXYOffset(weapon);
+    game.addEntity(weapon);
+    weapon = new Weapon(game, 3400, 4150);
+    weapon.meleeWeaponLevel = 2;
+    weapon.pickedUp = false;
+    setWidthHeight(weapon);
+    setXYOffset(weapon);
+    game.addEntity(weapon);
+    weapon = new Weapon(game, 3500, 4150);
+    weapon.usingMelee = false;
+    weapon.bowWeaponLevel = 1;
+    weapon.pickedUp = false;
+    setWidthHeight(weapon);
+    setXYOffset(weapon);
+    game.addEntity(weapon);
+    weapon = new Weapon(game, 3600, 4150);
+    weapon.usingMelee = false;
+    weapon.bowWeaponLevel = 2;
+    weapon.pickedUp = false;
+    setWidthHeight(weapon);
+    setXYOffset(weapon);
+    game.addEntity(weapon);
+    
+
+    game.init(ctx);
+    game.start();
+  });
+};
