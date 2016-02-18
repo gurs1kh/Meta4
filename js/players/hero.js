@@ -20,6 +20,8 @@ function Hero(game, x, y) {
   document.getElementById('lives').innerHTML = "Lives: " + this.lives;
 
   this.weapon = new Weapon(this.game, x - 7, y + 12);
+  
+  this.keys = [];
 }
 
 Hero.prototype = new Player();

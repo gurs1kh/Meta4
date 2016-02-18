@@ -11,6 +11,7 @@ window.onload = function () {
   ASSET_MANAGER.queueDownload("img/weaponsheet1_flipped-rotated_2.png");
   ASSET_MANAGER.queueDownload("img/arrow.png");
   ASSET_MANAGER.queueDownload("img/bows.png");
+  ASSET_MANAGER.queueDownload("img/keys.png");
 
   ASSET_MANAGER.downloadAll(function () {
 //	console.log("starting up da shield");
@@ -33,18 +34,21 @@ window.onload = function () {
     game.addEntity(game.hero.weapon);
     game.addEntity(goblin);
     game.addEntity(game.camera);
+    
     var weapon = new Weapon(game, 3300, 4150);
     weapon.meleeWeaponLevel = 1;
     weapon.pickedUp = false;
     setWidthHeight(weapon);
     setXYOffset(weapon);
     game.addEntity(weapon);
+    
     weapon = new Weapon(game, 3400, 4150);
     weapon.meleeWeaponLevel = 2;
     weapon.pickedUp = false;
     setWidthHeight(weapon);
     setXYOffset(weapon);
     game.addEntity(weapon);
+    
     weapon = new Weapon(game, 3500, 4150);
     weapon.usingMelee = false;
     weapon.bowWeaponLevel = 1;
@@ -52,6 +56,7 @@ window.onload = function () {
     setWidthHeight(weapon);
     setXYOffset(weapon);
     game.addEntity(weapon);
+    
     weapon = new Weapon(game, 3600, 4150);
     weapon.usingMelee = false;
     weapon.bowWeaponLevel = 2;
@@ -60,6 +65,21 @@ window.onload = function () {
     setXYOffset(weapon);
     game.addEntity(weapon);
     
+    var key = new Key(game, 3300, 4300);
+    key.whichKey = 1;
+    game.addEntity(key);
+    
+    key = new Key(game, 3400, 4300);
+    key.whichKey = 2;
+    game.addEntity(key);
+
+    key = new Key(game, 3500, 4300);
+    key.whichKey = 3;
+    game.addEntity(key);
+    
+    key = new Key(game, 3600, 4300);
+    key.whichKey = 4;
+    game.addEntity(key);
 
     game.init(ctx);
     game.start();
