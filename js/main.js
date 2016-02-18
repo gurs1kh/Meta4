@@ -12,6 +12,7 @@ window.onload = function () {
   ASSET_MANAGER.queueDownload("img/arrow.png");
   ASSET_MANAGER.queueDownload("img/bows.png");
   ASSET_MANAGER.queueDownload("img/keys.png");
+  ASSET_MANAGER.queueDownload("img/gate.png");
 
   ASSET_MANAGER.downloadAll(function () {
 //	console.log("starting up da shield");
@@ -80,6 +81,9 @@ window.onload = function () {
     key = new Key(game, 3600, 4300);
     key.whichKey = 4;
     game.addEntity(key);
+    
+    this.gate = new Gate(game, 3170, 4010);
+    game.addEntity(this.gate);
 
     game.init(ctx);
     game.start();
