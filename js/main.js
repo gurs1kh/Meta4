@@ -14,8 +14,9 @@ ASSET_MANAGER.downloadAll(function () {
 	var game = new GameEngine();
 	var enemies = [];
 	game.map = new Map(game);
-	game.hero = new Hero(game, 730, 500);
-	// game.hero.speed = 50;
+	game.hero = new Hero(game, 3200, 3200);
+	game.hero.speed = 10;
+	game.hero.boxes = false;
 	game.camera = new Camera(game, canvas.width, canvas.height);
 	var goblin = new Goblin(game, 500, 500);
 	this.game = game;

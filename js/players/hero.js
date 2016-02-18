@@ -19,33 +19,54 @@ Hero.prototype = new Player();
 Hero.prototype.constructor = Hero;
 
 Hero.prototype.update = function() {
-	
-	var velocity = {x:0, y:0};
 	if (this.game.a) {
       this.wleft = true;
-      velocity.x -= this.speed;
+      this.x -= this.speed;
     } 
     else this.wleft = false;
     
     if (this.game.w) {
       this.wbackward = true;
-      velocity.y -= this.speed;
+      this.y -= this.speed;
     }
     else this.wbackward = false;
     
     if (this.game.s) {
       this.wforward = true;
-      velocity.y += this.speed;
+      this.y += this.speed;
     }
     else this.wforward = false;
     
     if (this.game.d) {
       this.wright = true;
-      velocity.x += this.speed;
+      this.x += this.speed;
     } 
     else this.wright = false;
 	
-	if (velocity.x || velocity.y) {
+	var bounds = this.game.map.bounds;
+	var feetX = this.x + this.width / 2;
+	var feetY = this.y + this.height;
+	
+	if (feetX < bounds.x1) feetX = bounds.x1;
+	if (feetY < bounds.y1) feetY = bounds.y1;
+	if (feetX > bounds.x2) feetX = bounds.x2;
+	if (feetY > bounds.y2) feetY = bounds.y2;
+    
+	this.x = feetX - this.width / 2;
+	this.y = feetY - this.height;
+	
+	for (var i = 0; i < this.game.map.boundRects.length; i++) {
+		var rect = this.game.map.boundRects[i];
+		while (collideCircleWithRotatedRectangle({x:this.x + this.width / 2, y:this.y + this.height, radius:5}, rect)) {
+			if (rect.top) this.y++;
+			if (rect.bottom) this.y--;
+			if (rect.left) this.x++;
+			if (rect.right) this.x--;
+		}
+	}
+		
+	
+	/*if (velocity.x || velocity.y) {
 		var player = this;
 		var feetX = this.x + this.width / 2;
 		var feetY = this.y + this.height;
@@ -56,8 +77,10 @@ Hero.prototype.update = function() {
 		if (!intersects.length) {
 			this.x += velocity.x;
 			this.y += velocity.y;
+		} else {
+			
 		}
-	}
+	}*/
 	
 	/*var prevX = this.x + this.width / 2;
 	var prevY = this.y + this.height;
@@ -186,3 +209,60 @@ function checkLineIntersection(line1StartX, line1StartY, line1EndX, line1EndY, l
     // if line1 and line2 are segments, they intersect if both of the above are true
     return result;
 };
+
+//from https://gist.github.com/snorpey/8134c248296649433de2
+function collideCircleWithRotatedRectangle ( circle, rect ) {
+	
+	var rectCenterX = rect.x;
+	var rectCenterY = rect.y;
+
+	var rectX = rectCenterX - rect.width / 2;
+	var rectY = rectCenterY - rect.height / 2;
+
+	var rectReferenceX = rectX;
+	var rectReferenceY = rectY;
+	
+	// Rotate circle's center point back
+	var unrotatedCircleX = Math.cos( rect.rotation ) * ( circle.x - rectCenterX ) - Math.sin( rect.rotation ) * ( circle.y - rectCenterY ) + rectCenterX;
+	var unrotatedCircleY = Math.sin( rect.rotation ) * ( circle.x - rectCenterX ) + Math.cos( rect.rotation ) * ( circle.y - rectCenterY ) + rectCenterY;
+
+	// Closest point in the rectangle to the center of circle rotated backwards(unrotated)
+	var closestX, closestY;
+
+	// Find the unrotated closest x point from center of unrotated circle
+	if ( unrotatedCircleX < rectReferenceX ) {
+		closestX = rectReferenceX;
+	} else if ( unrotatedCircleX > rectReferenceX + rect.width ) {
+		closestX = rectReferenceX + rect.width;
+	} else {
+		closestX = unrotatedCircleX;
+	}
+ 
+	// Find the unrotated closest y point from center of unrotated circle
+	if ( unrotatedCircleY < rectReferenceY ) {
+		closestY = rectReferenceY;
+	} else if ( unrotatedCircleY > rectReferenceY + rect.height ) {
+		closestY = rectReferenceY + rect.height;
+	} else {
+		closestY = unrotatedCircleY;
+	}
+ 
+	// Determine collision
+	var collision = false;
+	var distance = getDistance( unrotatedCircleX, unrotatedCircleY, closestX, closestY );
+	
+	if ( distance < circle.radius ) {
+		collision = true;
+	}
+	else {
+		collision = false;
+	}
+
+	return collision;
+}
+function getDistance( fromX, fromY, toX, toY ) {
+	var dX = Math.abs( fromX - toX );
+	var dY = Math.abs( fromY - toY );
+
+	return Math.sqrt( ( dX * dX ) + ( dY * dY ) );
+}
