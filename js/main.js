@@ -14,7 +14,7 @@ ASSET_MANAGER.downloadAll(function () {
 	var game = new GameEngine();
 	var enemies = [];
 	game.map = new Map(game);
-	game.hero = new Hero(game, 3200, 3200);
+	game.hero = new Hero(game, 3180, 4100);
 	game.hero.speed = 2;
 	game.hero.boxes = false;
 	game.camera = new Camera(game, canvas.width, canvas.height);
