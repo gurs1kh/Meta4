@@ -14,7 +14,7 @@ window.onload = function() {
 	ASSET_MANAGER.queueDownload("img/keys.png");
 	ASSET_MANAGER.queueDownload("img/gate.png");
 
-	ASSET_MANAGER.downloadAll(function () {
+	ASSET_MANAGER.downloadAll(function() {
 		//	console.log("starting up da shield");
 		var canvas = document.getElementById('gameWorld');
 		var ctx = canvas.getContext('2d');

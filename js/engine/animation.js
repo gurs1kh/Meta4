@@ -12,7 +12,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDu
 	this.reverse = reverse;
 }
 
-Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
+Animation.prototype.drawFrame = function(tick, ctx, x, y, scaleBy) {
 	var scaleBy = scaleBy || 1;
 	this.elapsedTime += tick;
 	if (this.loop) {
@@ -23,7 +23,7 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
 		return;
 	}
 	var index = this.reverse ? this.frames - this.currentFrame() - 1 : this.currentFrame();
-	
+
 	var locX = x;
 	var locY = y;
 	var drawW = Math.min(this.frameWidth * scaleBy, ctx.canvas.width);
@@ -31,16 +31,16 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
 	var cropW = drawW / scaleBy;
 	var cropH = drawH / scaleBy;
 	ctx.drawImage(this.spriteSheet,
-				  index * this.frameWidth + this.startX,
-				  this.startY,
-				  cropW, cropH,
-				  locX, locY, drawW, drawH);
+		index * this.frameWidth + this.startX,
+		this.startY,
+		cropW, cropH,
+		locX, locY, drawW, drawH);
 }
 
-Animation.prototype.currentFrame = function () {
+Animation.prototype.currentFrame = function() {
 	return Math.floor(this.elapsedTime / this.frameDuration);
 }
 
-Animation.prototype.isDone = function () {
+Animation.prototype.isDone = function() {
 	return (this.elapsedTime >= this.totalTime);
 }

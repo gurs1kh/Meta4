@@ -5,7 +5,7 @@ function Player(game, x, y, width, height, radius) {
 	this.width = width;
 	this.height = height;
 	this.radius = radius;
-	
+
 	this.wforward = false;
 	this.wbackward = false;
 	this.wleft = false;
@@ -17,9 +17,9 @@ Player.prototype.constructor = Player;
 
 Player.prototype.collide = function(other) {
 	return (this.x < other.x + other.width &&
-			this.x + this.width > other.x &&
-			this.y < other.y + other.height &&
-			this.height + this.y > other.y)
+		this.x + this.width > other.x &&
+		this.y < other.y + other.height &&
+		this.height + this.y > other.y)
 }
 
 Player.prototype.canSee = function(other) {
@@ -31,39 +31,39 @@ Player.prototype.canSee = function(other) {
 
 	var midX = this.x + this.width / 2;
 	var midY = this.y + this.height / 2;
-	
+
 	var distanceC1 = Math.sqrt(((otherLeft - midX) * (otherLeft - midX)) + ((otherTop - midY) * (otherTop - midY)));
 	var distanceC2 = Math.sqrt(((otherRight - midX) * (otherRight - midX)) + ((otherTop - midY) * (otherTop - midY)));
 	var distanceC3 = Math.sqrt(((otherLeft - midX) * (otherLeft - midX)) + ((otherBottom - midY) * (otherBottom - midY)));
 	var distanceC4 = Math.sqrt(((otherRight - midX) * (otherRight - midX)) + ((otherBottom - midY) * (otherBottom - midY)));
-	return (distanceC1 < this.radius || distanceC2 < this.radius || distanceC3 < this.radius || distanceC4 < this.radius);	
+	return (distanceC1 < this.radius || distanceC2 < this.radius || distanceC3 < this.radius || distanceC4 < this.radius);
 }
 
 Player.prototype.draw = function(ctx) {
-  if (!this.invincible || this.num % 10 === 0) {
-	if (this.wforward) {
-		this.forwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
-	} else if (this.wbackward) {
-		this.backwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-	} else if (this.wleft) {
-		this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-	} else if (this.wright) {
-		this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-	} else {
-		this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+	if (!this.invincible || this.num % 10 === 0) {
+		if (this.wforward) {
+			this.forwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
+		} else if (this.wbackward) {
+			this.backwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+		} else if (this.wleft) {
+			this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+		} else if (this.wright) {
+			this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+		} else {
+			this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+		}
 	}
-      }
 	if (this.boxes) {
-	  ctx.strokeStyle = "red";
-	  ctx.strokeRect(this.x, this.y, this.width, this.height);
-	  ctx.strokeStyle = "green";
-	  ctx.beginPath();
-	  ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.radius, 0, 2*Math.PI);
-	  ctx.stroke();
-          ctx.strokeStyle = "white"; 
- 	  ctx.beginPath(); 
- 	  ctx.arc(this.x + this.width / 2, this.y + this.height, 2, 0, 2*Math.PI); 
- 	  ctx.stroke();
+		ctx.strokeStyle = "red";
+		ctx.strokeRect(this.x, this.y, this.width, this.height);
+		ctx.strokeStyle = "green";
+		ctx.beginPath();
+		ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.radius, 0, 2 * Math.PI);
+		ctx.stroke();
+		ctx.strokeStyle = "white";
+		ctx.beginPath();
+		ctx.arc(this.x + this.width / 2, this.y + this.height, 2, 0, 2 * Math.PI);
+		ctx.stroke();
 	}
 	Entity.prototype.draw.call(this);
 }

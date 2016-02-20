@@ -1,14 +1,13 @@
 // This game shell was happily copied from Googler Seth Ladd's "Bad Aliens" game and his Google IO talk in 2011
-
-window.requestAnimationFrame = (function () {
+window.requestAnimationFrame = (function() {
 	return window.requestAnimationFrame ||
-	window.webkitRequestAnimationFrame ||
-	window.mozRequestAnimationFrame ||
-	window.oRequestAnimationFrame ||
-	window.msRequestAnimationFrame ||
-	function (/* function */ callback, /* DOMElement */ element) {
-		window.setTimeout(callback, 1000 / 60);
-	};
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.oRequestAnimationFrame ||
+		window.msRequestAnimationFrame ||
+		function( /* function */ callback, /* DOMElement */ element) {
+			window.setTimeout(callback, 1000 / 60);
+		};
 })();
 
 
@@ -18,11 +17,11 @@ function Timer() {
 	this.wallLastTimestamp = 0;
 };
 
-Timer.prototype.tick = function () {
+Timer.prototype.tick = function() {
 	var wallCurrent = Date.now();
 	var wallDelta = (wallCurrent - this.wallLastTimestamp) / 1000;
 	this.wallLastTimestamp = wallCurrent;
-	
+
 	var gameDelta = Math.min(wallDelta, this.maxStep);
 	this.gameTime += gameDelta;
 	return gameDelta;
@@ -37,20 +36,20 @@ function GameEngine() {
 	this.wheel = null;
 	this.surfaceWidth = null;
 	this.surfaceHeight = null;
-        this.KBeenHandled = false;
+	this.KBeenHandled = false;
 };
 
-GameEngine.prototype.init = function (ctx) {
+GameEngine.prototype.init = function(ctx) {
 	this.ctx = ctx;
 	this.surfaceWidth = this.ctx.canvas.width;
 	this.surfaceHeight = this.ctx.canvas.height;
 	this.startInput();
 	this.timer = new Timer();
-//	console.log('game initialized');
+	//	console.log('game initialized');
 };
 
-GameEngine.prototype.start = function () {
-//	console.log("starting game");
+GameEngine.prototype.start = function() {
+	//	console.log("starting game");
 	var that = this;
 	(function gameLoop() {
 		that.loop();
@@ -60,52 +59,52 @@ GameEngine.prototype.start = function () {
 
 
 
-GameEngine.prototype.startInput = function () {
-//	console.log('Starting input');
+GameEngine.prototype.startInput = function() {
+	//	console.log('Starting input');
 	var that = this;
-	
-	this.ctx.canvas.addEventListener("keydown", function (e) {
+
+	this.ctx.canvas.addEventListener("keydown", function(e) {
 		if (String.fromCharCode(e.which) === 'A') that.a = true;
 		if (String.fromCharCode(e.which) === 'W') that.w = true;
 		if (String.fromCharCode(e.which) === 'S') that.s = true;
 		if (String.fromCharCode(e.which) === 'D') that.d = true;
-                if (String.fromCharCode(e.which) === 'K' && !that.KBeenHandled) {
-                  that.k = true;
-                  that.KBeenHandled = true;
-                } 
-                if (String.fromCharCode(e.which) === 'J') that.j = true;
-                if (e.keyCode === 37) that.left = true;
-                if (e.keyCode === 38) that.up = true;
-                if (e.keyCode === 39) that.right = true;
-                if (e.keyCode === 40) that.down = true;
-                e.preventDefault();
+		if (String.fromCharCode(e.which) === 'K' && !that.KBeenHandled) {
+			that.k = true;
+			that.KBeenHandled = true;
+		}
+		if (String.fromCharCode(e.which) === 'J') that.j = true;
+		if (e.keyCode === 37) that.left = true;
+		if (e.keyCode === 38) that.up = true;
+		if (e.keyCode === 39) that.right = true;
+		if (e.keyCode === 40) that.down = true;
+		e.preventDefault();
 	}, false);
-	
-	this.ctx.canvas.addEventListener("keyup", function (e) {
+
+	this.ctx.canvas.addEventListener("keyup", function(e) {
 		if (String.fromCharCode(e.which) === 'A') that.a = false;
 		if (String.fromCharCode(e.which) === 'W') that.w = false;
 		if (String.fromCharCode(e.which) === 'S') that.s = false;
 		if (String.fromCharCode(e.which) === 'D') that.d = false;
-                if (String.fromCharCode(e.which) === 'K') {
-                  that.k = false;
-                  that.KBeenHandled = false;
-                }
-                if (String.fromCharCode(e.which) === 'J') that.j = false;
-                if (e.keyCode === 37) that.left = false;
-                if (e.keyCode === 38) that.up = false;
-                if (e.keyCode === 39) that.right = false;
-                if (e.keyCode === 40) that.down = false;
+		if (String.fromCharCode(e.which) === 'K') {
+			that.k = false;
+			that.KBeenHandled = false;
+		}
+		if (String.fromCharCode(e.which) === 'J') that.j = false;
+		if (e.keyCode === 37) that.left = false;
+		if (e.keyCode === 38) that.up = false;
+		if (e.keyCode === 39) that.right = false;
+		if (e.keyCode === 40) that.down = false;
 	}, false);
-	
-//	console.log('Input started');
+
+	//	console.log('Input started');
 };
 
-GameEngine.prototype.addEntity = function (entity) {
-//	console.log('added entity');
+GameEngine.prototype.addEntity = function(entity) {
+	//	console.log('added entity');
 	this.entities.push(entity);
 };
 
-GameEngine.prototype.draw = function () {
+GameEngine.prototype.draw = function() {
 	this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 	this.ctx.save();
 	var transX = -(this.camera.x - this.camera.width / 2);
@@ -117,17 +116,17 @@ GameEngine.prototype.draw = function () {
 	this.ctx.restore();
 };
 
-GameEngine.prototype.update = function () {
+GameEngine.prototype.update = function() {
 	var entitiesCount = this.entities.length;
-	
+
 	for (var i = 0; i < entitiesCount; i++) {
 		var entity = this.entities[i];
-		
+
 		if (!entity.removeFromWorld) {
 			entity.update();
 		}
 	}
-	
+
 	for (var i = this.entities.length - 1; i >= 0; --i) {
 		if (this.entities[i].removeFromWorld) {
 			this.entities.splice(i, 1);
@@ -135,7 +134,7 @@ GameEngine.prototype.update = function () {
 	}
 };
 
-GameEngine.prototype.loop = function () {
+GameEngine.prototype.loop = function() {
 	this.clockTick = this.timer.tick();
 	this.update();
 	this.draw();
@@ -149,10 +148,9 @@ function Entity(game, x, y) {
 	this.removeFromWorld = false;
 };
 
-Entity.prototype.update = function () {
-};
+Entity.prototype.update = function() {};
 
-Entity.prototype.draw = function (ctx) {
+Entity.prototype.draw = function(ctx) {
 	if (this.game.showOutlines && this.radius) {
 		this.game.ctx.beginPath();
 		this.game.ctx.strokeStyle = "green";
@@ -162,7 +160,7 @@ Entity.prototype.draw = function (ctx) {
 	}
 };
 
-Entity.prototype.rotateAndCache = function (image, angle) {
+Entity.prototype.rotateAndCache = function(image, angle) {
 	var offscreenCanvas = document.createElement('canvas');
 	var size = Math.max(image.width, image.height);
 	offscreenCanvas.width = size;
