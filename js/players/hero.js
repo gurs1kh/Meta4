@@ -1,259 +1,261 @@
 function Hero(game, x, y) {
-  var sheet = ASSET_MANAGER.getAsset("img/sheet5.png");
-  var frameWidth = 33.3;
-  var frameHeight = 32;
-  Player.call(this, game, x, y, frameWidth, frameHeight, 200);
+	var sheet = ASSET_MANAGER.getAsset("img/sheet5.png");
+	var frameWidth = 33.3;
+	var frameHeight = 32;
+	Player.call(this, game, x, y, frameWidth, frameHeight, 200);
 
-  this.animation = new Animation(sheet, 94, 128, frameWidth, frameHeight, 0.02, 1, true, false);
+	this.animation = new Animation(sheet, 94, 128, frameWidth, frameHeight, 0.02, 1, true, false);
 
-  this.forwardAnimation = new Animation(sheet, 94, 128, frameWidth, frameHeight, 0.2, 3, true, false);
-  this.backwardAnimation = new Animation(sheet, 94.5, 224, frameWidth, frameHeight, 0.2, 3, true, false);
-  this.leftAnimation = new Animation(sheet, 94, 160, frameWidth, frameHeight, 0.2, 3, true, false);
-  this.rightAnimation = new Animation(sheet, 94, 192, frameWidth, frameHeight, 0.2, 3, true, false);
+	this.forwardAnimation = new Animation(sheet, 94, 128, frameWidth, frameHeight, 0.2, 3, true, false);
+	this.backwardAnimation = new Animation(sheet, 94.5, 224, frameWidth, frameHeight, 0.2, 3, true, false);
+	this.leftAnimation = new Animation(sheet, 94, 160, frameWidth, frameHeight, 0.2, 3, true, false);
+	this.rightAnimation = new Animation(sheet, 94, 192, frameWidth, frameHeight, 0.2, 3, true, false);
 
-  this.speed = 1.75;
-  this.boxes = false;
-  this.lives = 3;
-  this.invincible = false;
-  this.timeBeingInvincible = 0;
-  this.num = 0;
-  document.getElementById('lives').innerHTML = "Lives: " + this.lives;
+	this.speed = 1.75;
+	this.boxes = false;
+	this.lives = 3;
+	this.invincible = false;
+	this.timeBeingInvincible = 0;
+	this.num = 0;
 
-  this.weapon = new Weapon(this.game, x - 7, y + 12);
-  
-  this.keys = [];
+	this.weapon = new Weapon(this.game, x - 7, y + 12);
+
+	this.keys = [];
 }
 
 Hero.prototype = new Player();
 Hero.prototype.constructor = Hero;
 
-Hero.prototype.update = function () {
+Hero.prototype.update = function() {
 
-  if (this.invincible) {
-    if (this.timeBeingInvincible < 1000) {
-      this.timeBeingInvincible += 20;
-      this.num++;
-    } else {
-      this.invincible = false;
-      this.timeBeingInvincible = 0;
-      this.speed = 1.75;
-    }
-  }
+	if (this.invincible) {
+		if (this.timeBeingInvincible < 1000) {
+			this.timeBeingInvincible += 20;
+			this.num++;
+		} else {
+			this.invincible = false;
+			this.timeBeingInvincible = 0;
+			this.speed = 1.75;
+		}
+	}
 
-  if (this.game.j) {
-    this.weapon.usingMelee = !this.weapon.usingMelee;
-    setXYOffset(this.weapon);
-    this.game.j = false;
-  }
+	if (this.game.j) {
+		this.weapon.usingMelee = !this.weapon.usingMelee;
+		setXYOffset(this.weapon);
+		this.game.j = false;
+	}
 
-  if (this.game.a) {
-    this.wleft = true;
-    this.x -= this.speed;
-    this.weapon.meleeWeaponFlipped = false;
-    this.weapon.bowWeaponFlipped = false;
-    this.weapon.x = this.x - this.weapon.weaponLeftoffset_x;
-  } else {
-    this.wleft = false;
-  }
+	if (this.game.a) {
+		this.wleft = true;
+		this.x -= this.speed;
+		this.weapon.meleeWeaponFlipped = false;
+		this.weapon.bowWeaponFlipped = false;
+		this.weapon.x = this.x - this.weapon.weaponLeftoffset_x;
+	} else {
+		this.wleft = false;
+	}
 
-  if (this.game.w) {
-    this.wbackward = true;
-    this.y -= this.speed;
+	if (this.game.w) {
+		this.wbackward = true;
+		this.y -= this.speed;
 
-  } else
-    this.wbackward = false;
+	} else
+		this.wbackward = false;
 
-  if (this.game.s) {
-    this.wforward = true;
-    this.y += this.speed;
-  } else
-    this.wforward = false;
+	if (this.game.s) {
+		this.wforward = true;
+		this.y += this.speed;
+	} else
+		this.wforward = false;
 
-  if (this.game.d) {
-    this.wright = true;
-    this.x += this.speed;
-    this.weapon.meleeWeaponFlipped = true;
-    this.weapon.bowWeaponFlipped = true;
-    this.weapon.x = this.x + this.weapon.weaponRightOffset_x;
-  } else {
-    this.wright = false;
-  }
+	if (this.game.d) {
+		this.wright = true;
+		this.x += this.speed;
+		this.weapon.meleeWeaponFlipped = true;
+		this.weapon.bowWeaponFlipped = true;
+		this.weapon.x = this.x + this.weapon.weaponRightOffset_x;
+	} else {
+		this.wright = false;
+	}
 
-  this.weapon.y = this.y + this.weapon.weaponoffset_y;
+	this.weapon.y = this.y + this.weapon.weaponoffset_y;
 
-  if (this.game.k && this.weapon.meleeWeaponSlashTime > 0 && this.weapon.meleeWeaponTimeAfterSlash >= 1000) {
-    this.weapon.meleeWeaponSlashing = true;
-  } else {
-    this.weapon.meleeWeaponSlashing = false;
-    this.weapon.meleeWeaponTimeAfterSlash += 100;
-    this.game.k = false;
-  }
+	if (this.game.k && this.weapon.meleeWeaponSlashTime > 0 && this.weapon.meleeWeaponTimeAfterSlash >= 1000) {
+		this.weapon.meleeWeaponSlashing = true;
+	} else {
+		this.weapon.meleeWeaponSlashing = false;
+		this.weapon.meleeWeaponTimeAfterSlash += 100;
+		this.game.k = false;
+	}
 
-  if (this.weapon.meleeWeaponSlashing) {
-    this.weapon.meleeWeaponSlashTime -= 100;
-  } else if (!this.weapon.meleeWeaponSlashing && this.weapon.meleeWeaponTimeAfterSlash >= 1000) {
-    this.weapon.meleeWeaponSlashTime = 1000;
-  }
+	if (this.weapon.meleeWeaponSlashing) {
+		this.weapon.meleeWeaponSlashTime -= 100;
+	} else if (!this.weapon.meleeWeaponSlashing && this.weapon.meleeWeaponTimeAfterSlash >= 1000) {
+		this.weapon.meleeWeaponSlashTime = 1000;
+	}
 
-  if (!this.game.a && !this.game.w && !this.game.s && !this.game.d) {
-    this.weapon.meleeWeaponFlipped = false;
-    this.weapon.bowWeaponFlipped = false;
-    this.weapon.x = this.x - this.weapon.weaponLeftoffset_x;
-  }
+	if (!this.game.a && !this.game.w && !this.game.s && !this.game.d) {
+		this.weapon.meleeWeaponFlipped = false;
+		this.weapon.bowWeaponFlipped = false;
+		this.weapon.x = this.x - this.weapon.weaponLeftoffset_x;
+	}
 
-  if (this.game.left && !this.weapon.usingMelee && this.weapon.bowTimeAfterShot >= this.weapon.bowTimeBetweenShots) {
-    var arrow = new Arrow(this.game, this.weapon.x, this.weapon.y);
-    arrow.shootLeft = true;
-    setWidthHeight_arrow(arrow, 0);
-    this.game.addEntity(arrow);
-    this.weapon.bowTimeAfterShot = 0;
-  }
+	if (this.game.left && !this.weapon.usingMelee && this.weapon.bowTimeAfterShot >= this.weapon.bowTimeBetweenShots) {
+		var arrow = new Arrow(this.game, this.weapon.x, this.weapon.y);
+		arrow.shootLeft = true;
+		setWidthHeight_arrow(arrow, 0);
+		this.game.addEntity(arrow);
+		this.weapon.bowTimeAfterShot = 0;
+	}
 
-  if (this.game.up && !this.weapon.usingMelee && this.weapon.bowTimeAfterShot >= this.weapon.bowTimeBetweenShots) {
-    var arrow = new Arrow(this.game, this.weapon.x, this.weapon.y);
-    arrow.shootUp = true;
-    setWidthHeight_arrow(arrow, 1);
-    this.game.addEntity(arrow);
-    this.weapon.bowTimeAfterShot = 0;
-  }
+	if (this.game.up && !this.weapon.usingMelee && this.weapon.bowTimeAfterShot >= this.weapon.bowTimeBetweenShots) {
+		var arrow = new Arrow(this.game, this.weapon.x, this.weapon.y);
+		arrow.shootUp = true;
+		setWidthHeight_arrow(arrow, 1);
+		this.game.addEntity(arrow);
+		this.weapon.bowTimeAfterShot = 0;
+	}
 
-  if (this.game.down && !this.weapon.usingMelee && this.weapon.bowTimeAfterShot >= this.weapon.bowTimeBetweenShots) {
-    var arrow = new Arrow(this.game, this.weapon.x, this.weapon.y);
-    arrow.shootDown = true;
-    setWidthHeight_arrow(arrow, 1);
-    this.game.addEntity(arrow);
-    this.weapon.bowTimeAfterShot = 0;
-  }
+	if (this.game.down && !this.weapon.usingMelee && this.weapon.bowTimeAfterShot >= this.weapon.bowTimeBetweenShots) {
+		var arrow = new Arrow(this.game, this.weapon.x, this.weapon.y);
+		arrow.shootDown = true;
+		setWidthHeight_arrow(arrow, 1);
+		this.game.addEntity(arrow);
+		this.weapon.bowTimeAfterShot = 0;
+	}
 
-  if (this.game.right && !this.weapon.usingMelee && this.weapon.bowTimeAfterShot >= this.weapon.bowTimeBetweenShots) {
-    var arrow = new Arrow(this.game, this.weapon.x, this.weapon.y);
-    arrow.shootRight = true;
-    setWidthHeight_arrow(arrow, 0);
-    this.game.addEntity(arrow);
-    this.weapon.bowTimeAfterShot = 0;
-  }
+	if (this.game.right && !this.weapon.usingMelee && this.weapon.bowTimeAfterShot >= this.weapon.bowTimeBetweenShots) {
+		var arrow = new Arrow(this.game, this.weapon.x, this.weapon.y);
+		arrow.shootRight = true;
+		setWidthHeight_arrow(arrow, 0);
+		this.game.addEntity(arrow);
+		this.weapon.bowTimeAfterShot = 0;
+	}
 
-  var bounds = this.game.map.bounds;
-  var feetX = this.x + this.width / 2;
-  var feetY = this.y + this.height;
+	var bounds = this.game.map.bounds;
+	var feetX = this.x + this.width / 2;
+	var feetY = this.y + this.height;
 
-  if (feetX < bounds.x1)
-    feetX = bounds.x1;
-  if (feetY < bounds.y1)
-    feetY = bounds.y1;
-  if (feetX > bounds.x2)
-    feetX = bounds.x2;
-  if (feetY > bounds.y2)
-    feetY = bounds.y2;
+	if (feetX < bounds.x1)
+		feetX = bounds.x1;
+	if (feetY < bounds.y1)
+		feetY = bounds.y1;
+	if (feetX > bounds.x2)
+		feetX = bounds.x2;
+	if (feetY > bounds.y2)
+		feetY = bounds.y2;
 
-  this.x = feetX - this.width / 2;
-  this.y = feetY - this.height;
+	this.x = feetX - this.width / 2;
+	this.y = feetY - this.height;
 
-  for (var i = 0; i < this.game.map.boundRects.length; i++) {
-    var rect = this.game.map.boundRects[i];
-    while (collideCircleWithRotatedRectangle({x: this.x + this.width / 2, y: this.y + this.height, radius: 5}, rect)) {
-      if (rect.top)
-        this.y++;
-      if (rect.bottom)
-        this.y--;
-      if (rect.left)
-        this.x++;
-      if (rect.right)
-        this.x--;
-    }
-  }
+	for (var i = 0; i < this.game.map.boundRects.length; i++) {
+		var rect = this.game.map.boundRects[i];
+		while (collideCircleWithRotatedRectangle({
+				x: this.x + this.width / 2,
+				y: this.y + this.height,
+				radius: 5
+			}, rect)) {
+			if (rect.top)
+				this.y++;
+			if (rect.bottom)
+				this.y--;
+			if (rect.left)
+				this.x++;
+			if (rect.right)
+				this.x--;
+		}
+	}
 
 
-  for (var i = 0; i < this.game.enemies.length; i++) {
-    var enemy = this.game.enemies[i];
-    if (!this.invincible && !enemy.removeFromWorld && this.collide(enemy)) {
-      this.lives = this.lives - 0.5;
-      this.invincible = true;
-      this.speed = 3;
-      this.num++;
-      document.getElementById('lives').innerHTML = "Lives: " + this.lives;
-      if (this.lives <= 0) {
-        this.removeFromWorld = true;
-        this.weapon.removeFromWorld = true;
-        enemy.seesHero = false;
-        if (enemy.x !== enemy.startingX && enemy.y !== enemy.startingY) {
-          enemy.walkTowardX = enemy.startingX;
-          enemy.walkTowardY = enemy.startingY;
-          enemy.atStarting = false;
-        }
-      }
-    } else if (this.canSee(enemy)) {
-      enemy.seesHero = true;
-      enemy.walkTowardX = this.x;
-      enemy.walkTowardY = this.y;
-    } else {
-      enemy.seesHero = false;
-      if (enemy.x !== enemy.startingX && enemy.y !== enemy.startingY) {
-        enemy.walkTowardX = enemy.startingX;
-        enemy.walkTowardY = enemy.startingY;
-        enemy.atStarting = false;
-      }
-    }
-  }
+	for (var i = 0; i < this.game.enemies.length; i++) {
+		var enemy = this.game.enemies[i];
+		if (!this.invincible && !enemy.removeFromWorld && this.collide(enemy)) {
+			this.lives = this.lives - 0.5;
+			this.invincible = true;
+			this.speed = 3;
+			this.num++;
+			if (this.lives <= 0) {
+				this.removeFromWorld = true;
+				this.weapon.removeFromWorld = true;
+				enemy.seesHero = false;
+				if (enemy.x !== enemy.startingX && enemy.y !== enemy.startingY) {
+					enemy.walkTowardX = enemy.startingX;
+					enemy.walkTowardY = enemy.startingY;
+					enemy.atStarting = false;
+				}
+			}
+		} else if (this.canSee(enemy)) {
+			enemy.seesHero = true;
+			enemy.walkTowardX = this.x;
+			enemy.walkTowardY = this.y;
+		} else {
+			enemy.seesHero = false;
+			if (enemy.x !== enemy.startingX && enemy.y !== enemy.startingY) {
+				enemy.walkTowardX = enemy.startingX;
+				enemy.walkTowardY = enemy.startingY;
+				enemy.atStarting = false;
+			}
+		}
+	}
 
-  Entity.prototype.update.call(this);
+	Entity.prototype.update.call(this);
 }
 
 //from https://gist.github.com/snorpey/8134c248296649433de2 
 function collideCircleWithRotatedRectangle(circle, rect) {
 
-  var rectCenterX = rect.x;
-  var rectCenterY = rect.y;
+	var rectCenterX = rect.x;
+	var rectCenterY = rect.y;
 
 
-  var rectX = rectCenterX - rect.width / 2;
-  var rectY = rectCenterY - rect.height / 2;
+	var rectX = rectCenterX - rect.width / 2;
+	var rectY = rectCenterY - rect.height / 2;
 
 
-  var rectReferenceX = rectX;
-  var rectReferenceY = rectY;
+	var rectReferenceX = rectX;
+	var rectReferenceY = rectY;
 
-  // Rotate circle's center point back 
-  var unrotatedCircleX = Math.cos(rect.rotation) * (circle.x - rectCenterX) - Math.sin(rect.rotation) * (circle.y - rectCenterY) + rectCenterX;
-  var unrotatedCircleY = Math.sin(rect.rotation) * (circle.x - rectCenterX) + Math.cos(rect.rotation) * (circle.y - rectCenterY) + rectCenterY;
-
-
-  // Closest point in the rectangle to the center of circle rotated backwards(unrotated) 
-  var closestX, closestY;
+	// Rotate circle's center point back 
+	var unrotatedCircleX = Math.cos(rect.rotation) * (circle.x - rectCenterX) - Math.sin(rect.rotation) * (circle.y - rectCenterY) + rectCenterX;
+	var unrotatedCircleY = Math.sin(rect.rotation) * (circle.x - rectCenterX) + Math.cos(rect.rotation) * (circle.y - rectCenterY) + rectCenterY;
 
 
-  // Find the unrotated closest x point from center of unrotated circle 
-  if (unrotatedCircleX < rectReferenceX) {
-    closestX = rectReferenceX;
-  } else if (unrotatedCircleX > rectReferenceX + rect.width) {
-    closestX = rectReferenceX + rect.width;
-  } else {
-    closestX = unrotatedCircleX;
-  }
+	// Closest point in the rectangle to the center of circle rotated backwards(unrotated) 
+	var closestX, closestY;
 
-  // Find the unrotated closest y point from center of unrotated circle 
-  if (unrotatedCircleY < rectReferenceY) {
-    closestY = rectReferenceY;
-  } else if (unrotatedCircleY > rectReferenceY + rect.height) {
-    closestY = rectReferenceY + rect.height;
-  } else {
-    closestY = unrotatedCircleY;
-  }
 
-  // Determine collision 
-  var collision = false;
-  var distance = getDistance(unrotatedCircleX, unrotatedCircleY, closestX, closestY);
+	// Find the unrotated closest x point from center of unrotated circle 
+	if (unrotatedCircleX < rectReferenceX) {
+		closestX = rectReferenceX;
+	} else if (unrotatedCircleX > rectReferenceX + rect.width) {
+		closestX = rectReferenceX + rect.width;
+	} else {
+		closestX = unrotatedCircleX;
+	}
 
-  if (distance < circle.radius) {
-    collision = true;
-  } else {
-    collision = false;
-  }
-  return collision;
+	// Find the unrotated closest y point from center of unrotated circle 
+	if (unrotatedCircleY < rectReferenceY) {
+		closestY = rectReferenceY;
+	} else if (unrotatedCircleY > rectReferenceY + rect.height) {
+		closestY = rectReferenceY + rect.height;
+	} else {
+		closestY = unrotatedCircleY;
+	}
+
+	// Determine collision 
+	var collision = false;
+	var distance = getDistance(unrotatedCircleX, unrotatedCircleY, closestX, closestY);
+
+	if (distance < circle.radius) {
+		collision = true;
+	} else {
+		collision = false;
+	}
+	return collision;
 }
 
 function getDistance(fromX, fromY, toX, toY) {
-  var dX = Math.abs(fromX - toX);
-  var dY = Math.abs(fromY - toY);
-  return Math.sqrt((dX * dX) + (dY * dY));
+	var dX = Math.abs(fromX - toX);
+	var dY = Math.abs(fromY - toY);
+	return Math.sqrt((dX * dX) + (dY * dY));
 }

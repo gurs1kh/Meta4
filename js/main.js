@@ -35,6 +35,7 @@ window.onload = function() {
 		game.addEntity(game.hero.weapon);
 		game.addEntity(goblin);
 		game.addEntity(game.camera);
+		game.addEntity(new ScoreBoard(game));
 
 		var weapon = new Weapon(game, 3300, 4150);
 		weapon.meleeWeaponLevel = 1;
