@@ -20,7 +20,7 @@ window.onload = function() {
 		var ctx = canvas.getContext('2d');
 		//	ctx.scale(1.5, 1.5);
 
-		var game = new GameEngine();
+		game = new GameEngine();
 		var enemies = [];
 		game.map = new Map(game);
 		game.hero = new Hero(game, 3180, 4100);
