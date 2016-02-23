@@ -18,13 +18,23 @@ function Hero(game, x, y) {
 	this.timeBeingInvincible = 0;
 	this.num = 0;
 
-	this.weapon = new Weapon(this.game, x - 7, y + 12);
+	this.weapons = [];
+	this.weapons[0] = new MeleeWeapon1(this.game, x, y, true);
+	this.weapons[1] = new Bow1(this.game, x, y, true);
 
 	this.keys = [];
 }
 
 Hero.prototype = new Player();
 Hero.prototype.constructor = Hero;
+
+Hero.prototype.pickUp = function(item) {
+	if (item instanceof Weapon) {
+		this.weapons.unshift(item);
+	} else if (item instanceof Key) {
+		this.keys.push(item);
+	}
+}
 
 Hero.prototype.update = function() {
 
@@ -40,17 +50,13 @@ Hero.prototype.update = function() {
 	}
 
 	if (this.game.j) {
-		this.weapon.usingMelee = !this.weapon.usingMelee;
-		setXYOffset(this.weapon);
+		this.weapons.unshift(this.weapons.pop());
 		this.game.j = false;
 	}
 
 	if (this.game.a) {
 		this.wleft = true;
 		this.x -= this.speed;
-		this.weapon.meleeWeaponFlipped = false;
-		this.weapon.bowWeaponFlipped = false;
-		this.weapon.x = this.x - this.weapon.weaponLeftoffset_x;
 	} else {
 		this.wleft = false;
 	}
@@ -71,71 +77,28 @@ Hero.prototype.update = function() {
 	if (this.game.d) {
 		this.wright = true;
 		this.x += this.speed;
-		this.weapon.meleeWeaponFlipped = true;
-		this.weapon.bowWeaponFlipped = true;
-		this.weapon.x = this.x + this.weapon.weaponRightOffset_x;
 	} else {
 		this.wright = false;
 	}
-
-	this.weapon.y = this.y + this.weapon.weaponoffset_y;
-
-	if (this.game.k && this.weapon.meleeWeaponSlashTime > 0 && this.weapon.meleeWeaponTimeAfterSlash >= 1000) {
-		this.weapon.meleeWeaponSlashing = true;
+	
+	var attacking = this.game.k || this.game.left 
+		|| this.game.right || this.game.up || this.game.down;
+	
+	if (attacking && this.weapons[0].attackingTime <= 0) {
+		this.weapons[0].attacking = true;
+		this.weapons[0].attackingTime = 1000;
+	} else if (this.weapons[0].attackingTime <= 0) {
+		this.weapons[0].attacking = false;
 	} else {
-		this.weapon.meleeWeaponSlashing = false;
-		this.weapon.meleeWeaponTimeAfterSlash += 100;
+		this.weapons[0].attackingTime -= 100;
 		this.game.k = false;
 	}
-
-	if (this.weapon.meleeWeaponSlashing) {
-		this.weapon.meleeWeaponSlashTime -= 100;
-	} else if (!this.weapon.meleeWeaponSlashing && this.weapon.meleeWeaponTimeAfterSlash >= 1000) {
-		this.weapon.meleeWeaponSlashTime = 1000;
-	}
-
-	if (!this.game.a && !this.game.w && !this.game.s && !this.game.d) {
-		this.weapon.meleeWeaponFlipped = false;
-		this.weapon.bowWeaponFlipped = false;
-		this.weapon.x = this.x - this.weapon.weaponLeftoffset_x;
-	}
-
-	if (this.game.left && !this.weapon.usingMelee && this.weapon.bowTimeAfterShot >= this.weapon.bowTimeBetweenShots) {
-		var arrow = new Arrow(this.game, this.weapon.x, this.weapon.y);
-		arrow.shootLeft = true;
-		setWidthHeight_arrow(arrow, 0);
-		this.game.addEntity(arrow);
-		this.weapon.bowTimeAfterShot = 0;
-	}
-
-	if (this.game.up && !this.weapon.usingMelee && this.weapon.bowTimeAfterShot >= this.weapon.bowTimeBetweenShots) {
-		var arrow = new Arrow(this.game, this.weapon.x, this.weapon.y);
-		arrow.shootUp = true;
-		setWidthHeight_arrow(arrow, 1);
-		this.game.addEntity(arrow);
-		this.weapon.bowTimeAfterShot = 0;
-	}
-
-	if (this.game.down && !this.weapon.usingMelee && this.weapon.bowTimeAfterShot >= this.weapon.bowTimeBetweenShots) {
-		var arrow = new Arrow(this.game, this.weapon.x, this.weapon.y);
-		arrow.shootDown = true;
-		setWidthHeight_arrow(arrow, 1);
-		this.game.addEntity(arrow);
-		this.weapon.bowTimeAfterShot = 0;
-	}
-
-	if (this.game.right && !this.weapon.usingMelee && this.weapon.bowTimeAfterShot >= this.weapon.bowTimeBetweenShots) {
-		var arrow = new Arrow(this.game, this.weapon.x, this.weapon.y);
-		arrow.shootRight = true;
-		setWidthHeight_arrow(arrow, 0);
-		this.game.addEntity(arrow);
-		this.weapon.bowTimeAfterShot = 0;
-	}
-
+	
+	//edge of island collisions
 	var bounds = this.game.map.bounds;
 	var feetX = this.x + this.width / 2;
 	var feetY = this.y + this.height;
-
+	
 	if (feetX < bounds.x1)
 		feetX = bounds.x1;
 	if (feetY < bounds.y1)
@@ -144,10 +107,12 @@ Hero.prototype.update = function() {
 		feetX = bounds.x2;
 	if (feetY > bounds.y2)
 		feetY = bounds.y2;
-
+	
+	//reset position
 	this.x = feetX - this.width / 2;
 	this.y = feetY - this.height;
-
+	
+	//"wall" collision
 	for (var i = 0; i < this.game.map.boundRects.length; i++) {
 		var rect = this.game.map.boundRects[i];
 		while (collideCircleWithRotatedRectangle({
@@ -166,7 +131,7 @@ Hero.prototype.update = function() {
 		}
 	}
 
-
+	//enemy collision
 	for (var i = 0; i < this.game.enemies.length; i++) {
 		var enemy = this.game.enemies[i];
 		if (!this.invincible && !enemy.removeFromWorld && this.collide(enemy)) {
@@ -176,7 +141,7 @@ Hero.prototype.update = function() {
 			this.num++;
 			if (this.lives <= 0) {
 				this.removeFromWorld = true;
-				this.weapon.removeFromWorld = true;
+				this.weapons.removeFromWorld = true;
 				enemy.seesHero = false;
 				if (enemy.x !== enemy.startingX && enemy.y !== enemy.startingY) {
 					enemy.walkTowardX = enemy.startingX;
@@ -197,8 +162,14 @@ Hero.prototype.update = function() {
 			}
 		}
 	}
+	
+	Player.prototype.update.call(this);
+	this.weapons[0].update();
+}
 
-	Entity.prototype.update.call(this);
+Hero.prototype.draw = function(ctx) {
+	Player.prototype.draw.call(this, ctx);
+	this.weapons[0].draw(ctx);
 }
 
 //from https://gist.github.com/snorpey/8134c248296649433de2 

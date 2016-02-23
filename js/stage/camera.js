@@ -13,3 +13,11 @@ Camera.prototype.update = function () {
 	this.x = this.game.hero.x + this.game.hero.width / 2;
 	this.y = this.game.hero.y + this.game.hero.height / 2;
 };
+
+Camera.prototype.getBounds = function() {
+	return {x1:this.x - this.width / 2,
+			x2:this.x + this.width / 2,
+			y1:this.y - this.height / 2,
+			y2:this.y + this.height / 2,
+		   };
+}

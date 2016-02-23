@@ -77,7 +77,7 @@ GameEngine.prototype.startInput = function() {
 		if (e.keyCode === 38) that.up = true;
 		if (e.keyCode === 39) that.right = true;
 		if (e.keyCode === 40) that.down = true;
-		e.preventDefault();
+		if (e.keyCode >= 37 && e.keyCode <= 40) e.preventDefault();
 	}, false);
 
 	this.ctx.canvas.addEventListener("keyup", function(e) {
@@ -121,7 +121,7 @@ GameEngine.prototype.update = function() {
 
 	for (var i = 0; i < entitiesCount; i++) {
 		var entity = this.entities[i];
-
+		
 		if (!entity.removeFromWorld) {
 			entity.update();
 		}
