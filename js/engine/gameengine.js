@@ -111,7 +111,9 @@ GameEngine.prototype.draw = function() {
 	var transY = -(this.camera.y - this.camera.height / 2);
 	this.ctx.translate(transX, transY);
 	for (var i = 0; i < this.entities.length; i++) {
-		this.entities[i].draw(this.ctx);
+		if (this.camera.onScreen(this.entities[i]) || this.entities[i] instanceof Map) {
+			this.entities[i].draw(this.ctx);
+		}
 	}
 	this.ctx.restore();
 };

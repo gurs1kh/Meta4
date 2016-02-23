@@ -21,3 +21,9 @@ Camera.prototype.getBounds = function() {
 			y2:this.y + this.height / 2,
 		   };
 }
+
+Camera.prototype.onScreen = function(entity) {
+	bounds = this.getBounds();
+	return (entity.x + entity.width > bounds.x1 && entity.x < bounds.x2 &&
+			entity.y + entity.width > bounds.y1 && entity.y < bounds.y2);
+}
