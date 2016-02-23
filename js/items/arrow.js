@@ -2,9 +2,9 @@ function Arrow(game, x, y, damage, dir) {
 	Entity.call(this, game, x, y);
 	var sheet = ASSET_MANAGER.getAsset("img/arrow.png");
 	this.animations = [	new Animation(sheet, 0, 4, 32, 11, 0.2, 1, true, false),
-						new Animation(sheet, 53, 0, 11, 29, 0.2, 1, true, false),
+						new Animation(sheet, 38, 0, 11, 29, 0.2, 1, true, false),
 						new Animation(sheet, 71, 10, 32, 11, 0.2, 1, true, false),
-						new Animation(sheet, 38, 0, 11, 29, 0.2, 1, true, false)
+						new Animation(sheet, 53, 0, 11, 29, 0.2, 1, true, false),
 					  ];
 	this.damage = damage;
 	this.dir = dir;
