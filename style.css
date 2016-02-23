@@ -1,0 +1,26 @@
+/* 
+    Created on : Feb 23, 2016, 11:07:11 AM
+    Author     : Hannah
+*/
+
+#titleScreen {
+  width: 600px;
+  height: 600px;
+  background: black;
+}
+
+#startButton {
+  height: 40px;
+  width: 100px;
+  margin: -40px -50px; 
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 30px;
+}
+
+#gameWorld {
+  background: black;
+  display: none;
+}
+
