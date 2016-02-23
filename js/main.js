@@ -38,7 +38,7 @@ window.onload = function () {
     // game.addEntity(game.hero.weapon);
     game.addEntity(goblin);
     game.addEntity(game.camera);
-    game.addEntity(new ScoreBoard(game));
+    game.addEntity(new PlayerInfo(game));
 
     game.addEntity(new MeleeWeapon2(game, 3300, 4150));
     game.addEntity(new MeleeWeapon3(game, 3400, 4150));

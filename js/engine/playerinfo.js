@@ -1,12 +1,12 @@
-function ScoreBoard(game) {
+function PlayerInfo(game) {
 	Entity.call(this, game);
 }
 
 
-ScoreBoard.prototype = new Entity();
-ScoreBoard.prototype.constructor = ScoreBoard;
+PlayerInfo.prototype = new Entity();
+PlayerInfo.prototype.constructor = PlayerInfo;
 
-ScoreBoard.prototype.draw = function(ctx) {
+PlayerInfo.prototype.draw = function(ctx) {
 	ctx.save();
 	
 	var camera = this.game.camera;
