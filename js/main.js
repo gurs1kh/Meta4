@@ -56,7 +56,7 @@ window.onload = function () {
 //    PlaceEnemies_Goblin(game, 10);
 //    PlaceEnemies_Tomb(game, 10);
 //     PlaceEnemies_Undead(game, 10);
-//      PlaceEnemies_Basic(game, 10);
+      PlaceEnemies_Basic(game, 10);
 //      PlaceEnemies_Human(game, 10);
 
     var blackKnight = new BlackKnight(game, 2900, 4300);

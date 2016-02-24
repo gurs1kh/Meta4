@@ -5,13 +5,30 @@
  */
 
 function PlaceEnemies(game, numBasics, numHumans, numTombs, numUndeads, numGoblins, numDarks) {
-  PlaceEnemies_Basic(game, numBasics);
-  PlaceEnemies_Human(game, numHumans);
-  PlaceEnemies_Tomb(game, numTombs);
-  PlaceEnemies_Undead(game, numUndeads);
-  PlaceEnemies_Goblin(game, numGoblins);
-  PlaceEnemies_Dark(game, numDarks);
+  Entity.call(this, game);
+  this.numBasics = numBasics;
+  this.numHumans = numHumans;
+  this.numTombs = numTombs;
+  this.numUndeads = numUndeads;
+  this.numGoblins = numGoblins;
+  this.numDarks = numDarks;
 
+
+}
+
+PlaceEnemies.prototype = new Entity();
+PlaceEnemies.prototype.constructor = PlaceEnemies;
+
+PlaceEnemies.prototype.update = function() {
+  
+  //figure out what enemies to place now - or take what ones away?
+  PlaceEnemies_Basic(this.game, this.numBasics);
+  PlaceEnemies_Human(this.game, this.numHumans);
+  PlaceEnemies_Tomb(this.game, this.numTombs);
+  PlaceEnemies_Undead(this.game, this.numUndeads);
+  PlaceEnemies_Goblin(this.game, this.numGoblins);
+  PlaceEnemies_Dark(this.game, this.numDarks);
+  
 }
 
 function PlaceEnemies_Basic(game, numBasics) {
