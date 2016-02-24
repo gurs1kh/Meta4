@@ -13,8 +13,11 @@ MeleeWeapon.prototype.update = function() {
 			var enemy = this.game.enemies[i];
 			if (this.collide(enemy)) {
 				enemy.hitpoints -= this.damage;
-				if (enemy.hitpoints <= 0)
+				if (enemy.hitpoints <= 0) {
+					this.game.enemies.splice(i, 1);
+					i--;
 					enemy.removeFromWorld = true;
+				}
 			}
 		}
 	}

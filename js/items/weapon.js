@@ -23,7 +23,7 @@ Weapon.prototype.update = function() {
 Weapon.prototype.draw = function(ctx) {
 	if (!this.pickedUp) {
 		this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-	} else if ((this.attacking || this instanceof Bow)&& this.flipped) {
+	} else if ((this.attacking || this instanceof Bow) && this.flipped) {
 		ctx.save();
 		ctx.scale(-1,1);
 		this.animation.drawFrame(this.game.clockTick, ctx, -this.x - this.width, this.y);
