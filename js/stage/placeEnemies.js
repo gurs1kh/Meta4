@@ -10,7 +10,7 @@ PlaceEnemies.prototype.update = function() {
 	// this.placeBasics();
 	if (!count)
 	this.placeHuman();
-	count++;
+	count++; 
 	// this.placeTomb();
 	// this.placeUndead();
 	// this.placeGoblin();
