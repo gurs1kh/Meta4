@@ -16,11 +16,50 @@ function PlaceEnemies(game, numBasics, numHumans, numTombs, numUndeads, numGobli
 
 function PlaceEnemies_Basic(game, numBasics) {
 
+  numBasics = numBasics / 4;
+  
+  PlaceEnemies_BasicLocation(game, numBasics, 1950, 4450, 4500, 6050); //Bottom
+  PlaceEnemies_BasicLocation(game, numBasics, 1950, 4450, 350, 2300); //Top
+  PlaceEnemies_BasicLocation(game, numBasics, 350, 2300, 1950, 4450); //Left
+  PlaceEnemies_BasicLocation(game, numBasics, 4100, 6050, 1950, 4450); //Right
 
 }
 
-function PlaceEnemies_Human(game, numHumans) {
+function PlaceEnemies_BasicLocation(game, numBasics, XMin, XMax, YMin, YMax) {
+  for (var i = 0; i < numBasics; i++) {
+    var location = getLocation(game, XMin, XMax, YMin, YMax);
+    var basic;
+    var which = getRandomNumber(0, 2);
+    if (which === 0)
+      basic = new Dog(game, location.x, location.y);
+    else if (which === 1)
+      basic = new BlackRat(game, location.x, location.y);
+    else if (which === 2)
+      basic = new BrownRat(game, location.x, location.y);
+    game.enemies.push(basic);
+    game.addEntity(basic);
+  }   
+  
+}
 
+function PlaceEnemies_Human(game, numHumans) {
+  var blackKnight = new BlackKnight(game, 500, 500);
+  game.enemies.push(blackKnight);
+  game.addEntity(blackKnight);
+
+  for (var i = 0; i < numHumans; i++) {
+    var location = getLocation(game, 400, 1900, 350, 1910);
+    var human;
+    var which = getRandomNumber(0, 2);
+    if (which === 0)
+      human = new Stitches(game, location.x, location.y);
+    else if (which === 1)
+      human = new Eyepatch(game, location.x, location.y);
+    else if (which === 2)
+      human = new Viking(game, location.x, location.y);
+    game.enemies.push(human);
+    game.addEntity(human);
+  }
 
 }
 
