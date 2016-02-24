@@ -43,7 +43,7 @@ function PlaceEnemies_BasicLocation(game, numBasics, XMin, XMax, YMin, YMax) {
 }
 
 function PlaceEnemies_Human(game, numHumans) {
-  var blackKnight = new BlackKnight(game, 5820, 500);
+  var blackKnight = new BlackKnight(game, 500, 500);
   game.enemies.push(blackKnight);
   game.addEntity(blackKnight);
 
