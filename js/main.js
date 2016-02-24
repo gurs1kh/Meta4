@@ -45,13 +45,13 @@ window.onload = function () {
     game.addEntity(new Bow2(game, 3500, 4150));
     game.addEntity(new Bow3(game, 3600, 4150));
 
-    game.addEntity(new Key(game, 3300, 4300, 0));
-    game.addEntity(new Key(game, 3400, 4300, 1));
-    game.addEntity(new Key(game, 3500, 4300, 2));
-    game.addEntity(new Key(game, 3600, 4300, 3));
+//    game.addEntity(new Key(game, 3300, 4300, 0));
+//    game.addEntity(new Key(game, 3400, 4300, 1));
+//    game.addEntity(new Key(game, 3500, 4300, 2));
+//    game.addEntity(new Key(game, 3600, 4300, 3));
     game.addEntity(new Gate(game, 3170, 4010));
     
-	game.addEntity(new PlaceEnemies(game, 5));
+	game.addEntity(new PlaceEnemies(game, 3));
 	
     game.init(ctx);
     game.start();

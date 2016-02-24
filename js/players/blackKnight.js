@@ -2,7 +2,7 @@ function BlackKnight(game, x, y) {
   var sheet = ASSET_MANAGER.getAsset("img/sheet7.png");
   var frameWidth = 32;
   var frameHeight = 32;
-  Enemy.call(this, game, x, y, frameWidth, frameHeight, 200);
+  Boss.call(this, game, x, y, frameWidth, frameHeight, 200);
 
   this.animation = new Animation(sheet, 0, 0, frameWidth, frameHeight, 0.02, 1, true, false);
 
@@ -12,5 +12,5 @@ function BlackKnight(game, x, y) {
   this.rightAnimation = new Animation(sheet, 0, 64, frameWidth, frameHeight, 0.2, 3, true, false);
 }
 
-BlackKnight.prototype = new Enemy();
+BlackKnight.prototype = new Boss();
 BlackKnight.prototype.constructor = BlackKnight;

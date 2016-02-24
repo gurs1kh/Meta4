@@ -30,8 +30,10 @@ PlayerInfo.prototype.draw = function(ctx) {
         this.hearts[this.game.hero.lives * 2].drawFrame(this.game.clockTick, ctx, camera.width - 100, 5, 0.5);
 	
 	this.game.hero.keys.forEach(function(key) {
+          if (key.pickedUp) {
 		var i = key.whichKey;
 		key.animations[i].drawFrame(key.game.clockTick, ctx, camera.width - 25, (i + 1) * 40);
+              }
 	});
 	
 	ctx.restore();

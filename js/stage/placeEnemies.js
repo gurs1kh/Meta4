@@ -8,13 +8,14 @@ PlaceEnemies.prototype.constructor = PlaceEnemies;
 count = 0;
 PlaceEnemies.prototype.update = function() {
 	// this.placeBasics();
-	if (!count)
+	if (!count) {
 	this.placeHuman();
 	count++;
-	// this.placeTomb();
-	// this.placeUndead();
-	// this.placeGoblin();
-	// this.placeDark();
+	 this.placeTomb();
+	 this.placeUndead();
+	 this.placeGoblin();
+	 this.placeDark();
+        }
 }
 
 PlaceEnemies.prototype.placeBasics = function() {
@@ -100,7 +101,7 @@ PlaceEnemies.prototype.placeUndead = function() {
 	}
 }
 
-PlaceEnemies.prototype.Goblin = function() {
+PlaceEnemies.prototype.placeGoblin = function() {
 	var armoredGoblin = new ArmoredGoblin(this.game, 5820, 5900);
 	this.game.enemies.push(armoredGoblin);
 	this.game.addEntity(armoredGoblin);
