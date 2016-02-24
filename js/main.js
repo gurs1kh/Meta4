@@ -53,11 +53,11 @@ window.onload = function () {
     this.gate = new Gate(game, 3170, 4010);
     game.addEntity(this.gate);
     
-//    PlaceEnemies_Goblin(game, 10);
-//    PlaceEnemies_Tomb(game, 10);
-//     PlaceEnemies_Undead(game, 10);
-//      PlaceEnemies_Basic(game, 10);
-//      PlaceEnemies_Human(game, 10);
+   PlaceEnemies_Goblin(game, 10);
+   // PlaceEnemies_Tomb(game, 10);
+    // PlaceEnemies_Undead(game, 10);
+     // PlaceEnemies_Basic(game, 10);
+     // PlaceEnemies_Human(game, 10);
 
     var blackKnight = new BlackKnight(game, 2900, 4300);
     enemies.push(blackKnight);
