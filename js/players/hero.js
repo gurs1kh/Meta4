@@ -11,7 +11,7 @@ function Hero(game, x, y) {
 	this.leftAnimation = new Animation(sheet, 94, 160, frameWidth, frameHeight, 0.2, 3, true, false);
 	this.rightAnimation = new Animation(sheet, 94, 192, frameWidth, frameHeight, 0.2, 3, true, false);
 
-	this.speed = 1.75;
+	this.speed = 3;
 	this.boxes = false;
 	this.lives = 3;
 	this.invincible = false;
@@ -45,7 +45,7 @@ Hero.prototype.update = function() {
 		} else {
 			this.invincible = false;
 			this.timeBeingInvincible = 0;
-			this.speed = 1.75;
+			this.speed *= 3/4;
 		}
 	}
 
@@ -137,7 +137,7 @@ Hero.prototype.update = function() {
 		if (!this.invincible && !enemy.removeFromWorld && this.collide(enemy)) {
 			this.lives = this.lives - 0.5;
 			this.invincible = true;
-			this.speed = 3;
+			this.speed *= 4/3;
 			this.num++;
 			if (this.lives <= 0) {
 				this.removeFromWorld = true;

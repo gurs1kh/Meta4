@@ -9,12 +9,18 @@ count = 0;
 PlaceEnemies.prototype.update = function() {
 	if (!count) {
 		this.placeBasics();
+	console.log(2, game.entities.length);
 		this.placeHuman();
+	console.log(3, game.entities.length);
 		count++; 
 		this.placeTomb();
+	console.log(4, game.entities.length);
 		this.placeUndead();
+	console.log(5, game.entities.length);
 		this.placeGoblin();
+	console.log(6, game.entities.length);
 		this.placeDark();
+	console.log(7, game.entities.length);
 	}
 }
 
@@ -47,7 +53,6 @@ PlaceEnemies.prototype.placeHuman = function() {
 	var blackKnight = new BlackKnight(this.game, 500, 500);
 	this.game.enemies.push(blackKnight);
 	this.game.addEntity(blackKnight);
-	
 	for (var i = 0; i < this.num; i++) {
 		var location = getlocation(400, 1900, 350, 1910);
 		var human;
@@ -129,23 +134,21 @@ function getRandomNumber(min, max) {
 
 function getlocation(xMin, xMax, yMin, yMax) {
 	var location = {};
-	var newX = true;
-	var newY = true;
+	var newXY = true;
 	while (true) {
-		if (newX)
-			location.x = getRandomNumber(xMin, xMax);
-		if (newY)
-			location.y = getRandomNumber(yMin, yMax);
-		newX = false;
-		newY = false;
-		for (var j = 0; j < this.game.enemies.length; j++) {
-		if (Math.abs(this.game.enemies[j].x - location.x) <= 100) 
-			newX = true;
-		if (Math.abs(this.game.enemies[j].y - location.y) <= 100) 
-			newY = true;
+		if (newXY) {
+			location = {x:getRandomNumber(xMin, xMax),
+						y:getRandomNumber(yMin, yMax)
+					   }
 		}
-		if (!newX && !newY)
+		newXY = false;
+		for (var j = 0; j < this.game.enemies.length; j++) {
+			if (getDistance(this.game.enemies[j], location) <= 100) 
+				newXY = true;
+		}
+		if (!newXY)
 			break;
+		console.log("a");
 	}
 	return location;
 }
