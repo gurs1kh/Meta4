@@ -31,10 +31,6 @@ Enemy.prototype.update = function() {
 	this.wleft = false;
 	this.wright = false;
 	
-	if (this.attackedTime > 0) {
-		this.attackedTime -= 100;
-	}
-	
 	var v = {x: 0, y: 0};
 	if (this.seesHero || !this.atStarting) {
 		//if the goblin and destination are on the same y axis
@@ -83,6 +79,7 @@ Enemy.prototype.update = function() {
 	}
 	
 	if (this.attackedTime > 0) {
+		this.attackedTime -= 100;
 		v.x *= -4;
 		v.y *= -4;
 	}
