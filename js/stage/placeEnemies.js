@@ -8,13 +8,13 @@ PlaceEnemies.prototype.constructor = PlaceEnemies;
 count = 0;
 PlaceEnemies.prototype.update = function() {
 	if (!count) {
-	this.placeBasics();
-	this.placeHuman();
-	count++; 
-	this.placeTomb();
-	this.placeUndead();
-	this.placeGoblin();
-	this.placeDark();
+		this.placeBasics();
+		this.placeHuman();
+		count++; 
+		this.placeTomb();
+		this.placeUndead();
+		this.placeGoblin();
+		this.placeDark();
 	}
 }
 

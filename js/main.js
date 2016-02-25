@@ -23,19 +23,15 @@ window.onload = function () {
 
     game = new GameEngine();
     var enemies = [];
+	game.gate = new Gate(game, 3170, 4010);
     game.map = new Map(game);
     game.hero = new Hero(game, 3180, 4100);
     game.camera = new Camera(game, canvas.width, canvas.height);
     game.playerInfo = new PlayerInfo(game);
-//    var goblin = new ArmoredGoblin(game, 2900, 4100);
-
-//    enemies.push(goblin);
-    console.log(game.hero);
+	
     game.enemies = enemies;
     game.addEntity(game.map);
-    game.addEntity(game.hero);
-    // game.addEntity(game.hero.weapon);
-//    game.addEntity(goblin);
+    game.addEntity(game.gate);
     game.addEntity(game.camera);
     game.addEntity(game.playerInfo);
 
@@ -45,11 +41,11 @@ window.onload = function () {
     game.addEntity(new Bow2(game, 3500, 4150));
     game.addEntity(new Bow3(game, 3600, 4150));
 
-//    game.addEntity(new Key(game, 3300, 4300, 0));
-//    game.addEntity(new Key(game, 3400, 4300, 1));
-//    game.addEntity(new Key(game, 3500, 4300, 2));
-//    game.addEntity(new Key(game, 3600, 4300, 3));
-    game.addEntity(new Gate(game, 3170, 4010));
+    // game.addEntity(new Key(game, 3300, 4300, 0));
+    // game.addEntity(new Key(game, 3400, 4300, 1));
+    // game.addEntity(new Key(game, 3500, 4300, 2));
+    // game.addEntity(new Key(game, 3600, 4300, 3));
+    game.addEntity(game.hero);
     
 	game.addEntity(new PlaceEnemies(game, 3));
 	

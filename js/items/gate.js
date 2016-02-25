@@ -9,6 +9,7 @@ function Gate(game, x, y) {
 	this.gateOpening2 = new Animation(this.gateSheet, 0, 127, 61, 64, 0.2, 1, true, false);
 	this.gateOpening3 = new Animation(this.gateSheet, 0, 191, 61, 64, 0.2, 1, true, false);
 	this.gateOpen = new Animation(this.gateSheet, 0, 254, 61, 64, 0.2, 1, true, false);
+	
 	this.closed = true;
 	this.whichGate = 1;
 

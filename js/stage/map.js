@@ -28,7 +28,7 @@ function Map(game) {
 		rotation: 0,
 		width: gate.width,
 		height: gate.height,
-		top: true,
+		top: true
 	});
 	
 	this.debug = false;
