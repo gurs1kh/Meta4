@@ -21,7 +21,7 @@ function Hero(game, x, y) {
 	this.weapons = [];
 	this.weapons[0] = new MeleeWeapon1(this.game, x, y, true);
 	this.weapons[1] = new Bow1(this.game, x, y, true);
-
+	
 	this.keys = [];
 }
 
@@ -130,7 +130,7 @@ Hero.prototype.update = function() {
 				this.x--;
 		}
 	}
-
+	
 	//enemy collision
 	for (var i = 0; i < this.game.enemies.length; i++) {
 		var enemy = this.game.enemies[i];

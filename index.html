@@ -54,10 +54,6 @@
       <input id="startButton" type="button" value="Start" onclick="startGame()">
     </div>
 
-    <!--    <div style="position: absolute; margin-top: 50px; left: 15px; top: 30px; width: 400px; height: 30px; background-color: rgba(0,0,0,0); font-family: Impact, Charcoal, sans-serif; font-size: 24pt; color: black; "> 
-  Use WASD to move 
-</div> -->
-
     <canvas id="gameWorld" tabindex="1" width="600" height="600"></canvas>
     <h1>Controls:</h1>
     <ul>
@@ -68,10 +64,10 @@
     </ul>
     
     <script type="text/javascript">
-     function startGame() {
-       document.getElementById('titleScreen').style.display = "none";
-       document.getElementById('gameWorld').style.display = "inline";
-     }
+    function startGame() {
+		document.getElementById('titleScreen').style.display = "none";
+		document.getElementById('gameWorld').style.display = "inline";
+    }
    </script>
   </body>
 </html>
