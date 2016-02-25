@@ -13,16 +13,14 @@ PlaceEnemies.prototype = new Entity();
 PlaceEnemies.prototype.constructor = PlaceEnemies;
 
 PlaceEnemies.prototype.placeBasics = function() {
-	var num = this.num / 4;
-	
-	this.placeBasicsAtlocation(num, 1950, 4450, 4500, 6050); //Bottom
-	this.placeBasicsAtlocation(num, 1950, 4450, 350, 2300); //Top
-	this.placeBasicsAtlocation(num, 350, 2300, 1950, 4450); //Left
-	this.placeBasicsAtlocation(num, 4100, 6050, 1950, 4450); //Right
+	this.placeBasicsAtlocation(1950, 4450, 4500, 6050); //Bottom
+	this.placeBasicsAtlocation(1950, 4450, 350, 2300); //Top
+	this.placeBasicsAtlocation(350, 2300, 1950, 4450); //Left
+	this.placeBasicsAtlocation(4100, 6050, 1950, 4450); //Right
 }
 
-PlaceEnemies.prototype.placeBasicsAtlocation = function(num, xMin, xMax, yMin, yMax) {
-	for (var i = 0; i < num; i++) {
+PlaceEnemies.prototype.placeBasicsAtlocation = function(xMin, xMax, yMin, yMax) {
+	for (var i = 0; i < this.num; i++) {
 		var location = getlocation(xMin, xMax, yMin, yMax);
 		var basic;
 		var which = getRandomNumber(0, 2);
@@ -80,7 +78,7 @@ PlaceEnemies.prototype.placeUndead = function() {
 	this.game.addEntity(death);
 
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(this.game, 4475, 6040, 350, 1910);
+		var location = getlocation(4475, 6040, 350, 1910);
 		var undead;
 		var which = getRandomNumber(0, 2);
 		if (which === 0)
