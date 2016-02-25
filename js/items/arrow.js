@@ -48,10 +48,10 @@ Arrow.prototype.update = function() {
 		}
 	}
 	
-	if (this.dir == 0) this.x -= 4;
-	else if (this.dir == 1) this.y += 4;
-	else if (this.dir == 2) this.x += 4;
-	else if (this.dir == 3) this.y -= 4;
+	if (this.dir == 0) this.x -= 6;
+	else if (this.dir == 1) this.y += 6;
+	else if (this.dir == 2) this.x += 6;
+	else if (this.dir == 3) this.y -= 6;
 	
 	Entity.prototype.update.call(this);
 };

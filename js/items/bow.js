@@ -1,6 +1,6 @@
 function Bow(game, x, y, pickedUp) {
 	Weapon.call(this, game, x, y, pickedUp);
-	this.attackDelay = 5000;
+	this.attackDelay = 3000;
 	this.width = 25;
 	this.height = 25;
 	this.offX = 20;

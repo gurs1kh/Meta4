@@ -11,6 +11,7 @@ function Enemy(game, x, y, frameWidth, frameHeight) {
 	this.atStarting = true;
 	this.walkTowardX = 0;
 	this.walkTowardY = 0;
+	this.attacked = false;
 	
 	this.startingX = this.x;
 	this.startingY = this.y;
@@ -29,6 +30,7 @@ Enemy.prototype.update = function() {
 	this.wbackward = false;
 	this.wleft = false;
 	this.wright = false;
+	this.velocity = {x:0, y:0};
 	if (this.seesHero || !this.atStarting) {
 		//if the goblin and destination are on the same y axis
                 ///**************************************************************************************TODO: changed this line*/
