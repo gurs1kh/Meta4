@@ -18,7 +18,7 @@ function Key(game, x, y, i) {
 	this.pickedUp = false;
 }
 
-Key.prototype = new Entity(); 
+Key.prototype = new Entity();
 Key.prototype.constructor = Key;
 
 Key.prototype.collide = function(other) {
