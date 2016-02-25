@@ -21,6 +21,7 @@ function Hero(game, x, y) {
 	this.weapons = [];
 	this.weapons[0] = new MeleeWeapon1(this.game, x, y, true);
 	this.weapons[1] = new Bow1(this.game, x, y, true);
+	this.currentWeapon = this.weapons[0];
 	
 	this.keys = [];
 }
@@ -29,8 +30,10 @@ Hero.prototype = new Player();
 Hero.prototype.constructor = Hero;
 
 Hero.prototype.pickUp = function(item) {
-	if (item instanceof Weapon) {
-		this.weapons.unshift(item);
+	if (item instanceof MeleeWeapon) {
+		this.currentWeapon = this.weapons[0] = item;
+	} else if (item instanceof Bow) {
+		this.currentWeapon = this.weapons[1] = item;
 	} else if (item instanceof Key) {
 		this.keys.push(item);
 	}
@@ -50,7 +53,7 @@ Hero.prototype.update = function() {
 	}
 
 	if (this.game.j) {
-		this.weapons.unshift(this.weapons.pop());
+		this.currentWeapon = this.weapons[(this.weapons.indexOf(this.currentWeapon) + 1) % 2];
 		this.game.j = false;
 	}
 
@@ -84,13 +87,13 @@ Hero.prototype.update = function() {
 	var attacking = this.game.k || this.game.left 
 		|| this.game.right || this.game.up || this.game.down;
 	
-	if (attacking && this.weapons[0].attackingTime <= 0) {
-		this.weapons[0].attacking = true;
-		this.weapons[0].attackingTime = 1000;
-	} else if (this.weapons[0].attackingTime <= 0) {
-		this.weapons[0].attacking = false;
+	if (attacking && this.currentWeapon.attackingTime <= 0) {
+		this.currentWeapon.attacking = true;
+		this.currentWeapon.attackingTime = 1000;
+	} else if (this.currentWeapon.attackingTime <= 0) {
+		this.currentWeapon.attacking = false;
 	} else {
-		this.weapons[0].attackingTime -= 100;
+		this.currentWeapon.attackingTime -= 100;
 		this.game.k = false;
 	}
 	
@@ -141,7 +144,6 @@ Hero.prototype.update = function() {
 			this.num++;
 			if (this.lives <= 0) {
 				this.removeFromWorld = true;
-				this.weapons.removeFromWorld = true;
 				enemy.seesHero = false;
 				if (enemy.x !== enemy.startingX && enemy.y !== enemy.startingY) {
 					enemy.walkTowardX = enemy.startingX;
@@ -164,12 +166,12 @@ Hero.prototype.update = function() {
 	}
 	
 	Player.prototype.update.call(this);
-	this.weapons[0].update();
+	this.currentWeapon.update();
 }
 
 Hero.prototype.draw = function(ctx) {
 	Player.prototype.draw.call(this, ctx);
-	this.weapons[0].draw(ctx);
+	this.currentWeapon.draw(ctx);
 }
 
 //from https://gist.github.com/snorpey/8134c248296649433de2 
