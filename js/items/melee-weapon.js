@@ -14,6 +14,7 @@ MeleeWeapon.prototype.update = function() {
 			var enemy = this.game.enemies[i];
 			if (this.collide(enemy)) {
 				enemy.hitpoints -= this.damage;
+				enemy.attackedTime = 1000;
 				if (enemy.hitpoints <= 0) {
 					this.game.enemies.splice(i, 1);
 					i--;
