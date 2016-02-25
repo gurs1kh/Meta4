@@ -1,7 +1,5 @@
 function Gate(game, x, y) {
 	Entity.call(this, game, x, y);
-	this.x = x;
-	this.y = y;
 	this.width = 61;
 	this.height = 64;
 	this.gateSheet = ASSET_MANAGER.getAsset("img/gate.png");
@@ -11,7 +9,7 @@ function Gate(game, x, y) {
 	this.gateOpening2 = new Animation(this.gateSheet, 0, 127, 61, 64, 0.2, 1, true, false);
 	this.gateOpening3 = new Animation(this.gateSheet, 0, 191, 61, 64, 0.2, 1, true, false);
 	this.gateOpen = new Animation(this.gateSheet, 0, 254, 61, 64, 0.2, 1, true, false);
-
+	this.closed = true;
 	this.whichGate = 1;
 
 	this.boxes = false;
@@ -37,10 +35,16 @@ Gate.prototype.update = function() {
 			this.whichGate = 3;
 		else if (this.game.hero.keys.length === 3)
 			this.whichGate = 4;
-		else if (this.game.hero.keys.length === 4)
-			this.whichGate = 5;
+		else if (this.game.hero.keys.length === 4) {
+			this.game.gate = new Gate(this.game, this.x, this.y);
+			this.game.gate.whichGate = 5;
+			this.game.entities.push(this.game.gate);
+			this.removeFromWorld = true;
+			if (this.closed) this.game.map.boundRects.pop();
+			this.game.gate.closed = false;
+		}
 	}
-
+	
 	Entity.prototype.update.call(this);
 };
 

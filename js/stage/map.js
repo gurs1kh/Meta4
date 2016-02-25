@@ -20,7 +20,17 @@ function Map(game) {
 						{x: 3180, y: 4075, width: 10, height: 5, rotation: 0, top: true, left: true},
 						{x: 3220, y: 4075, width: 10, height: 5, rotation: 0, top: true, right: true},
 					];
-
+	
+	var gate = this.game.gate;
+	this.boundRects.push({
+		x: gate.x + gate.width / 2,
+		y: gate.y + gate.height / 2,
+		rotation: 0,
+		width: gate.width,
+		height: gate.height,
+		top: true,
+	});
+	
 	this.debug = false;
 
 	if (this.debug) {

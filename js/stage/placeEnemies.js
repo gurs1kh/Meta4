@@ -7,15 +7,15 @@ PlaceEnemies.prototype = new Entity();
 PlaceEnemies.prototype.constructor = PlaceEnemies;
 count = 0;
 PlaceEnemies.prototype.update = function() {
-	// this.placeBasics();
 	if (!count) {
+	this.placeBasics();
 	this.placeHuman();
-	count++;
-	 this.placeTomb();
-	 this.placeUndead();
-	 this.placeGoblin();
-	 this.placeDark();
-        }
+	count++; 
+	this.placeTomb();
+	this.placeUndead();
+	this.placeGoblin();
+	this.placeDark();
+	}
 }
 
 PlaceEnemies.prototype.placeBasics = function() {
