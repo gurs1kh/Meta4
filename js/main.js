@@ -43,7 +43,7 @@ window.onload = function () {
 	
     game.addEntity(game.hero);
     
-	game.addEntity(new PlaceEnemies(game, 10));
+	new PlaceEnemies(game, 30);
     game.init(ctx);
     game.start();
   });

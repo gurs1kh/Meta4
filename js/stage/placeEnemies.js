@@ -1,28 +1,16 @@
 function PlaceEnemies(game, num) {
 	this.game = game;
 	this.num = num;
+	this.placeBasics();
+	this.placeHuman();
+	this.placeTomb();
+	this.placeUndead();
+	this.placeGoblin();
+	this.placeDark();
 }
 	
 PlaceEnemies.prototype = new Entity();
 PlaceEnemies.prototype.constructor = PlaceEnemies;
-count = 0;
-PlaceEnemies.prototype.update = function() {
-	if (!count) {
-		this.placeBasics();
-	console.log(2, game.entities.length);
-		this.placeHuman();
-	console.log(3, game.entities.length);
-		count++; 
-		this.placeTomb();
-	console.log(4, game.entities.length);
-		this.placeUndead();
-	console.log(5, game.entities.length);
-		this.placeGoblin();
-	console.log(6, game.entities.length);
-		this.placeDark();
-	console.log(7, game.entities.length);
-	}
-}
 
 PlaceEnemies.prototype.placeBasics = function() {
 	var num = this.num / 4;
