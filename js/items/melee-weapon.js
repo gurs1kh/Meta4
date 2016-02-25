@@ -1,5 +1,6 @@
 function MeleeWeapon(game, x, y, pickedUp) {
 	Weapon.call(this, game, x, y, pickedUp);
+	this.attackDelay = 1000;
 	
 }
 

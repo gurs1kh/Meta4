@@ -89,7 +89,7 @@ Hero.prototype.update = function() {
 	
 	if (attacking && this.currentWeapon.attackingTime <= 0) {
 		this.currentWeapon.attacking = true;
-		this.currentWeapon.attackingTime = 1000;
+		this.currentWeapon.attackingTime = this.currentWeapon.attackDelay;
 	} else if (this.currentWeapon.attackingTime <= 0) {
 		this.currentWeapon.attacking = false;
 	} else {
