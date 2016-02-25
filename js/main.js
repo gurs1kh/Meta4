@@ -34,16 +34,12 @@ window.onload = function () {
     game.addEntity(game.gate);
     game.addEntity(game.camera);
     game.addEntity(game.playerInfo);
-
-    game.addEntity(new MeleeWeapon2(game, 3300, 4150));
-    game.addEntity(new MeleeWeapon3(game, 3400, 4150));
-
-    game.addEntity(new Bow2(game, 3500, 4150));
-    game.addEntity(new Bow3(game, 3600, 4150));
-	
+    
+    game.bossesKilled = 0;
     game.addEntity(game.hero);
     
-	new PlaceEnemies(game, 30);
+    
+    new PlaceEnemies(game, 30);
     game.init(ctx);
     game.start();
   });

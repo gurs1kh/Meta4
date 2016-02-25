@@ -26,13 +26,15 @@ PlayerInfo.prototype.draw = function(ctx) {
 //	ctx.fillStyle = "black"
 //	ctx.font = "24pt Impact";
 //	ctx.fillText("Lives: ", camera.width - 100, 30);
+
+        this.game.hero.weapons[0].animation.drawFrame(this.game.clockTick, ctx, camera.width - 30, 40);
         
         this.hearts[this.game.hero.lives * 2].drawFrame(this.game.clockTick, ctx, camera.width - 100, 5, 0.5);
 	
 	this.game.hero.keys.forEach(function(key) {
           if (key.pickedUp) {
 		var i = key.whichKey;
-		key.animations[i].drawFrame(key.game.clockTick, ctx, camera.width - 25, (i + 1) * 40);
+		key.animations[i].drawFrame(key.game.clockTick, ctx, camera.width - 25, (i + 2) * 40);
               }
 	});
 	
