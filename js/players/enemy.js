@@ -29,7 +29,6 @@ Enemy.prototype.update = function() {
 	this.wbackward = false;
 	this.wleft = false;
 	this.wright = false;
-	//if the goblin is within the viewing circle
 	if (this.seesHero || !this.atStarting) {
 		//if the goblin and destination are on the same y axis
                 ///**************************************************************************************TODO: changed this line*/

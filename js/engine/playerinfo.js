@@ -21,33 +21,33 @@ PlayerInfo.prototype.draw = function(ctx) {
 	
 	var camera = this.game.camera;
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
-//	ctx.textAlign = "right";
-//	ctx.font = "30px Arial";
-//	ctx.fillStyle = "black"
-//	ctx.font = "24pt Impact";
-//	ctx.fillText("Lives: ", camera.width - 100, 30);
+	// ctx.textAlign = "right";
+	// ctx.font = "30px Arial";
+	// ctx.fillStyle = "black"
+	// ctx.font = "24pt Impact";
+	// ctx.fillText("Lives: ", camera.width - 100, 30);
 
-        this.game.hero.weapons[0].animation.drawFrame(this.game.clockTick, ctx, camera.width - 30, 40);
-        
-        this.hearts[this.game.hero.lives * 2].drawFrame(this.game.clockTick, ctx, camera.width - 100, 5, 0.5);
+	this.game.hero.currentWeapon.animation.drawFrame(this.game.clockTick, ctx, camera.width - 30, 40);
+	
+	this.hearts[this.game.hero.lives * 2].drawFrame(this.game.clockTick, ctx, camera.width - 100, 5, 0.5);
 	
 	this.game.hero.keys.forEach(function(key) {
-          if (key.pickedUp) {
-		var i = key.whichKey;
-		key.animations[i].drawFrame(key.game.clockTick, ctx, camera.width - 25, (i + 2) * 40);
-              }
+		if (key.pickedUp) {
+			var i = key.whichKey;
+			key.animations[i].drawFrame(key.game.clockTick, ctx, camera.width - 25, (i + 2) * 40);
+		}
 	});
 	
 	ctx.restore();
         
-        if (this.game.hero.lives <= 0) {
-          var img = ASSET_MANAGER.getAsset("img/test.jpg");
-          ctx.drawImage(img, this.game.camera.x - this.game.camera.width / 2, this.game.camera.y - this.game.camera.height / 2);
-          var len = this.game.entities.length;
-          for (var i = 0; i < len; i++) {
-            var entity = this.game.entities[i];
-            if (entity instanceof Enemy)
-              entity.removeFromWorld = true;
-          }
-        }
+	if (this.game.hero.lives <= 0) {
+		var img = ASSET_MANAGER.getAsset("img/test.jpg");
+		ctx.drawImage(img, this.game.camera.x - this.game.camera.width / 2, this.game.camera.y - this.game.camera.height / 2);
+		var len = this.game.entities.length;
+		for (var i = 0; i < len; i++) {
+			var entity = this.game.entities[i];
+			if (entity instanceof Enemy)
+				entity.removeFromWorld = true;
+		}
+	}
 }
