@@ -32,7 +32,7 @@ Arrow.prototype.collide = function(other) {
 
 Arrow.prototype.update = function() {
 	var bounds = this.game.camera.getBounds();
-	if (!this.game.camera.onScreen(this))
+	if (!this.game.camera.onScreen(this) || this.collide(this.game.gate))
 		this.removeFromWorld = true;
 	
 	for (var i = 0; i < this.game.enemies.length; i++) {
