@@ -14,6 +14,7 @@ window.onload = function () {
   ASSET_MANAGER.queueDownload("img/keys.png");
   ASSET_MANAGER.queueDownload("img/gate.png");
   ASSET_MANAGER.queueDownload("img/heartspritesheet.png");
+  ASSET_MANAGER.queueDownload("img/test.jpg");
 
   ASSET_MANAGER.downloadAll(function () {
     //	console.log("starting up da shield");
@@ -23,7 +24,7 @@ window.onload = function () {
 
     game = new GameEngine();
     var enemies = [];
-	game.gate = new Gate(game, 3170, 4010);
+    game.gate = new Gate(game, 3170, 4010);
     game.map = new Map(game);
     game.hero = new Hero(game, 3180, 4100);
     game.camera = new Camera(game, canvas.width, canvas.height);
