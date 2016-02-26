@@ -151,17 +151,6 @@ Hero.prototype.update = function() {
 					enemy.atStarting = false;
 				}
 			}
-		} else if (this.canSee(enemy)) {
-			enemy.seesHero = true;
-			enemy.walkTowardX = this.x;
-			enemy.walkTowardY = this.y;
-		} else {
-			enemy.seesHero = false;
-			if (enemy.x !== enemy.startingX && enemy.y !== enemy.startingY) {
-				enemy.walkTowardX = enemy.startingX;
-				enemy.walkTowardY = enemy.startingY;
-				enemy.atStarting = false;
-			}
 		}
 	}
 	

@@ -34,13 +34,13 @@ window.onload = function () {
     game.addEntity(game.map);
     game.addEntity(game.gate);
     game.addEntity(game.camera);
-    game.addEntity(game.playerInfo);
     
     game.bossesKilled = 0;
     game.addEntity(game.hero);
     
     
     new PlaceEnemies(game, 30);
+    game.addEntity(game.playerInfo);
     game.init(ctx);
     game.start();
   });

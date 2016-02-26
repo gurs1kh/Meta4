@@ -1,23 +1,25 @@
 function Enemy(game, x, y, frameWidth, frameHeight) {
-	Player.call(this, game, x, y, frameWidth, frameHeight, 0);
-
+	Player.call(this, game, x, y, frameWidth, frameHeight, 200);
+	
 	this.animation;
 	this.forwardAnimation;
 	this.backwardAnimation;
 	this.leftAnimation;
 	this.rightAnimation;
-
-	this.seesHero = false;
+	
+	this.wforward = false;
+	this.wbackward = false;
+	this.wleft = false;
+	this.wright = false;
+	
 	this.atStarting = true;
-	this.walkTowardX = 0;
-	this.walkTowardY = 0;
 	this.attackedTime = 0;
 
 	this.startingX = this.x;
 	this.startingY = this.y;
-
+	
 	this.hitpoints = 100;
-	this.canBeHit = 1;
+	this.canBeHit = true;
 
 	this.boxes = false;
 }
@@ -31,51 +33,19 @@ Enemy.prototype.update = function() {
 	this.wleft = false;
 	this.wright = false;
 	
-	var v = {x: 0, y: 0};
-	if (this.seesHero || !this.atStarting) {
-		//if the goblin and destination are on the same y axis
-		///**************************************************************************************TODO: changed this line*/
-		if (this.walkTowardY < this.y + 1 && this.walkTowardY > this.y - 1) {
-		//if the destination is to the left of the goblin
-			if (this.walkTowardX < this.x) {
-				this.wleft = true;
-				v.x -= 1;
-			//if the destination is to the right of the goblin
-			} else {
-				this.wright = true;
-				v.x += 1;
-			}
-		//if the destination is below the goblin
-		} else if (this.walkTowardY > this.y) {
-			this.wforward = true;
-			//if the destination and goblin are on the same x axis
-			if (this.walkTowardX === this.x) {
-				v.y += 1;
-			//if the destination is to the left of the goblin
-			} else if (this.walkTowardX < this.x) {
-				v.y += .75;
-				v.x -= .75;
-			//if the destination is to the right of the goblin
-			} else {
-				v.y += .75;
-				v.x += .75;
-			}
-		//if the destination is above the goblin
-		} else {
-			this.wbackward = true;
-			//if the destination and goblin are on the same x axis
-			if (this.walkTowardX === this.x) {
-				v.y -= 1;
-			//if the destination is to the left of the goblin
-			} else if (this.walkTowardX < this.x) {
-				v.y -= .75;
-				v.x -= .75;
-			//if the destination is to the right of the goblin
-			} else {
-				v.y -= .75;
-				v.x -= .75;
-			}
-		}
+	var v = {x: -this.x, y: -this.y};
+	if (this.canSee(this.game.hero)) {
+		v.x += this.game.hero.x;
+		v.y += this.game.hero.y;
+	} else {
+		v.x += this.startingX;
+		v.y += this.startingY;
+	}
+	
+	var magn = Math.sqrt(v.x * v.x + v.y * v.y);
+	if (magn) {
+		v.x /= magn;
+		v.y /= magn;
 	}
 	
 	if (this.attackedTime > 0) {
@@ -87,13 +57,17 @@ Enemy.prototype.update = function() {
 	this.x += v.x;
 	this.y += v.y;
 	
-	if ((this.startingX < this.x + 1 && this.startingX > this.x - 1) && (this.startingY < this.y + 1 && this.startingY > this.y - 1)) {
-		this.atStarting = true;
-		this.wforward = false;
-		this.wbackward = false;
-		this.wleft = false;
-		this.wright = false;
+	if (Math.abs(v.x) > Math.abs(v.y)) {
+		if (v.x > 0)
+			this.wright = true;
+		else
+			this.wleft = true;
+	} else {
+		if (v.y < 0)
+			this.wbackward = true;
+		else
+			this.wforward = true;
 	}
-
+	
 	Entity.prototype.update.call(this);
 }
