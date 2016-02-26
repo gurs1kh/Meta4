@@ -16,6 +16,13 @@ Enemy.prototype = new Player();
 Enemy.prototype.constructor = Enemy;
 
 Enemy.prototype.update = function() {
+  
+    if (this.removeFromWorld) {
+        var num = getRandomNumber(0, 9);
+        if (num === 4) {
+          this.game.addEntity(new Heart(this.game, this.x, this.y));
+        }
+    }
 	this.down = false;
 	this.up = false;
 	this.left = false;
@@ -63,4 +70,8 @@ Enemy.prototype.update = function() {
 	}
 	
 	Entity.prototype.update.call(this);
+}
+
+function getRandomNumber(min, max) {
+	return Math.floor(Math.random() * (max - min + 1.0)) + min;
 }

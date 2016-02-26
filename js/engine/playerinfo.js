@@ -9,7 +9,6 @@ function PlayerInfo(game) {
                               new Animation(this.heartSheet, 0, 290, 186, 58, 0.2, 1, true, false),
                               new Animation(this.heartSheet, 0, 348, 186, 58, 0.2, 1, true, false)
                             ];
-        this.heart1 = new Animation(this.heartSheet, 0, 0, 62, 58, 0.2, 1, true, false);
 }
 
 

@@ -36,7 +36,10 @@ Hero.prototype.pickUp = function(item) {
 		this.currentWeapon = this.weapons[1] = item;
 	} else if (item instanceof Key) {
 		this.keys.push(item);
-	}
+	} else if (item instanceof Heart) {
+                if (this.lives <= 2.5)
+                  this.lives += 0.5;
+        }
 }
 
 Hero.prototype.update = function() {

@@ -42,6 +42,7 @@ window.onload = function() {
 
         new PlaceEnemies(game, 30);
         game.addEntity(game.playerInfo);
+        
         game.init(ctx);
         game.start();
     });
