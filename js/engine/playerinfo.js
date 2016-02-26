@@ -17,32 +17,31 @@ PlayerInfo.prototype.constructor = PlayerInfo;
 
 PlayerInfo.prototype.draw = function(ctx) {
 	ctx.save();
-	
-	var camera = this.game.camera;
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
-	// ctx.textAlign = "right";
-	// ctx.font = "30px Arial";
-	// ctx.fillStyle = "black"
-	// ctx.font = "24pt Impact";
-	// ctx.fillText("Lives: ", camera.width - 100, 30);
-
-	this.game.hero.currentWeapon.animation.drawFrame(this.game.clockTick, ctx, camera.width - 30, 40);
-	
-	this.hearts[this.game.hero.lives * 2].drawFrame(this.game.clockTick, ctx, camera.width - 100, 5, 0.5);
-	
-	this.game.hero.keys.forEach(function(key) {
-		if (key.pickedUp) {
-			var i = key.whichKey;
-			key.animations[i].drawFrame(key.game.clockTick, ctx, camera.width - 25, (i + 2) * 40);
-		}
-	});
-	
-	ctx.restore();
-        
+	var camera = this.game.camera;
 	if (this.game.hero.lives <= 0) {
+		this.game.hero.lives = -Infinity;
 		var img = ASSET_MANAGER.getAsset("img/game-over-screen.png");
-		ctx.drawImage(img, this.game.camera.x - this.game.camera.width / 2, this.game.camera.y - this.game.camera.height / 2, camera.width, camera.height);
+		ctx.drawImage(img, 0, 0, camera.width, camera.height);
+	} else {
+		// ctx.textAlign = "right";
+		// ctx.font = "30px Arial";
+		// ctx.fillStyle = "black"
+		// ctx.font = "24pt Impact";
+		// ctx.fillText("Lives: ", camera.width - 100, 30);
+
+		this.game.hero.currentWeapon.animation.drawFrame(this.game.clockTick, ctx, camera.width - 30, 40);
+		
+		this.hearts[this.game.hero.lives * 2].drawFrame(this.game.clockTick, ctx, camera.width - 100, 5, 0.5);
+		
+		this.game.hero.keys.forEach(function(key) {
+			if (key.pickedUp) {
+				var i = key.whichKey;
+				key.animations[i].drawFrame(key.game.clockTick, ctx, camera.width - 25, (i + 2) * 40);
+			}
+		});
 	}
+	ctx.restore();
 }
 
 PlayerInfo.prototype.update = function() {
