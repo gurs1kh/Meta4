@@ -41,8 +41,8 @@ PlayerInfo.prototype.draw = function(ctx) {
 	ctx.restore();
         
 	if (this.game.hero.lives <= 0) {
-		var img = ASSET_MANAGER.getAsset("img/test.jpg");
-		ctx.drawImage(img, this.game.camera.x - this.game.camera.width / 2, this.game.camera.y - this.game.camera.height / 2);
+		var img = ASSET_MANAGER.getAsset("img/game-over-screen.png");
+		ctx.drawImage(img, this.game.camera.x - this.game.camera.width / 2, this.game.camera.y - this.game.camera.height / 2, camera.width, camera.height);
 	}
 }
 

@@ -14,8 +14,10 @@ window.onload = function() {
     ASSET_MANAGER.queueDownload("img/keys.png");
     ASSET_MANAGER.queueDownload("img/gate.png");
     ASSET_MANAGER.queueDownload("img/heartspritesheet.png");
-    ASSET_MANAGER.queueDownload("img/test.jpg");
-
+    ASSET_MANAGER.queueDownload("img/startscreen.png");
+    ASSET_MANAGER.queueDownload("img/game-over-screen.png");
+    ASSET_MANAGER.queueDownload("img/win-screen.png");
+    
     ASSET_MANAGER.downloadAll(function() {
         //	console.log("starting up da shield");
         var canvas = document.getElementById('gameWorld');
