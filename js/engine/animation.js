@@ -12,29 +12,32 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDu
 	this.reverse = reverse;
 }
 
-Animation.prototype.drawFrame = function(tick, ctx, x, y, scaleBy) {
-	var scaleBy = scaleBy || 1;
-	this.elapsedTime += tick;
-	if (this.loop) {
-		if (this.isDone()) {
-			this.elapsedTime = 0;
-		}
-	} else if (this.isDone()) {
-		return;
-	}
-	var index = this.reverse ? this.frames - this.currentFrame() - 1 : this.currentFrame();
+Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
+    var scaleBy = scaleBy || 1;
+    this.elapsedTime += tick;
+    if (this.loop) {
+        if (this.isDone()) {
+            this.elapsedTime = 0;
+        }
+    } else if (this.isDone()) {
+        return;
+    }
+    var index = this.reverse ? this.frames - this.currentFrame() - 1 : this.currentFrame();
+    var vindex = 0;
+    while ((index + 1) * this.frameWidth + this.startX > this.spriteSheet.width) {
+        index -= Math.floor((this.spriteSheet.width - this.startX) / this.frameWidth);
+        vindex++;
+    }
 
-	var locX = x;
-	var locY = y;
-	var drawW = Math.min(this.frameWidth * scaleBy, ctx.canvas.width);
-	var drawH = Math.min(this.frameHeight * scaleBy, ctx.canvas.height);
-	var cropW = drawW / scaleBy;
-	var cropH = drawH / scaleBy;
-	ctx.drawImage(this.spriteSheet,
-		index * this.frameWidth + this.startX,
-		this.startY,
-		cropW, cropH,
-		locX, locY, drawW, drawH);
+    var locX = x;
+    var locY = y;
+    ctx.drawImage(this.spriteSheet,
+                  index * this.frameWidth + this.startX,
+				  vindex * this.frameHeight + this.startY,  // source from sheet
+                  this.frameWidth, this.frameHeight,
+                  locX, locY,
+                  this.frameWidth * scaleBy,
+                  this.frameHeight * scaleBy);
 }
 
 Animation.prototype.currentFrame = function() {

@@ -5,11 +5,17 @@ function Player(game, x, y, width, height, radius) {
 	this.width = width;
 	this.height = height;
 	this.radius = radius;
-
-	this.wforward = false;
-	this.wbackward = false;
-	this.wleft = false;
-	this.wright = false;
+	
+	this.animation;
+	this.downAnimation;
+	this.upAnimation;
+	this.leftAnimation;
+	this.rightAnimation;
+	
+	this.down = false;
+	this.up = false;
+	this.left = false;
+	this.right = false;
 }
 
 Player.prototype = new Entity();
@@ -41,13 +47,13 @@ Player.prototype.canSee = function(other) {
 
 Player.prototype.draw = function(ctx) {
 	if (!this.invincible || this.num % 10 === 0) {
-		if (this.wforward) {
-			this.forwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
-		} else if (this.wbackward) {
-			this.backwardAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-		} else if (this.wleft) {
+		if (this.down) {
+			this.downAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
+		} else if (this.up) {
+			this.upAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+		} else if (this.left) {
 			this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-		} else if (this.wright) {
+		} else if (this.right) {
 			this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
 		} else {
 			this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);

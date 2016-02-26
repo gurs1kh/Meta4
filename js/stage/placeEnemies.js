@@ -111,9 +111,7 @@ PlaceEnemies.prototype.placeGoblin = function() {
 }
 
 PlaceEnemies.prototype.placeDark = function() {
-	//Add dr darkabolical here
-	
-	
+	this.game.addEntity(new DrDarkabolical(this.game, 3200, 3200));
 	
 	for (var i = 0; i < this.num / 4; i++) {
 

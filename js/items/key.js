@@ -38,8 +38,6 @@ Key.prototype.update = function() {
 };
 
 Key.prototype.draw = function(ctx) {
-  
-//        console.log(this.animations[this.whichKey]);
 	this.animations[this.whichKey].drawFrame(this.game.clockTick, ctx, this.x, this.y);
 	
 	if (this.boxes) {

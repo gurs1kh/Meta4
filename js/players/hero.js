@@ -6,8 +6,8 @@ function Hero(game, x, y) {
 
 	this.animation = new Animation(sheet, 94, 128, frameWidth, frameHeight, 0.02, 1, true, false);
 
-	this.forwardAnimation = new Animation(sheet, 94, 128, frameWidth, frameHeight, 0.2, 3, true, false);
-	this.backwardAnimation = new Animation(sheet, 94.5, 224, frameWidth, frameHeight, 0.2, 3, true, false);
+	this.downAnimation = new Animation(sheet, 94, 128, frameWidth, frameHeight, 0.2, 3, true, false);
+	this.upAnimation = new Animation(sheet, 94.5, 224, frameWidth, frameHeight, 0.2, 3, true, false);
 	this.leftAnimation = new Animation(sheet, 94, 160, frameWidth, frameHeight, 0.2, 3, true, false);
 	this.rightAnimation = new Animation(sheet, 94, 192, frameWidth, frameHeight, 0.2, 3, true, false);
 
@@ -58,30 +58,30 @@ Hero.prototype.update = function() {
 	}
 
 	if (this.game.a) {
-		this.wleft = true;
+		this.left = true;
 		this.x -= this.speed;
 	} else {
-		this.wleft = false;
+		this.left = false;
 	}
 
 	if (this.game.w) {
-		this.wbackward = true;
+		this.up = true;
 		this.y -= this.speed;
 
 	} else
-		this.wbackward = false;
+		this.up = false;
 
 	if (this.game.s) {
-		this.wforward = true;
+		this.down = true;
 		this.y += this.speed;
 	} else
-		this.wforward = false;
+		this.down = false;
 
 	if (this.game.d) {
-		this.wright = true;
+		this.right = true;
 		this.x += this.speed;
 	} else {
-		this.wright = false;
+		this.right = false;
 	}
 	
 	var attacking = this.game.k || this.game.left 

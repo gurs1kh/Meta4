@@ -5,8 +5,8 @@ function Hood(game, x, y) {
   Enemy.call(this, game, x, y, frameWidth, frameHeight, 200);
   this.animation = new Animation(sheet, 287, 0, frameWidth, frameHeight, 0.02, 1, true, false);
 
-  this.forwardAnimation = new Animation(sheet, 287, 0, frameWidth, frameHeight, 0.2, 3, true, false);
-  this.backwardAnimation = new Animation(sheet, 287, 96, frameWidth, frameHeight, 0.2, 3, true, false);
+  this.downAnimation = new Animation(sheet, 287, 0, frameWidth, frameHeight, 0.2, 3, true, false);
+  this.upAnimation = new Animation(sheet, 287, 96, frameWidth, frameHeight, 0.2, 3, true, false);
   this.leftAnimation = new Animation(sheet, 287, 32, frameWidth, frameHeight, 0.2, 3, true, false);
   this.rightAnimation = new Animation(sheet, 287, 64, frameWidth, frameHeight, 0.2, 3, true, false);
 }

@@ -1,17 +1,6 @@
 function Enemy(game, x, y, frameWidth, frameHeight) {
 	Player.call(this, game, x, y, frameWidth, frameHeight, 200);
 	
-	this.animation;
-	this.forwardAnimation;
-	this.backwardAnimation;
-	this.leftAnimation;
-	this.rightAnimation;
-	
-	this.wforward = false;
-	this.wbackward = false;
-	this.wleft = false;
-	this.wright = false;
-	
 	this.atStarting = true;
 	this.attackedTime = 0;
 
@@ -27,10 +16,10 @@ Enemy.prototype = new Player();
 Enemy.prototype.constructor = Enemy;
 
 Enemy.prototype.update = function() {
-	this.wforward = false;
-	this.wbackward = false;
-	this.wleft = false;
-	this.wright = false;
+	this.down = false;
+	this.up = false;
+	this.left = false;
+	this.right = false;
 	
 	var v = {x: -this.x, y: -this.y};
 	if (this.canSee(this.game.hero)) {
@@ -53,20 +42,23 @@ Enemy.prototype.update = function() {
 		v.y *= -4;
 	}
 	
+	v.x = Math.round(v.x);
+	v.y = Math.round(v.y);
+	
 	this.x += v.x;
 	this.y += v.y;
 	
 	if (v.x != 0 || v.y != 0) {
 		if (Math.abs(v.x) > Math.abs(v.y)) {
 			if (v.x > 0)
-				this.wright = true;
+				this.right = true;
 			else
-				this.wleft = true;
+				this.left = true;
 		} else {
 			if (v.y < 0)
-				this.wbackward = true;
+				this.up = true;
 			else
-				this.wforward = true;
+				this.down = true;
 		}
 	}
 	

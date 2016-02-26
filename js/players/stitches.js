@@ -6,8 +6,8 @@ function Stitches(game, x, y) {
 
   this.animation = new Animation(sheet, 290, 0, frameWidth, frameHeight, 0.02, 1, true, false);
 
-  this.forwardAnimation = new Animation(sheet, 290, 0, frameWidth, frameHeight, 0.2, 3, true, false);
-  this.backwardAnimation = new Animation(sheet, 290, 96, frameWidth, frameHeight, 0.2, 3, true, false);
+  this.downAnimation = new Animation(sheet, 290, 0, frameWidth, frameHeight, 0.2, 3, true, false);
+  this.upAnimation = new Animation(sheet, 290, 96, frameWidth, frameHeight, 0.2, 3, true, false);
   this.leftAnimation = new Animation(sheet, 290, 32, frameWidth, frameHeight, 0.2, 3, true, false);
   this.rightAnimation = new Animation(sheet, 290, 64, frameWidth, frameHeight, 0.2, 3, true, false);
 }

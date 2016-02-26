@@ -6,8 +6,8 @@ function BlackKnight(game, x, y) {
 
   this.animation = new Animation(sheet, 0, 0, frameWidth, frameHeight, 0.02, 1, true, false);
 
-  this.forwardAnimation = new Animation(sheet, 0, 0, frameWidth, frameHeight, 0.2, 3, true, false);
-  this.backwardAnimation = new Animation(sheet, 0, 96, frameWidth, frameHeight, 0.2, 3, true, false);
+  this.downAnimation = new Animation(sheet, 0, 0, frameWidth, frameHeight, 0.2, 3, true, false);
+  this.upAnimation = new Animation(sheet, 0, 96, frameWidth, frameHeight, 0.2, 3, true, false);
   this.leftAnimation = new Animation(sheet, 0, 32, frameWidth, frameHeight, 0.2, 3, true, false);
   this.rightAnimation = new Animation(sheet, 0, 64, frameWidth, frameHeight, 0.2, 3, true, false);
 }
