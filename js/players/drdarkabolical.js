@@ -21,9 +21,10 @@ function DrDarkabolical(game, x, y) {
 DrDarkabolical.prototype = new Boss();
 DrDarkabolical.prototype.constructor = DrDarkabolical;
 
-// DrDarkabolical.prototype.update = function() {
-	
-// }
+DrDarkabolical.prototype.update = function() {
+	Boss.prototype.update.call(this);
+	this.speed = this.game.hero.speed;
+}
 
 // DrDarkabolical.prototype.draw = function() {
 	

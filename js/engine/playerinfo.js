@@ -41,15 +41,17 @@ PlayerInfo.prototype.draw = function(ctx) {
 	ctx.restore();
         
 	if (this.game.hero.lives <= 0) {
-		this.game.entities.splice(this.game.entities.indexOf(this), 1);
-		this.game.entities.push(this);
 		var img = ASSET_MANAGER.getAsset("img/test.jpg");
 		ctx.drawImage(img, this.game.camera.x - this.game.camera.width / 2, this.game.camera.y - this.game.camera.height / 2);
-		var len = this.game.entities.length;
-		for (var i = 0; i < len; i++) {
-			var entity = this.game.entities[i];
-			if (entity instanceof Enemy)
-				entity.removeFromWorld = true;
-		}
+	}
+}
+
+PlayerInfo.prototype.update = function() {
+	if (this.game.hero.lives <= 0) {
+		this.game.entities.splice(this.game.entities.indexOf(this), 1);
+		this.game.entities.push(this);
+		this.game.enemies.forEach(function(d) {
+			d.removeFromWorld = true;
+		});
 	}
 }

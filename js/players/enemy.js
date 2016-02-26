@@ -1,14 +1,14 @@
 function Enemy(game, x, y, frameWidth, frameHeight) {
 	Player.call(this, game, x, y, frameWidth, frameHeight, 200);
+	this.speed = 1;
+	this.hitpoints = 100;
 	
-	this.atStarting = true;
-	this.attackedTime = 0;
-
 	this.startingX = this.x;
 	this.startingY = this.y;
 	
-	this.hitpoints = 100;
-
+	this.atStarting = true;
+	this.attackedTime = 0;
+	
 	this.boxes = false;
 }
 
@@ -32,8 +32,8 @@ Enemy.prototype.update = function() {
 	
 	var magn = Math.sqrt(v.x * v.x + v.y * v.y);
 	if (magn) {
-		v.x /= magn;
-		v.y /= magn;
+		v.x *= this.speed / magn;
+		v.y *= this.speed / magn;
 	}
 	
 	if (this.attackedTime > 0) {

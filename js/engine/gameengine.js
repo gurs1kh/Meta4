@@ -57,8 +57,6 @@ GameEngine.prototype.start = function() {
 	})();
 };
 
-
-
 GameEngine.prototype.startInput = function() {
 	//	console.log('Starting input');
 	var that = this;
