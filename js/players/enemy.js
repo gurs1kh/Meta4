@@ -19,7 +19,6 @@ function Enemy(game, x, y, frameWidth, frameHeight) {
 	this.startingY = this.y;
 	
 	this.hitpoints = 100;
-	this.canBeHit = true;
 
 	this.boxes = false;
 }
@@ -57,16 +56,18 @@ Enemy.prototype.update = function() {
 	this.x += v.x;
 	this.y += v.y;
 	
-	if (Math.abs(v.x) > Math.abs(v.y)) {
-		if (v.x > 0)
-			this.wright = true;
-		else
-			this.wleft = true;
-	} else {
-		if (v.y < 0)
-			this.wbackward = true;
-		else
-			this.wforward = true;
+	if (v.x != 0 || v.y != 0) {
+		if (Math.abs(v.x) > Math.abs(v.y)) {
+			if (v.x > 0)
+				this.wright = true;
+			else
+				this.wleft = true;
+		} else {
+			if (v.y < 0)
+				this.wbackward = true;
+			else
+				this.wforward = true;
+		}
 	}
 	
 	Entity.prototype.update.call(this);
