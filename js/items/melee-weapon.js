@@ -1,6 +1,10 @@
 function MeleeWeapon(game, x, y, pickedUp) {
 	Weapon.call(this, game, x, y, pickedUp);
 	this.attackDelay = 1000;
+	this.width = 28;
+	this.height = 25;
+	this.offX = 30;
+	this.offY = 5;
 	
 }
 
