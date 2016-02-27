@@ -191,7 +191,7 @@ Hero.prototype.update = function() {
 }
 
 Hero.prototype.draw = function(ctx) {
-	if ((this.currentWeapon.up || this.currentWeapon.left) && !(this.currentWeapon instanceof Bow)) {
+	if ((this.currentWeapon.up || this.currentWeapon.left) && this.currentWeapon instanceof MeleeWeapon) {
 		this.upAnimation.elapsedTime = 0;
 		this.leftAnimation.elapsedTime = 0;
 		this.currentWeapon.draw(ctx);
@@ -228,9 +228,13 @@ Hero.prototype.draw = function(ctx) {
 	}
 	Entity.prototype.draw.call(this);
 
-	if (this.currentWeapon.down || this.currentWeapon.right || this.currentWeapon instanceof Bow) {
+	if ((this.currentWeapon.down || this.currentWeapon.right) && this.currentWeapon instanceof MeleeWeapon) {
 		this.downAnimation.elapsedTime = 0;
 		this.rightAnimation.elapsedTime = 0;
+		this.currentWeapon.draw(ctx);
+	}
+	
+	if (this.currentWeapon instanceof Bow) {
 		this.currentWeapon.draw(ctx);
 	}
 }

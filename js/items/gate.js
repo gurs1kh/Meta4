@@ -43,7 +43,6 @@ Gate.prototype.update = function() {
 			this.removeFromWorld = true;
 			if (this.closed) this.game.map.boundRects.pop();
 			this.game.gate.closed = false;
-                        
 		}
 	}
 	
