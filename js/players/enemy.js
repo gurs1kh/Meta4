@@ -44,7 +44,7 @@ Enemy.prototype.update = function () {
   }
 
   if (v.x != 0 || v.y != 0) {
-    if (Math.abs(v.x) > Math.abs(v.y)) {
+    if (Math.abs(v.x) > 0.75 * Math.abs(v.y)) {
       if (v.x > 0)
         this.right = true;
       else
