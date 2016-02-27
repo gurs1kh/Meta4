@@ -5,7 +5,7 @@ function MeleeWeapon(game, x, y, pickedUp) {
     this.height = 25;
     this.offX = 15;
     this.offY = 5;
-	this.boxes = true;
+	this.boxes = false;
 }
 
 MeleeWeapon.prototype = new Weapon();
@@ -57,14 +57,10 @@ MeleeWeapon.prototype.update = function() {
 
 Weapon.prototype.draw = function(ctx) {
 	ctx.save();
-	ctx.translate(this.game.camera.x, this.game.camera.y + 5);
-	// ctx.fillStyle = "red"
-	// ctx.beginPath();
-	// ctx.arc(0, 0, 2, 0, 2 * Math.PI);
-	// ctx.fill();
 	if (!this.pickedUp) {
 		this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
 	} else if (this.attacking || this instanceof Bow) {
+		ctx.translate(this.game.camera.x, this.game.camera.y + 5);
 		var offX = 0, offY = 0;
 		if (this.up) {
 			offY = -5;
