@@ -167,25 +167,6 @@ Hero.prototype.update = function() {
 		}
 	}
 
-	//gate is open and hero just got onto the bridge
-	if (!this.game.gate.closed && (this.x >= 3150 && this.x < 3250) && this.y < 3970) {
-		this.game.gate.closed = true;
-		this.game.gate.whichGate = 1;
-		this.keys.forEach(function(key) {
-			key.removeFromWorld = true;
-		});
-		this.keys.length = 0;
-		this.game.map.boundRects.push({
-			x: this.game.gate.x + this.game.gate.width / 2,
-			y: this.game.gate.y + this.game.gate.height / 2,
-			rotation: 0,
-			width: this.game.gate.width,
-			height: this.game.gate.height,
-			top: true
-		});
-
-	}
-
 	Player.prototype.update.call(this);
 	this.currentWeapon.update();
 }
