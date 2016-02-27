@@ -54,9 +54,9 @@
   <body>
     <h1>META4</h1>
     <div id="titleScreen">
-		<input id="startButton" type="button" value="Start" onclick="startGame()">
+      <input id="startButton" type="button" value="Start" onclick="startGame()">
     </div>
-	
+
     <canvas id="gameWorld" tabindex="1" width="600" height="600"></canvas>
     <h1>Controls:</h1>
     <ul>
@@ -64,13 +64,13 @@
       <li>Use the arrow keys to attack in the direction you choose</li>
       <li>Press space to switch between melee weapon and bow</li>
     </ul>
-    
+
     <script type="text/javascript">
-    function startGame() {
-		document.getElementById('titleScreen').style.display = "none";
-		document.getElementById('gameWorld').style.display = "inline";
-		document.getElementById('gameWorld').focus();
-    }
-	</script>
+      function startGame() {
+        document.getElementById('titleScreen').style.display = "none";
+        document.getElementById('gameWorld').style.display = "inline";
+        document.getElementById('gameWorld').focus();
+      }
+    </script>
   </body>
 </html>
