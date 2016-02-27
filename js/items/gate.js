@@ -19,6 +19,13 @@ function Gate(game, x, y) {
 Gate.prototype = new Entity();
 Gate.prototype.constructor = Gate;
 
+Gate.prototype.collide = function (other) {
+    return (this.x < other.x + other.width &&
+            this.x + this.width > other.x &&
+            this.y < other.y + other.height &&
+            this.height + this.y > other.y);
+}
+
 Gate.prototype.update = function () {
     if (this.collide(this.game.hero)) {
         if (this.game.hero.keys.length === 0)
