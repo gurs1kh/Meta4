@@ -13,7 +13,7 @@ function Gate(game, x, y) {
 	this.closed = true;
 	this.whichGate = 1;
 
-	this.boxes = false;
+	this.boxes = true;
 }
 
 Gate.prototype = new Entity();
@@ -43,6 +43,7 @@ Gate.prototype.update = function() {
 			this.removeFromWorld = true;
 			if (this.closed) this.game.map.boundRects.pop();
 			this.game.gate.closed = false;
+                        
 		}
 	}
 	

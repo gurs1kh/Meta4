@@ -6,7 +6,10 @@ function PlaceEnemies(game, num) {
 	this.placeTomb();
 	this.placeUndead();
 	this.placeGoblin();
-	this.placeDark();
+//	this.placeDark();
+        this.game.drDarkabolical = new DrDarkabolical(this.game, 3200, 3200);
+        this.game.enemies.push(this.game.drDarkabolical);
+        this.game.addEntity(this.game.drDarkabolical);
 }
 
 PlaceEnemies.prototype = new Entity();
@@ -110,31 +113,6 @@ PlaceEnemies.prototype.placeGoblin = function() {
 	}
 }
 
-PlaceEnemies.prototype.placeDark = function() {
-	this.game.addEntity(new DrDarkabolical(this.game, 3200, 3200));
-	
-	for (var i = 0; i < this.num / 4; i++) {
-
-		var locations = [
-			getlocationDark(2500, 3200, 2500, 3200, 1), //quadrant 1
-			getlocationDark(3200, 3900, 2500, 3200, 2), //quadrant 2
-			getlocationDark(2500, 3200, 3200, 3800, 3), //quadrant 3
-			getlocationDark(3200, 3900, 3200, 3800, 4), //quadrant 4
-		];
-		
-		for (var j = 0; j < 4; j++) {
-			var dark;
-			var which = getRandomNumber(0, 1);
-			if (!which)
-				dark = new Scarf(this.game, locations[j].x, locations[j].y);
-			else
-				dark = new Hood(this.game, locations[j].x, locations[j].y);
-			this.game.enemies.push(dark);
-			this.game.addEntity(dark);
-		}
-	}
-}
-
 function getRandomNumber(min, max) {
 	return Math.floor(Math.random() * (max - min + 1.0)) + min;
 }
@@ -157,47 +135,6 @@ function getlocation(xMin, xMax, yMin, yMax) {
 		if (!newXY)
 			break;
 		console.log("a");
-	}
-	return location;
-}
-
-function getlocationDark(xMin, xMax, yMin, yMax, quandrant) {
-	var location = {};
-	var newXY = true;
-	while (true) {
-		if (newXY) {
-			location = {
-				x: getRandomNumber(xMin, xMax),
-				y: getRandomNumber(yMin, yMax)
-			};
-		}
-		newXY = false;
-		switch (quandrant) {
-			case 1:
-				if (!(location.x + location.y >= 5700 && location.x + location.y <= 6400))
-					newXY = true;
-				break;
-			case 2:
-				if (!(location.x - location.y >= 0 && location.x - location.y <= 700))
-					newXY = true;
-				break;
-			case 3:
-				if (!(location.x - location.y >= -700 && location.x - location.y <= 0))
-					newXY = true;
-				break;
-			case 4:
-				if (!(location.x + location.y >= 6400 && location.x + location.y <= 7100))
-					newXY = true;
-				break;
-		}
-		if (!newXY) {
-			for (var j = 0; j < this.game.enemies.length; j++) {
-				if (getDistance(this.game.enemies[j], location) <= 100)
-					newXY = true;
-			}
-		}
-		if (!newXY)
-			break;
 	}
 	return location;
 }
