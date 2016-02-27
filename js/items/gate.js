@@ -13,7 +13,7 @@ function Gate(game, x, y) {
 	this.closed = true;
 	this.whichGate = 1;
 
-	this.boxes = true;
+	this.boxes = false;
 }
 
 Gate.prototype = new Entity();
