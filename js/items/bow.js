@@ -3,7 +3,7 @@ function Bow(game, x, y, pickedUp) {
 	this.attackDelay = 3000;
 	this.width = 25;
 	this.height = 25;
-	this.offX = 20;
+	this.offX = 10;
 	this.offY = 0;
 }
 
@@ -21,5 +21,18 @@ Bow.prototype.update = function() {
 			this.game.addEntity(new Arrow(this.game, this.x, this.y, this.damage, 2));
 		else if (this.up)
 			this.game.addEntity(new Arrow(this.game, this.x, this.y, this.damage, 3));
+	}
+}
+
+Bow.prototype.draw = function(ctx) {
+	if (!this.pickedUp) {
+		this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+	} else if ((this.attacking || this instanceof Bow) && this.flipped) {
+		ctx.save();
+		ctx.scale(-1,1);
+		this.animation.drawFrame(this.game.clockTick, ctx, -this.x - this.width - this.offX, this.y);
+		ctx.restore();
+	} else if (this.attacking || this instanceof Bow) {
+		this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
 	}
 }
