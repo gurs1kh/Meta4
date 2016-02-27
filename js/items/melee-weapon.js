@@ -5,28 +5,28 @@ function MeleeWeapon(game, x, y, pickedUp) {
     this.height = 25;
     this.offX = 15;
     this.offY = 5;
-	this.boxes = false;
+    this.boxes = false;
 }
 
 MeleeWeapon.prototype = new Weapon();
 MeleeWeapon.prototype.constructor = MeleeWeapon;
 
-MeleeWeapon.prototype.update = function() {
+MeleeWeapon.prototype.update = function () {
     Weapon.prototype.update.call(this);
-	if (this.pickedUp) {
-		if (this.left) {
-			this.x -= this.offX;
-			this.y += this.offY;
-		} else if (this.right) {
-			this.x += this.offX;
-			this.y += this.offY;
-		} else if (this.up) {
-			this.y -= this.offY;
-		} else if (this.down) {
-			this.y += this.game.hero.height / 2 + this.offY;
-		}
-	}
-	
+    if (this.pickedUp) {
+        if (this.left) {
+            this.x -= this.offX;
+            this.y += this.offY;
+        } else if (this.right) {
+            this.x += this.offX;
+            this.y += this.offY;
+        } else if (this.up) {
+            this.y -= this.offY;
+        } else if (this.down) {
+            this.y += this.game.hero.height / 2 + this.offY;
+        }
+    }
+
     if (this.attacking && this.pickedUp) {
         for (var i = 0; i < this.game.enemies.length; i++) {
             var enemy = this.game.enemies[i];
@@ -55,42 +55,42 @@ MeleeWeapon.prototype.update = function() {
     }
 }
 
-Weapon.prototype.draw = function(ctx) {
-	ctx.save();
-	if (!this.pickedUp) {
-		this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-	} else if (this.attacking || this instanceof Bow) {
-		ctx.translate(this.game.camera.x, this.game.camera.y + 5);
-		var offX = 0, offY = 0;
-		if (this.up) {
-			offY = -5;
-			offX = 18;
-			ctx.scale(1,1);
-		}
-		if (this.down) {
-			offY = 0;
-			offX = 18;
-			ctx.scale(-1,-1);
-		}
-		if (this.left) {
-			offX = 5;
-			offY = 10;
-			ctx.scale(1,1);
-		}
-		if (this.right) {
-			offX = 5;
-			offY = 10;
-			ctx.scale(-1,1);
-		}
-		this.animation.drawFrame(this.game.clockTick, ctx, -this.width + offX, -this.height + offY);
-	}
-	ctx.restore();
-	if (this.boxes) {
-		ctx.strokeStyle = "red";
-		ctx.strokeRect(this.x, this.y, this.width, this.height);
-		ctx.strokeStyle = "green";
-		ctx.beginPath();
-		ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.radius, 0, 2 * Math.PI);
-		ctx.stroke();
-	}
+Weapon.prototype.draw = function (ctx) {
+    ctx.save();
+    if (!this.pickedUp) {
+        this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    } else if (this.attacking || this instanceof Bow) {
+        ctx.translate(this.game.camera.x, this.game.camera.y + 5);
+        var offX = 0, offY = 0;
+        if (this.up) {
+            offY = -5;
+            offX = 18;
+            ctx.scale(1, 1);
+        }
+        if (this.down) {
+            offY = 0;
+            offX = 18;
+            ctx.scale(-1, -1);
+        }
+        if (this.left) {
+            offX = 5;
+            offY = 10;
+            ctx.scale(1, 1);
+        }
+        if (this.right) {
+            offX = 5;
+            offY = 10;
+            ctx.scale(-1, 1);
+        }
+        this.animation.drawFrame(this.game.clockTick, ctx, -this.width + offX, -this.height + offY);
+    }
+    ctx.restore();
+    if (this.boxes) {
+        ctx.strokeStyle = "red";
+        ctx.strokeRect(this.x, this.y, this.width, this.height);
+        ctx.strokeStyle = "green";
+        ctx.beginPath();
+        ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.radius, 0, 2 * Math.PI);
+        ctx.stroke();
+    }
 };

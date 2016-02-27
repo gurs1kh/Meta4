@@ -1,5 +1,5 @@
 // the "main" code begins here
-window.onload = function() {
+window.onload = function () {
     ASSET_MANAGER = new AssetManager();
     ASSET_MANAGER.queueDownload("img/sheet2.png");
     ASSET_MANAGER.queueDownload("img/sheet3.png");
@@ -17,8 +17,8 @@ window.onload = function() {
     ASSET_MANAGER.queueDownload("img/startscreen.png");
     ASSET_MANAGER.queueDownload("img/game-over-screen.png");
     ASSET_MANAGER.queueDownload("img/win-screen.png");
-    
-    ASSET_MANAGER.downloadAll(function() {
+
+    ASSET_MANAGER.downloadAll(function () {
         //	console.log("starting up da shield");
         var canvas = document.getElementById('gameWorld');
         var ctx = canvas.getContext('2d');
@@ -42,7 +42,7 @@ window.onload = function() {
 
         new PlaceEnemies(game, 30);
         game.addEntity(game.playerInfo);
-        
+
         game.init(ctx);
         game.start();
     });

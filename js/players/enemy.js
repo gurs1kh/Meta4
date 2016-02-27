@@ -43,18 +43,6 @@ Enemy.prototype.update = function() {
 		v.y *= this.speed / magn;
 	}
 	
-	if (this.attackedTime > 0) {
-		this.attackedTime -= 100;
-		v.x *= -4;
-		v.y *= -4;
-	}
-	
-	v.x = Math.round(v.x);
-	v.y = Math.round(v.y);
-	
-	this.x += v.x;
-	this.y += v.y;
-	
 	if (v.x != 0 || v.y != 0) {
 		if (Math.abs(v.x) > Math.abs(v.y)) {
 			if (v.x > 0)
@@ -68,6 +56,18 @@ Enemy.prototype.update = function() {
 				this.down = true;
 		}
 	}
+	
+	if (this.attackedTime > 0) {
+		this.attackedTime -= 100;
+		v.x *= -4;
+		v.y *= -4;
+	}
+	
+	v.x = Math.round(v.x);
+	v.y = Math.round(v.y);
+	
+	this.x += v.x;
+	this.y += v.y;
 	
 	Entity.prototype.update.call(this);
 }
