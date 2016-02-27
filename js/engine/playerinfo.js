@@ -46,13 +46,3 @@ PlayerInfo.prototype.draw = function (ctx) {
 	}
 	ctx.restore();
 }
-
-PlayerInfo.prototype.update = function () {
-	if (this.game.hero.lives <= 0) {
-		this.game.entities.splice(this.game.entities.indexOf(this), 1);
-		this.game.entities.push(this);
-		this.game.enemies.forEach(function (d) {
-			d.removeFromWorld = true;
-		});
-	}
-}

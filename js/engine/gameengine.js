@@ -123,6 +123,7 @@ GameEngine.prototype.draw = function () {
 			this.entities[i].draw(this.ctx);
 		}
 	}
+	this.playerInfo.draw(this.ctx);
 	this.ctx.restore();
 };
 
@@ -144,6 +145,7 @@ GameEngine.prototype.update = function () {
 			this.entities.splice(i, 1);
 		}
 	}
+	this.playerInfo.update();
 };
 
 GameEngine.prototype.loop = function () {
