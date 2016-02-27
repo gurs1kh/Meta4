@@ -13,13 +13,13 @@ Bow.prototype.constructor = Bow;
 Bow.prototype.update = function() {
 	Weapon.prototype.update.call(this);
 	if (this.attackingTime <= 0 && this.pickedUp) {
-		if (this.game.left)
+		if (this.left)
 			this.game.addEntity(new Arrow(this.game, this.x, this.y, this.damage, 0));
-		else if (this.game.down)
+		else if (this.down)
 			this.game.addEntity(new Arrow(this.game, this.x, this.y, this.damage, 1));
-		else if (this.game.right)
+		else if (this.right)
 			this.game.addEntity(new Arrow(this.game, this.x, this.y, this.damage, 2));
-		else if (this.game.up)
+		else if (this.up)
 			this.game.addEntity(new Arrow(this.game, this.x, this.y, this.damage, 3));
 	}
 }

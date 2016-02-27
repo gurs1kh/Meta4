@@ -66,15 +66,10 @@ GameEngine.prototype.startInput = function() {
 		if (String.fromCharCode(e.which) === 'W') that.w = true;
 		if (String.fromCharCode(e.which) === 'S') that.s = true;
 		if (String.fromCharCode(e.which) === 'D') that.d = true;
-		if (String.fromCharCode(e.which) === 'K' && !that.KBeenHandled) {
-			that.k = true;
-			that.KBeenHandled = true;
+		if (String.fromCharCode(e.which) === ' ') {
+			that.j = true;
+			e.preventDefault();
 		}
-		if (String.fromCharCode(e.which) === 'J') that.j = true;
-		if (e.keyCode === 37) that.left = true;
-		if (e.keyCode === 38) that.up = true;
-		if (e.keyCode === 39) that.right = true;
-		if (e.keyCode === 40) that.down = true;
 		if (e.keyCode >= 37 && e.keyCode <= 40) e.preventDefault();
 	}, false);
 
@@ -83,15 +78,11 @@ GameEngine.prototype.startInput = function() {
 		if (String.fromCharCode(e.which) === 'W') that.w = false;
 		if (String.fromCharCode(e.which) === 'S') that.s = false;
 		if (String.fromCharCode(e.which) === 'D') that.d = false;
-		if (String.fromCharCode(e.which) === 'K') {
-			that.k = false;
-			that.KBeenHandled = false;
-		}
-		if (String.fromCharCode(e.which) === 'J') that.j = false;
-		if (e.keyCode === 37) that.left = false;
-		if (e.keyCode === 38) that.up = false;
-		if (e.keyCode === 39) that.right = false;
-		if (e.keyCode === 40) that.down = false;
+		if (String.fromCharCode(e.which) === ' ') that.j = false;
+		if (e.keyCode === 37) that.left = true;
+		if (e.keyCode === 38) that.up = true;
+		if (e.keyCode === 39) that.right = true;
+		if (e.keyCode === 40) that.down = true;
 	}, false);
 
 	//	console.log('Input started');
