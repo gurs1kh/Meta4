@@ -18,32 +18,34 @@ window.onload = function () {
 	ASSET_MANAGER.queueDownload("img/game-over-screen.png");
 	ASSET_MANAGER.queueDownload("img/win-screen.png");
 
-	ASSET_MANAGER.downloadAll(function () {
-		//	console.log("starting up da shield");
-		var canvas = document.getElementById('gameWorld');
-		var ctx = canvas.getContext('2d');
-		//	ctx.scale(1.5, 1.5);
+	ASSET_MANAGER.downloadAll(newGame);
+}
 
-		game = new GameEngine();
-		var enemies = [];
-		game.gate = new Gate(game, 3170, 4010);
-		game.map = new Map(game);
-		game.hero = new Hero(game, 3180, 4100);
-		game.camera = new Camera(game, canvas.width, canvas.height);
-		game.playerInfo = new PlayerInfo(game);
+function newGame() {
+	//	console.log("starting up da shield");
+	var canvas = document.getElementById('gameWorld');
+	var ctx = canvas.getContext('2d');
+	//	ctx.scale(1.5, 1.5);
 
-		game.enemies = enemies;
-		game.addEntity(game.map);
-		game.addEntity(game.gate);
-		game.addEntity(game.camera);
+	game = new GameEngine();
+	var enemies = [];
+	game.gate = new Gate(game, 3170, 4010);
+	game.map = new Map(game);
+	game.hero = new Hero(game, 3180, 4100);
+	game.camera = new Camera(game, canvas.width, canvas.height);
+	game.playerInfo = new PlayerInfo(game);
 
-		game.bossesKilled = 0;
-		game.addEntity(game.hero);
+	game.enemies = enemies;
+	game.addEntity(game.map);
+	game.addEntity(game.gate);
+	game.addEntity(game.camera);
 
-		new PlaceEnemies(game, 30);
-		// game.addEntity(game.playerInfo);
+	game.bossesKilled = 0;
+	game.addEntity(game.hero);
 
-		game.init(ctx);
-		game.start();
-	});
+	new PlaceEnemies(game, 30);
+	// game.addEntity(game.playerInfo);
+
+	game.init(ctx);
+	game.start();
 }
