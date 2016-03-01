@@ -16,13 +16,13 @@ Boss.prototype.update = function () {
 
 		switch (this.game.bossesKilled) {
 			case 1:
-				weapon = new MeleeWeapon2(this.game, this.x + 25, this.y);
+				weapon = new Sword2(this.game, this.x + 25, this.y);
 				break;
 			case 2:
 				weapon = new Bow2(this.game, this.x + 25, this.y);
 				break;
 			case 3:
-				weapon = new MeleeWeapon3(this.game, this.x + 25, this.y);
+				weapon = new Sword3(this.game, this.x + 25, this.y);
 				break;
 			case 4:
 				weapon = new Bow3(this.game, this.x + 25, this.y);

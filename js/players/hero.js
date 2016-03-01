@@ -19,7 +19,7 @@ function Hero(game, x, y) {
 	this.num = 0;
 
 	this.weapons = [];
-	this.weapons[0] = new MeleeWeapon1(this.game, x, y, true);
+	this.weapons[0] = new Sword1(this.game, x, y, true);
 	this.weapons[1] = new Bow1(this.game, x, y, true);
 	this.currentWeapon = this.weapons[0];
 
@@ -30,7 +30,7 @@ Hero.prototype = new Player();
 Hero.prototype.constructor = Hero;
 
 Hero.prototype.pickUp = function (item) {
-	if (item instanceof MeleeWeapon) {
+	if (item instanceof Sword) {
 		this.currentWeapon = this.weapons[0] = item;
 	} else if (item instanceof Bow) {
 		this.currentWeapon = this.weapons[1] = item;
@@ -190,7 +190,7 @@ Hero.prototype.update = function () {
 }
 
 Hero.prototype.draw = function (ctx) {
-	if ((this.currentWeapon.up || this.currentWeapon.left) && this.currentWeapon instanceof MeleeWeapon) {
+	if ((this.currentWeapon.up || this.currentWeapon.left) && this.currentWeapon instanceof Sword) {
 		this.upAnimation.elapsedTime = 0;
 		this.leftAnimation.elapsedTime = 0;
 		this.currentWeapon.draw(ctx);
@@ -227,7 +227,7 @@ Hero.prototype.draw = function (ctx) {
 	}
 	Entity.prototype.draw.call(this);
 
-	if ((this.currentWeapon.down || this.currentWeapon.right) && this.currentWeapon instanceof MeleeWeapon) {
+	if ((this.currentWeapon.down || this.currentWeapon.right) && this.currentWeapon instanceof Sword) {
 		this.downAnimation.elapsedTime = 0;
 		this.rightAnimation.elapsedTime = 0;
 		this.currentWeapon.draw(ctx);
