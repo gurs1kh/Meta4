@@ -43,7 +43,7 @@ function newGame() {
 	game.bossesKilled = 0;
 	game.addEntity(game.hero);
 
-	new PlaceEnemies(game, 30);
+	new PlaceEnemies(game, 250);
 	// game.addEntity(game.playerInfo);
 
 	game.init(ctx);
