@@ -116,9 +116,9 @@ GameEngine.prototype.draw = function () {
 	var transY = -(this.camera.y - this.camera.height / 2);
 	this.ctx.translate(transX, transY);
 	for (var i = 0; i < this.entities.length; i++) {
-		if (this.camera.onScreen(this.entities[i]) ||
+		if (this.entities[i] && (this.camera.onScreen(this.entities[i]) ||
 			this.entities[i] instanceof Map ||
-			this.entities[i] instanceof PlayerInfo) {
+			this.entities[i] instanceof PlayerInfo)) {
 
 			this.entities[i].draw(this.ctx);
 		}
@@ -133,13 +133,13 @@ GameEngine.prototype.update = function () {
 	for (var i = 0; i < entitiesCount; i++) {
 		var entity = this.entities[i];
 
-		if (!entity.removeFromWorld) {
+		if (entity && !entity.removeFromWorld) {
 			entity.update();
 		}
 	}
 
 	for (var i = this.entities.length - 1; i >= 0; --i) {
-		if (this.entities[i].removeFromWorld) {
+		if (!this.entities[i] || this.entities[i].removeFromWorld) {
 			if (this.entities[i] instanceof Enemy)
 				this.entities[i].update();
 			this.entities.splice(i, 1);

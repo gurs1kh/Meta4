@@ -7,6 +7,8 @@ function PlaceEnemies(game, num) {
 	this.placeUndead();
 	this.placeGoblin();
 	this.game.drDarkabolical = new DrDarkabolical(this.game, 3200, 3200);
+	this.game.drDarkabolical.lifeMeter = new EnemyInfo(this.game, this.game.drDarkabolical.x, this.game.drDarkabolical.y - 15);
+	this.game.addEntity(this.game.drDarkabolical.lifeMeter);
 	this.game.enemies.push(this.game.drDarkabolical);
 	this.game.addEntity(this.game.drDarkabolical);
 }
@@ -39,6 +41,8 @@ PlaceEnemies.prototype.placeBasicsAtlocation = function (xMin, xMax, yMin, yMax)
 
 PlaceEnemies.prototype.placeHuman = function () {
 	var blackKnight = new BlackKnight(this.game, 500, 500);
+	blackKnight.lifeMeter = new EnemyInfo(blackKnight.game, blackKnight.x, blackKnight.y - 15);
+	this.game.addEntity(blackKnight.lifeMeter);
 	this.game.enemies.push(blackKnight);
 	this.game.addEntity(blackKnight);
 	for (var i = 0; i < this.num; i++) {
@@ -58,6 +62,8 @@ PlaceEnemies.prototype.placeHuman = function () {
 
 PlaceEnemies.prototype.placeTomb = function () {
 	var skeletonKing = new SkeletonKing(this.game, 500, 5900);
+	skeletonKing.lifeMeter = new EnemyInfo(skeletonKing.game, skeletonKing.x, skeletonKing.y - 15);
+	this.game.addEntity(skeletonKing.lifeMeter);
 	this.game.enemies.push(skeletonKing);
 	this.game.addEntity(skeletonKing);
 
@@ -76,6 +82,8 @@ PlaceEnemies.prototype.placeTomb = function () {
 
 PlaceEnemies.prototype.placeUndead = function () {
 	var death = new Death(this.game, 5820, 500);
+	death.lifeMeter = new EnemyInfo(death.game, death.x, death.y - 15);
+	this.game.addEntity(death.lifeMeter);
 	this.game.enemies.push(death);
 	this.game.addEntity(death);
 
@@ -96,6 +104,8 @@ PlaceEnemies.prototype.placeUndead = function () {
 
 PlaceEnemies.prototype.placeGoblin = function () {
 	var armoredGoblin = new ArmoredGoblin(this.game, 5820, 5900);
+	armoredGoblin.lifeMeter = new EnemyInfo(armoredGoblin.game, armoredGoblin.x, armoredGoblin.y - 15);
+	this.game.addEntity(armoredGoblin.lifeMeter);
 	this.game.enemies.push(armoredGoblin);
 	this.game.addEntity(armoredGoblin);
 

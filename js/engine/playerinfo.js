@@ -9,23 +9,39 @@ function PlayerInfo(game) {
 		new Animation(this.heartSheet, 0, 290, 186, 58, 0.2, 1, true, false),
 		new Animation(this.heartSheet, 0, 348, 186, 58, 0.2, 1, true, false)
 	];
+	this.createButton = true;
 }
 
 
 PlayerInfo.prototype = new Entity();
 PlayerInfo.prototype.constructor = PlayerInfo;
 
+PlayerInfo.prototype.update = function() {
+	if (this.game.hero.lives <= 0) {
+		this.game.hero.lives = -Infinity;
+		this.game.entities.forEach(function(d) { if (d) d.removeFromWorld = true; });
+	}
+	
+}
+
 PlayerInfo.prototype.draw = function (ctx) {
 	ctx.save();
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
 	var camera = this.game.camera;
 	if (this.game.hero.lives <= 0) {
-		this.game.hero.lives = -Infinity;
 		var img = ASSET_MANAGER.getAsset("img/game-over-screen.png");
 		ctx.drawImage(img, 0, 0, camera.width, camera.height);
+		if (this.createButton) {
+			document.getElementById('resetButton').style.display = "inline";
+			this.createButton = false;
+		}
 	} else if (this.game.drDarkabolical.dead) {
 		var img = ASSET_MANAGER.getAsset("img/win-screen.png");
 		ctx.drawImage(img, 0, 0, camera.width, camera.height);
+		if (this.createButton) {
+			document.getElementById('resetButton').style.display = "inline";
+			this.createButton = false;
+		}
 	} else {
 		// ctx.textAlign = "right";
 		// ctx.font = "30px Arial";
