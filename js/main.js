@@ -50,4 +50,7 @@ function newGame() {
 
 	game.init(ctx);
 	game.start();
+	var music = new Audio('music/meta4-theme.wav');
+	music.loop = true;
+	music.play();
 }
