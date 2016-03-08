@@ -1,7 +1,7 @@
 function Tree(game, x, y) {
 	Entity.call(this, game, x, y);
 	this.width = 90;
-	this.height = 90;
+	this.height = 92;
 	this.treeSheet = ASSET_MANAGER.getAsset("img/sheetTree.png");
 
 	this.animation = new Animation(this.treeSheet, 0, 0, 95, 95, 0.2, 1, true, false);
