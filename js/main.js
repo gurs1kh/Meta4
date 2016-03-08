@@ -19,7 +19,7 @@ window.onload = function () {
 	ASSET_MANAGER.queueDownload("img/game-over-screen.png");
 	ASSET_MANAGER.queueDownload("img/win-screen.png");
 	//ASSET_MANAGER.queueDownload("img/sheetTree.png");
-
+	
 	ASSET_MANAGER.downloadAll(newGame);
 }
 
@@ -47,10 +47,10 @@ function newGame() {
 
 	new PlaceEnemies(game, 30);
 	// game.addEntity(game.playerInfo);
-
+	
 	game.init(ctx);
 	game.start();
-	var music = new Audio('music/meta4-theme.wav');
+	var music = new Audio('audio/meta4-theme.wav');
 	music.loop = true;
 	music.play();
 }
