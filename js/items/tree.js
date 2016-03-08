@@ -1,11 +1,25 @@
 function Tree(game, x, y) {
 	Entity.call(this, game, x, y);
-	this.width = 90;
-	this.height = 92;
+	this.width = 95;
+	this.height = 95;
 	this.treeSheet = ASSET_MANAGER.getAsset("img/sheetTree.png");
-
-	this.animation = new Animation(this.treeSheet, 0, 0, 95, 95, 0.2, 1, true, false);
-
+	var which = getRandomNumber(0, 15);
+	if (which === 0) this.animation = new Animation(this.treeSheet, 0, 0, 95, 95, 0.2, 1, true, false);
+	else if (which === 1) this.animation = new Animation(this.treeSheet, 95, 0, 95, 95, 0.2, 1, true, false);
+	else if (which === 2) this.animation = new Animation(this.treeSheet, 190, 0, 95, 95, 0.2, 1, true, false);
+	else if (which === 3) this.animation = new Animation(this.treeSheet, 285, 0, 95, 95, 0.2, 1, true, false);
+	else if (which === 4) this.animation = new Animation(this.treeSheet, 0, 95, 95, 95, 0.2, 1, true, false);
+	else if (which === 5) this.animation = new Animation(this.treeSheet, 95, 95, 95, 95, 0.2, 1, true, false);
+	else if (which === 6) this.animation = new Animation(this.treeSheet, 190, 95, 95, 95, 0.2, 1, true, false);
+	else if (which === 7) this.animation = new Animation(this.treeSheet, 285, 95, 95, 95, 0.2, 1, true, false);
+	else if (which === 8) this.animation = new Animation(this.treeSheet, 0, 190, 95, 95, 0.2, 1, true, false);
+	else if (which === 9) this.animation = new Animation(this.treeSheet, 95, 190, 95, 95, 0.2, 1, true, false);
+	else if (which === 10) this.animation = new Animation(this.treeSheet, 190, 190, 95, 95, 0.2, 1, true, false);
+	else if (which === 11) this.animation = new Animation(this.treeSheet, 285, 190, 95, 95, 0.2, 1, true, false);
+	else if (which === 12) this.animation = new Animation(this.treeSheet, 0, 285, 95, 95, 0.2, 1, true, false);
+	else if (which === 13) this.animation = new Animation(this.treeSheet, 95, 285, 95, 95, 0.2, 1, true, false);
+	else if (which === 14) this.animation = new Animation(this.treeSheet, 190, 285, 95, 95, 0.2, 1, true, false);
+	else if (which === 15) this.animation = new Animation(this.treeSheet, 285, 285, 95, 95, 0.2, 1, true, false);	
 	this.closed = true;
 
 	this.boxes = false;
@@ -41,4 +55,8 @@ Tree.prototype.draw = function (ctx) {
 	}
 
 	Entity.prototype.draw.call(this);
+}
+
+function getRandomNumber(min, max) {
+	return Math.floor(Math.random() * (max - min + 1.0)) + min;
 }
