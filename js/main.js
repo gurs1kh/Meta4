@@ -19,6 +19,7 @@ window.onload = function () {
 	ASSET_MANAGER.queueDownload("img/game-over-screen.png");
 	ASSET_MANAGER.queueDownload("img/win-screen.png");
 	ASSET_MANAGER.queueDownload("img/sheetTree.png");
+	ASSET_MANAGER.queueDownload("img/sheetTombstone.png");
 
 	ASSET_MANAGER.downloadAll(newGame);
 }
@@ -50,7 +51,7 @@ function newGame() {
 	game.addEntity(game.hero);
 
 	new PlaceEnemies(game, 30);
-	new PlaceTerrain(game, 35); 
+	new PlaceTerrain(game, 20); 
 	// game.addEntity(game.playerInfo);
 	
 	game.init(ctx);
