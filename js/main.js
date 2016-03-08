@@ -17,6 +17,7 @@ window.onload = function () {
 	ASSET_MANAGER.queueDownload("img/startscreen.png");
 	ASSET_MANAGER.queueDownload("img/game-over-screen.png");
 	ASSET_MANAGER.queueDownload("img/win-screen.png");
+	ASSET_MANAGER.queueDownload("img/sheetTree.png");
 
 	ASSET_MANAGER.downloadAll(newGame);
 }
