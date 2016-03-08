@@ -43,7 +43,8 @@ Hero.prototype.pickUp = function (item) {
 }
 
 Hero.prototype.update = function () {
-
+	var velocity = {x:0, y:0};
+	
 	if (this.invincible) {
 		if (this.timeBeingInvincible < 1000) {
 			this.timeBeingInvincible += 20;
@@ -54,7 +55,7 @@ Hero.prototype.update = function () {
 			this.speed *= 3 / 4;
 		}
 	}
-
+	
 	if (this.game.j) {
 		this.currentWeapon = this.weapons[(this.weapons.indexOf(this.currentWeapon) + 1) % 2];
 		this.game.j = false;
@@ -62,33 +63,33 @@ Hero.prototype.update = function () {
 
 	if (this.game.a) {
 		this.left = true;
-		this.x -= this.speed;
+		velocity.x -= this.speed;
 	} else {
 		this.left = false;
 	}
 
 	if (this.game.w) {
 		this.up = true;
-		this.y -= this.speed;
+		velocity.y -= this.speed;
 
 	} else
 		this.up = false;
 
 	if (this.game.s) {
 		this.down = true;
-		this.y += this.speed;
+		velocity.y += this.speed;
 	} else
 		this.down = false;
 
 	if (this.game.d) {
 		this.right = true;
-		this.x += this.speed;
+		velocity.x += this.speed;
 	} else {
 		this.right = false;
 	}
 
 	var attacking = this.game.left || this.game.right || this.game.up || this.game.down;
-
+	
 	if (attacking && this.currentWeapon.attackingTime <= 0) {
 		this.currentWeapon.attacking = true;
 		this.currentWeapon.attackingTime = this.currentWeapon.attackDelay;
@@ -109,7 +110,10 @@ Hero.prototype.update = function () {
 	} else {
 		this.currentWeapon.attackingTime -= 100;
 	}
-
+	
+	this.x += velocity.x;
+	this.y += velocity.y;
+	
 	//edge of island collisions
 	var bounds = this.game.map.bounds;
 	var feetX = this.x + this.width / 2;
@@ -136,14 +140,19 @@ Hero.prototype.update = function () {
 			y: this.y + this.height,
 			radius: 5
 		}, rect)) {
-			if (rect.top)
-				this.y++;
-			if (rect.bottom)
-				this.y--;
-			if (rect.left)
-				this.x++;
-			if (rect.right)
-				this.x--;
+			if (rect.all) {
+				this.x -= velocity.x;
+				this.y -= velocity.y;
+			} else {
+				if (rect.top)
+					this.y++;
+				if (rect.bottom)
+					this.y--;
+				if (rect.left)
+					this.x++;
+				if (rect.right)
+					this.x--;
+			}
 		}
 	}
 

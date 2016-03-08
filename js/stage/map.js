@@ -31,6 +31,15 @@ function Map(game) {
 		height: gate.height,
 		top: true,
 	});
+	
+	// this.boundRects.push({
+		// x: 3000,
+		// y: 4100,
+		// rotation: 0,
+		// width: 100,
+		// height: 100,
+		// all: true,
+	// });
 
 	this.debug = false;
 

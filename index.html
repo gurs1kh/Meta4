@@ -7,10 +7,12 @@
 	<script type="text/javascript" src="js/engine/assetmanager.js"></script>
 	<script type="text/javascript" src="js/engine/animation.js"></script>
 	<script type="text/javascript" src="js/engine/playerinfo.js"></script>
-        <script type="text/javascript" src="js/engine/enemyInfo.js"></script>
+    <script type="text/javascript" src="js/engine/enemyInfo.js"></script>
 	<script type="text/javascript" src="js/stage/map.js"></script>
+	<script type="text/javascript" src="js/stage/minimap.js"></script>
 	<script type="text/javascript" src="js/stage/camera.js"></script>
 	<script type="text/javascript" src="js/stage/placeEnemies.js"></script>
+	<script type="text/javascript" src="js/stage/placeTerrain.js"></script>
 	<script type="text/javascript" src="js/players/player.js"></script>
 	<script type="text/javascript" src="js/players/enemies/enemy.js"></script>
 	<script type="text/javascript" src="js/players/enemies/bosses/boss.js"></script>
@@ -77,14 +79,14 @@
 	function startGame() {
 		document.getElementById('titleScreen').style.display = "none";
 		document.getElementById('gameWorld').style.display = "inline";
+		document.getElementById('resetButton').style.display = "none";
 		document.getElementById('gameWorld').focus();
-                document.getElementById('resetButton').style.display = "none";
 	}
-        function restartGame() {
-          document.getElementById('resetButton').style.display = "none";
-          newGame();
-          document.getElementById('gameWorld').focus();
-        }
+	function restartGame() {
+		document.getElementById('resetButton').style.display = "none";
+		newGame();
+		document.getElementById('gameWorld').focus();
+	}
 </script>
 </body>
 </html>

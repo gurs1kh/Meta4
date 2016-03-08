@@ -8,6 +8,7 @@ window.onload = function () {
 	ASSET_MANAGER.queueDownload("img/sheet6.png");
 	ASSET_MANAGER.queueDownload("img/sheet7.png");
 	ASSET_MANAGER.queueDownload("img/META4map.gif");
+	ASSET_MANAGER.queueDownload("img/META4map-mini.gif");
 	ASSET_MANAGER.queueDownload("img/weaponsheet2.png");
 	ASSET_MANAGER.queueDownload("img/arrow.png");
 	ASSET_MANAGER.queueDownload("img/bows.png");
@@ -30,26 +31,31 @@ function newGame() {
 
 	game = new GameEngine();
 	var enemies = [];
-	var trees = []; 
+	var terrain = []; 
 	game.gate = new Gate(game, 3170, 4010);
-	game.tree = new Tree(game, 3000, 4100);
+//	game.tree = new Tree(game, 3000, 4100);
 	game.map = new Map(game);
 	game.hero = new Hero(game, 3180, 4100);
 	game.camera = new Camera(game, canvas.width, canvas.height);
 	game.playerInfo = new PlayerInfo(game);
 
 	game.enemies = enemies;
+	game.terrain = terrain; 
 	game.addEntity(game.map);
 	game.addEntity(game.gate);
-	game.addEntity(game.tree); 
+//	game.addEntity(game.tree); 
 	game.addEntity(game.camera);
 
 	game.bossesKilled = 0;
 	game.addEntity(game.hero);
 
 	new PlaceEnemies(game, 30);
+	new PlaceTerrain(game, 35); 
 	// game.addEntity(game.playerInfo);
-
+	
 	game.init(ctx);
 	game.start();
+	var music = new Audio('audio/meta4-theme.wav');
+	music.loop = true;
+	music.play();
 }
