@@ -8,6 +8,7 @@ window.onload = function () {
 	ASSET_MANAGER.queueDownload("img/sheet6.png");
 	ASSET_MANAGER.queueDownload("img/sheet7.png");
 	ASSET_MANAGER.queueDownload("img/META4map.gif");
+	ASSET_MANAGER.queueDownload("img/META4map-mini.gif");
 	ASSET_MANAGER.queueDownload("img/weaponsheet2.png");
 	ASSET_MANAGER.queueDownload("img/arrow.png");
 	ASSET_MANAGER.queueDownload("img/bows.png");

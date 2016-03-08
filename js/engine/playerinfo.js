@@ -10,6 +10,7 @@ function PlayerInfo(game) {
 		new Animation(this.heartSheet, 0, 348, 186, 58, 0.2, 1, true, false)
 	];
 	this.createButton = true;
+	this.minimap = new MiniMap(game);
 }
 
 
@@ -48,7 +49,7 @@ PlayerInfo.prototype.draw = function (ctx) {
 		// ctx.fillStyle = "black"
 		// ctx.font = "24pt Impact";
 		// ctx.fillText("Lives: ", camera.width - 100, 30);
-
+		
 		this.game.hero.currentWeapon.animation.drawFrame(this.game.clockTick, ctx, camera.width - 30, 40);
 
 		this.hearts[this.game.hero.lives * 2].drawFrame(this.game.clockTick, ctx, camera.width - 100, 5, 0.5);
@@ -59,6 +60,7 @@ PlayerInfo.prototype.draw = function (ctx) {
 				key.animations[i].drawFrame(key.game.clockTick, ctx, camera.width - 25, (i + 2) * 40);
 			}
 		});
+		this.minimap.draw(ctx);
 	}
 	ctx.restore();
 }
