@@ -1,13 +1,12 @@
 function Tree(game, x, y) {
 	Entity.call(this, game, x, y);
 	this.width = 90;
-	this.height = 86;
-	this.gateSheet = ASSET_MANAGER.getAsset("img/sheetTree.png");
+	this.height = 90;
+	this.treeSheet = ASSET_MANAGER.getAsset("img/sheetTree.png");
 
-	this.tree1 = new Animation(this.gateSheet, 0, 0, 95, 95, 0.2, 1, true, false);
+	this.animation = new Animation(this.treeSheet, 0, 0, 95, 95, 0.2, 1, true, false);
 
 	this.closed = true;
-	this.whichGate = 1;
 
 	this.boxes = false;
 }
@@ -20,11 +19,19 @@ Tree.prototype.collide = function (other) {
 			this.y < other.y + other.height &&
 			this.height + this.y > other.y);
 }
+Tree.prototype.update = function () {
+	//if (this.collide(this.game.hero)) {
+	//	}
+	Entity.prototype.update.call(this);
+	}
+
+//};
 
 Tree.prototype.draw = function (ctx) {
-	this.tree1.drawFrame(this.game.clockTick, ctx, 0, 0, 1);
+	   
+	this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
 	
-		if (this.boxes) {
+	if (this.boxes) {
 		ctx.strokeStyle = "red";
 		ctx.strokeRect(this.x, this.y, this.width, this.height);
 		ctx.strokeStyle = "green";

@@ -30,7 +30,9 @@ function newGame() {
 
 	game = new GameEngine();
 	var enemies = [];
+	var trees = []; 
 	game.gate = new Gate(game, 3170, 4010);
+	game.tree = new Tree(game, 3000, 4100);
 	game.map = new Map(game);
 	game.hero = new Hero(game, 3180, 4100);
 	game.camera = new Camera(game, canvas.width, canvas.height);
@@ -39,6 +41,7 @@ function newGame() {
 	game.enemies = enemies;
 	game.addEntity(game.map);
 	game.addEntity(game.gate);
+	game.addEntity(game.tree); 
 	game.addEntity(game.camera);
 
 	game.bossesKilled = 0;
