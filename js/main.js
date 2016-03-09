@@ -39,19 +39,16 @@ function newGame() {
 	var enemies = [];
 	var terrain = []; 
 	game.map = new Map(game);
-	game.gate = new Gate(game, 3170, 4010);
 	game.hero = new Hero(game, 3180, 4100);
 	game.camera = new Camera(game, canvas.width, canvas.height);
 	game.playerInfo = new PlayerInfo(game);
 
 	game.enemies = enemies;
 	game.terrain = terrain; 
-	game.addEntity(game.map);
-	game.addEntity(game.gate); 
+	game.addEntity(game.map); 
 	game.addEntity(game.camera);
-
-	game.bossesKilled = 0;
 	game.addEntity(game.hero);
+	game.bossesKilled = 0;
 
 	new PlaceEnemies(game, 30);
 	new PlaceTerrain(game, 20);

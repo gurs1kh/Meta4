@@ -1,6 +1,8 @@
 function PlaceTerrain(game, num) {
 	this.game = game;
 	this.num = num;
+	game.gate = new Gate(game, 3170, 4010);
+	game.addEntity(game.gate);
 	this.placeTrees();
 	this.placeSnowTrees(); 
 	this.placeTombs();

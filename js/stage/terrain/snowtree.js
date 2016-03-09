@@ -20,16 +20,8 @@ function SnowTree(game, x, y) {
 	else if (which === 13) this.animation = new Animation(this.sheet, 95, 285, 95, 95, 0.2, 1, true, false);
 	else if (which === 14) this.animation = new Animation(this.sheet, 190, 285, 95, 95, 0.2, 1, true, false);
 	else if (which === 15) this.animation = new Animation(this.sheet, 285, 285, 95, 95, 0.2, 1, true, false);	
-	this.closed = true;
 	
-	this.game.map.boundRects.push({
-		x: this.x + this.width / 2,
-		y: this.y + this.height * 3 / 4,
-		rotation: 0,
-		width: this.width / 2,
-		height: this.height / 2,
-		all: true,
-	});
+	this.addBoundRects(this.x + this.width * 3 / 8, this.y + this.height * 3 / 4, this.width / 4, this.height / 4);
 }
 SnowTree.prototype = new Terrain();
 SnowTree.prototype.constructor = SnowTree;
