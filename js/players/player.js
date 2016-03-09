@@ -21,13 +21,6 @@ function Player(game, x, y, width, height, radius) {
 Player.prototype = new Entity();
 Player.prototype.constructor = Player;
 
-Player.prototype.collide = function (other) {
-	return (this.x < other.x + other.width &&
-			this.x + this.width > other.x &&
-			this.y < other.y + other.height &&
-			this.height + this.y > other.y)
-}
-
 Player.prototype.canSee = function (other) {
 	//Check the distance from the center of the circle to the enemies four corners
 	var otherLeft = other.x;
