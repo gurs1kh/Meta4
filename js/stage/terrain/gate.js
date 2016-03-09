@@ -2,13 +2,13 @@ function Gate(game, x, y) {
 	Terrain.call(this, game, x, y);
 	this.width = 61;
 	this.height = 64;
-	this.gateSheet = ASSET_MANAGER.getAsset("img/gate.png");
+	this.sheet = ASSET_MANAGER.getAsset("img/gate.png");
 
-	this.gateClosed = new Animation(this.gateSheet, 0, 0, 61, 64, 0.2, 1, true, false);
-	this.gateOpening1 = new Animation(this.gateSheet, 0, 63, 61, 64, 0.2, 1, true, false);
-	this.gateOpening2 = new Animation(this.gateSheet, 0, 127, 61, 64, 0.2, 1, true, false);
-	this.gateOpening3 = new Animation(this.gateSheet, 0, 191, 61, 64, 0.2, 1, true, false);
-	this.gateOpen = new Animation(this.gateSheet, 0, 254, 61, 64, 0.2, 1, true, false);
+	this.gateClosed = new Animation(this.sheet, 0, 0, 61, 64, 0.2, 1, true, false);
+	this.gateOpening1 = new Animation(this.sheet, 0, 63, 61, 64, 0.2, 1, true, false);
+	this.gateOpening2 = new Animation(this.sheet, 0, 127, 61, 64, 0.2, 1, true, false);
+	this.gateOpening3 = new Animation(this.sheet, 0, 191, 61, 64, 0.2, 1, true, false);
+	this.gateOpen = new Animation(this.sheet, 0, 254, 61, 64, 0.2, 1, true, false);
 
 	this.closed = true;
 	this.whichGate = 1;
@@ -64,6 +64,4 @@ Gate.prototype.draw = function (ctx) {
 		ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.radius, 0, 2 * Math.PI);
 		ctx.stroke();
 	}
-
-	Terrain.prototype.draw.call(this);
 };

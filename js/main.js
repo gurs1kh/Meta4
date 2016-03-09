@@ -32,16 +32,13 @@ window.onload = function () {
 }
 
 function newGame() {
-	//	console.log("starting up da shield");
 	var canvas = document.getElementById('gameWorld');
 	var ctx = canvas.getContext('2d');
-	//	ctx.scale(1.5, 1.5);
 
 	game = new GameEngine();
 	var enemies = [];
 	var terrain = []; 
 	game.gate = new Gate(game, 3170, 4010);
-//	game.tree = new Tree(game, 3000, 4100);
 	game.map = new Map(game);
 	game.hero = new Hero(game, 3180, 4100);
 	game.camera = new Camera(game, canvas.width, canvas.height);
@@ -50,16 +47,14 @@ function newGame() {
 	game.enemies = enemies;
 	game.terrain = terrain; 
 	game.addEntity(game.map);
-	game.addEntity(game.gate);
-//	game.addEntity(game.tree); 
+	game.addEntity(game.gate); 
 	game.addEntity(game.camera);
 
 	game.bossesKilled = 0;
 	game.addEntity(game.hero);
 
 	new PlaceEnemies(game, 30);
-	new PlaceTerrain(game, 20); 
-	// game.addEntity(game.playerInfo);
+	new PlaceTerrain(game, 20);
 	
 	game.init(ctx);
 	game.start();
