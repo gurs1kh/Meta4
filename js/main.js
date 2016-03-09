@@ -20,7 +20,12 @@ window.onload = function () {
 	ASSET_MANAGER.queueDownload("img/win-screen.png");
 	ASSET_MANAGER.queueDownload("img/sheetTree.png");
 
-	ASSET_MANAGER.downloadAll(newGame);
+	ASSET_MANAGER.downloadAll(function() {
+		newGame();
+		var music = new Audio('audio/meta4-theme.wav');
+		music.loop = true;
+		music.play();
+	});
 }
 
 function newGame() {
@@ -55,7 +60,4 @@ function newGame() {
 	
 	game.init(ctx);
 	game.start();
-	var music = new Audio('audio/meta4-theme.wav');
-	music.loop = true;
-	music.play();
 }
