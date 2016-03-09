@@ -8,8 +8,6 @@ function Enemy(game, x, y, frameWidth, frameHeight) {
 
 	this.atStarting = true;
 	this.attackedTime = 0;
-
-	this.boxes = false;
 }
 
 Enemy.prototype = new Player();
