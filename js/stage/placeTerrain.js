@@ -2,6 +2,7 @@ function PlaceTerrain(game, num) {
 	this.game = game;
 	this.num = num;
 	this.placeTrees();
+	this.placeSnowTrees(); 
 	this.placeTombs();
 }
 
@@ -33,7 +34,15 @@ PlaceTerrain.prototype.placeTombs = function () {
 		this.game.addEntity(tombs);
 	}
 }
-
+PlaceTerrain.prototype.placeSnowTrees = function () {
+	for (var i = 0; i < this.num; i++) {
+		var location = getlocation(4475, 6040, 4475, 6040);
+		var snowtrees;
+			snowtrees = new SnowTree(this.game, location.x, location.y);
+		this.game.terrain.push(snowtrees);
+		this.game.addEntity(snowtrees);
+	}
+}
 function getlocation(xMin, xMax, yMin, yMax) {
 	var location = {};
 	var newXY = true;
