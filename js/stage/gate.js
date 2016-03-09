@@ -1,5 +1,5 @@
 function Gate(game, x, y) {
-	Entity.call(this, game, x, y);
+	Terrain.call(this, game, x, y);
 	this.width = 61;
 	this.height = 64;
 	this.gateSheet = ASSET_MANAGER.getAsset("img/gate.png");
@@ -16,15 +16,8 @@ function Gate(game, x, y) {
 	this.boxes = false;
 }
 
-Gate.prototype = new Entity();
+Gate.prototype = new Terrain();
 Gate.prototype.constructor = Gate;
-
-Gate.prototype.collide = function (other) {
-	return (this.x < other.x + other.width &&
-			this.x + this.width > other.x &&
-			this.y < other.y + other.height &&
-			this.height + this.y > other.y);
-}
 
 Gate.prototype.update = function () {
 	if (this.collide(this.game.hero)) {
@@ -47,7 +40,7 @@ Gate.prototype.update = function () {
 		}
 	}
 
-	Entity.prototype.update.call(this);
+	Terrain.prototype.update.call(this);
 };
 
 Gate.prototype.draw = function (ctx) {
@@ -72,5 +65,5 @@ Gate.prototype.draw = function (ctx) {
 		ctx.stroke();
 	}
 
-	Entity.prototype.draw.call(this);
+	Terrain.prototype.draw.call(this);
 };
