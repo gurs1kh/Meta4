@@ -12,7 +12,6 @@ function Hero(game, x, y) {
 	this.rightAnimation = new Animation(sheet, 94, 192, frameWidth, frameHeight, 0.2, 3, true, false);
 
 	this.speed = 3;
-	this.boxes = false;
 	this.lives = 3;
 	this.invincible = false;
 	this.timeBeingInvincible = 0;
@@ -135,15 +134,19 @@ Hero.prototype.update = function () {
 	//"wall" collision
 	for (var i = 0; i < this.game.map.boundRects.length; i++) {
 		var rect = this.game.map.boundRects[i];
-		while (collideCircleWithRotatedRectangle({
-			x: this.x + this.width / 2,
-			y: this.y + this.height,
-			radius: 5
-		}, rect)) {
-			if (rect.all) {
-				this.x -= velocity.x;
-				this.y -= velocity.y;
-			} else {
+		if (rect.all && collideCircleWithRotatedRectangle({
+				x: this.x + this.width / 2,
+				y: this.y + this.height,
+				radius: 5
+			}, rect)) {
+			this.x -= velocity.x;
+			this.y -= velocity.y;
+		} else {
+			while (collideCircleWithRotatedRectangle({
+				x: this.x + this.width / 2,
+				y: this.y + this.height,
+				radius: 5
+			}, rect)) {
 				if (rect.top)
 					this.y++;
 				if (rect.bottom)
@@ -221,18 +224,6 @@ Hero.prototype.draw = function (ctx) {
 				this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
 			}
 		}
-	}
-	if (this.boxes) {
-		ctx.strokeStyle = "red";
-		ctx.strokeRect(this.x, this.y, this.width, this.height);
-		ctx.strokeStyle = "green";
-		ctx.beginPath();
-		ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.radius, 0, 2 * Math.PI);
-		ctx.stroke();
-		ctx.strokeStyle = "white";
-		ctx.beginPath();
-		ctx.arc(this.x + this.width / 2, this.y + this.height, 2, 0, 2 * Math.PI);
-		ctx.stroke();
 	}
 	Entity.prototype.draw.call(this);
 

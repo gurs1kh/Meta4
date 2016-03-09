@@ -23,12 +23,4 @@ Weapon.prototype.draw = function (ctx) {
 	} else if (this.attacking || this instanceof Bow) {
 		this.animation.drawFrame(this.game.clockTick, ctx, this.game.hero.x - this.width, this.game.hero.y);
 	}
-	if (this.boxes) {
-		ctx.strokeStyle = "red";
-		ctx.strokeRect(this.x, this.y, this.width, this.height);
-		ctx.strokeStyle = "green";
-		ctx.beginPath();
-		ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.radius, 0, 2 * Math.PI);
-		ctx.stroke();
-	}
 };
