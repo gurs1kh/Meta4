@@ -7,6 +7,7 @@ function PlaceTerrain(game, num) {
 	this.placeSnowTrees(); 
 	this.placeTombs();
 	this.placeRocks();
+	this.placeTrap();
 }
 
 PlaceTerrain.prototype = new Entity();
@@ -53,6 +54,15 @@ PlaceTerrain.prototype.placeRocks = function () {
 			rocks = new Rock(this.game, location.x, location.y);
 		this.game.terrain.push(rocks);
 		this.game.addEntity(rocks);
+	}
+}
+PlaceTerrain.prototype.placeTrap = function () {
+	for (var i = 0; i < this.num; i++) {
+		var location = getlocation(4475, 6040, 350, 1910);
+		var pits;
+			pits = new Pit(this.game, location.x, location.y);
+		this.game.terrain.push(pits);
+		this.game.addEntity(pits);
 	}
 }
 function getlocation(xMin, xMax, yMin, yMax) {
