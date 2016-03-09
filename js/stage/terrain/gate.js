@@ -12,7 +12,16 @@ function Gate(game, x, y) {
 
 	this.closed = true;
 	this.whichGate = 1;
-
+	
+	this.game.map.boundRects.push({
+		x: this.x + this.width / 2,
+		y: this.y + this.height / 2,
+		rotation: 0,
+		width: this.width,
+		height: this.height,
+		top: true,
+	});
+	
 	this.boxes = false;
 }
 

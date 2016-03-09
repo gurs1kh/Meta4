@@ -137,7 +137,9 @@ GameEngine.prototype.update = function () {
 			entity.update();
 		}
 	}
-
+	
+	this.entities.sort(function(a, b) { return (a.y + a.height) - (b.y + b.height); });
+	
 	for (var i = this.entities.length - 1; i >= 0; --i) {
 		if (!this.entities[i] || this.entities[i].removeFromWorld) {
 			if (this.entities[i] instanceof Enemy)

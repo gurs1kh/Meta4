@@ -38,8 +38,8 @@ function newGame() {
 	game = new GameEngine();
 	var enemies = [];
 	var terrain = []; 
-	game.gate = new Gate(game, 3170, 4010);
 	game.map = new Map(game);
+	game.gate = new Gate(game, 3170, 4010);
 	game.hero = new Hero(game, 3180, 4100);
 	game.camera = new Camera(game, canvas.width, canvas.height);
 	game.playerInfo = new PlayerInfo(game);

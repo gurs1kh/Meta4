@@ -2,8 +2,6 @@ function Boss(game, x, y, frameWidth, frameHeight) {
 	Enemy.call(this, game, x, y, frameWidth, frameHeight);
 	this.hitpoints = 300;
 	this.startingHitpoints = 300;
-//	this.lifeMeter = new EnemyInfo(game, x, y - 10);
-//	console.log(this.lifeMeter);
 }
 
 Boss.prototype = new Enemy();

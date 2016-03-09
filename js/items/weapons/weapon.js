@@ -2,7 +2,6 @@ function Weapon(game, x, y, pickedUp) {
 	Entity.call(this, game, x, y);
 	this.attacking = false;
 	this.attackingTime = 0;
-	this.boxes = false;
 	this.pickedUp = pickedUp;
 }
 

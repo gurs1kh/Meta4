@@ -8,8 +8,6 @@ function Rock(game, x, y) {
 	else if (which === 1) this.animation = new Animation(this.sheet, 33, 0, 32, 31, 0.2, 1, true, false);
 	else if (which === 2) this.animation = new Animation(this.sheet, 33, 0, 32, 31, 0.2, 1, true, false);
 	this.closed = true;
-
-	this.boxes = false;
 }
 Rock.prototype = new Terrain();
 Rock.prototype.constructor = Rock;

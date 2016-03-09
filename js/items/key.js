@@ -4,18 +4,17 @@ function Key(game, x, y, i) {
 	this.y = y;
 	this.width = 25;
 	this.height = 25;
-	this.keySheet = ASSET_MANAGER.getAsset("img/keys.png");
+	this.sheet = ASSET_MANAGER.getAsset("img/keys.png");
 
 	//  this.meleeWeaponLeft_basic = new Animation(this.weaponSheet, 68, 40, 20, 18, 0.2, 1, true, false);
 	this.animations = [
-		new Animation(this.keySheet, 0, 0, 20, 21, 0.2, 1, true, false),
-		new Animation(this.keySheet, 20, 0, 24, 24, 0.2, 1, true, false),
-		new Animation(this.keySheet, 44, 0, 21, 20, 0.2, 1, true, false),
-		new Animation(this.keySheet, 65, 0, 22, 24, 0.2, 1, true, false)
+		new Animation(this.sheet, 0, 0, 20, 21, 0.2, 1, true, false),
+		new Animation(this.sheet, 20, 0, 24, 24, 0.2, 1, true, false),
+		new Animation(this.sheet, 44, 0, 21, 20, 0.2, 1, true, false),
+		new Animation(this.sheet, 65, 0, 22, 24, 0.2, 1, true, false)
 	];
 
 	this.whichKey = i;
-	this.boxes = false;
 	this.pickedUp = false;
 }
 

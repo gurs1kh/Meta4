@@ -16,8 +16,6 @@ function Arrow(game, x, y, damage, dir) {
 		this.width = 11;
 		this.height = 29;
 	}
-
-	this.boxes = false;
 }
 
 Arrow.prototype = new Entity();

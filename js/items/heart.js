@@ -4,11 +4,9 @@ function Heart(game, x, y) {
 	this.y = y;
 	this.width = 15.5;
 	this.height = 14.5;
-	this.heartSheet = ASSET_MANAGER.getAsset("img/heartspritesheet.png");
+	this.sheet = ASSET_MANAGER.getAsset("img/heartspritesheet.png");
+	this.animation = new Animation(this.sheet, 0, 58, 62, 58, 0.2, 1, true, false);
 
-	this.animation = new Animation(this.heartSheet, 0, 58, 62, 58, 0.2, 1, true, false);
-
-	this.boxes = false;
 	this.pickedUp = false;
 }
 
