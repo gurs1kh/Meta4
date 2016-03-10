@@ -119,7 +119,7 @@ GameEngine.prototype.draw = function () {
 		if (this.entities[i] && (this.camera.onScreen(this.entities[i]) ||
 			this.entities[i] instanceof Map ||
 			this.entities[i] instanceof PlayerInfo)) {
-
+			
 			this.entities[i].draw(this.ctx);
 		}
 	}

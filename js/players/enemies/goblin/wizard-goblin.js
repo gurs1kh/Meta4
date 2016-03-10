@@ -12,7 +12,37 @@ function WizardGoblin(game, x, y) {
 	this.rightAnimation = new Animation(sheet, 0, 192, frameWidth, frameHeight, 0.2, 3, true, false);
 
 	this.hitpoints = 70;
+	this.attackingTime = 0;
+	this.attackDelay = 3000;
+
 }
 
 WizardGoblin.prototype = new Enemy();
 WizardGoblin.prototype.constructor = WizardGoblin;
+
+WizardGoblin.prototype.update = function () {
+	Enemy.prototype.update.call(this);
+
+	if (this.canSee(this.game.hero) && this.attackingTime <= 0) {
+		this.attackingTime = this.attackDelay;
+		var v = {x: -this.x, y: -this.y};
+		v.x += this.game.hero.x;
+		v.y += this.game.hero.y;
+
+
+		var magn = Math.sqrt(v.x * v.x + v.y * v.y);
+		if (magn) {
+			v.x *= 2 / magn;
+			v.y *= 2 / magn;
+		}
+
+		v.x = Math.round(v.x);
+		v.y = Math.round(v.y);
+		var blueOrb = new BlueOrb(this.game, this.x, this.y, v.x, v.y);
+		this.game.addEntity(blueOrb);
+
+	} else if (this.attackingTime > 0)
+		this.attackingTime -= 50;
+
+	Entity.prototype.update.call(this);
+}
