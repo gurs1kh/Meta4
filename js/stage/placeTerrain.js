@@ -15,7 +15,7 @@ PlaceTerrain.prototype.constructor = PlaceTerrain;
 
 PlaceTerrain.prototype.placeTrees = function () {
 	this.placeTreesAtlocation(1950, 4450, 4300, 5900); //Bottom
-	this.placeTreesAtlocation(1950, 4450, 350, 2150); //Top
+	this.placeTreesAtlocation(1950, 4450, 150, 2050); //Top
 	this.placeTreesAtlocation(350, 2300, 1950, 4300); //Left
 	this.placeTreesAtlocation(4100, 5900, 1950, 4450); //Right
 }
@@ -64,6 +64,9 @@ PlaceTerrain.prototype.placeTrap = function () {
 		this.game.terrain.push(pits);
 		this.game.addEntity(pits);
 	}
+}
+PlaceTerrain.prototype.placeFalse = function () {
+	
 }
 function getlocation(xMin, xMax, yMin, yMax) {
 	var location = {};
