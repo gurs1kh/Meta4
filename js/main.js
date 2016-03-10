@@ -24,6 +24,7 @@ window.onload = function () {
 	ASSET_MANAGER.queueDownload("img/sheetRock.png");
 	ASSET_MANAGER.queueDownload("img/sheetPit.png");
 	ASSET_MANAGER.queueDownload("img/projectiles.png");
+	ASSET_MANAGER.queueDownload("img/throwingBone.gif");
 
 	ASSET_MANAGER.downloadAll(function() {
 		newGame();
