@@ -26,6 +26,7 @@ window.onload = function () {
 	ASSET_MANAGER.queueDownload("img/projectiles.png");
 	ASSET_MANAGER.queueDownload("img/throwingBone.gif");
 	ASSET_MANAGER.queueDownload("img/purpleOrb.png");
+	ASSET_MANAGER.queueDownload("img/ninjaStars.png");
 
 	ASSET_MANAGER.downloadAll(function() {
 		newGame();

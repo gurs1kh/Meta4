@@ -1,19 +1,18 @@
-function Bone(game, x, y, deltaX, deltaY) {
+function NinjaStar(game, x, y, deltaX, deltaY) {
 	Entity.call(this, game, x, y);
-	var sheet = ASSET_MANAGER.getAsset("img/throwingBone.gif");
-	this.animation = new Animation(sheet, 0, 0, 18, 17, 0.2, 4, true, false);
-
-	this.width = 18;
-	this.height = 17;
-
+	var sheet = ASSET_MANAGER.getAsset("img/ninjaStars.png");
+	this.animation = new Animation(sheet, 0, 0, 12, 12, 0.2, 2, true, false);
+	this.width = 12;
+	this.height = 12;
+	
 	this.deltaX = deltaX;
 	this.deltaY = deltaY;
 }
 
-Bone.prototype = new Entity();
-Bone.prototype.constructor = Bone;
+NinjaStar.prototype = new Entity();
+NinjaStar.prototype.constructor = NinjaStar;
 
-Bone.prototype.update = function () {
+NinjaStar.prototype.update = function () {
 	if (!this.game.camera.onScreen(this) || this.collide(this.game.gate))
 		this.removeFromWorld = true;
 
@@ -33,7 +32,7 @@ Bone.prototype.update = function () {
 	Entity.prototype.update.call(this);
 };
 
-Bone.prototype.draw = function (ctx) {
+NinjaStar.prototype.draw = function (ctx) {
 	this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
 	Entity.prototype.draw.call(this);
 };

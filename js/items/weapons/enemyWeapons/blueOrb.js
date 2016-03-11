@@ -9,7 +9,6 @@ function BlueOrb(game, x, y, deltaX, deltaY) {
 	this.deltaX = deltaX;
 	this.deltaY = deltaY;
 
-	this.attackDelay = 3000;
 }
 
 BlueOrb.prototype = new Entity();
