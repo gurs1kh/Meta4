@@ -3,7 +3,8 @@ function DrDarkabolical(game, x, y) {
 	var frameWidth = 33.3;
 	var frameHeight = 32;
 	Boss.call(this, game, x, y, frameWidth, frameHeight);
-	//  this.radius = 300;
+	this.radius = 250;
+	this.speed = 2;
 
 	this.animation = new Animation(sheet, 192 + 32, 128, 32, 32, 0.05, 1, true, false);
 	this.upAnimation = new Animation(sheet, 192, 128 + 96, 32, 32, 0.2, 3, true, false);
@@ -21,6 +22,9 @@ function DrDarkabolical(game, x, y) {
 	this.minionsAlive = 0;
 	this.vulnerable = false;
 	this.dead = false;
+
+	this.attackingTime = 0;
+	this.attackDelay = 2000;
 }
 
 DrDarkabolical.prototype = new Boss();
@@ -31,6 +35,24 @@ DrDarkabolical.prototype.update = function () {
 		this.removeFromWorld = true;
 	} else {
 		Boss.prototype.update.call(this);
+		
+		if (this.canSee(this.game.hero) && this.vulnerable && this.attackingTime <= 0) {
+			this.attackingTime = this.attackDelay;
+			var v = {x: -this.x, y: -this.y};
+			v.x += this.game.hero.x;
+			v.y += this.game.hero.y;
+			var magn = Math.sqrt(v.x * v.x + v.y * v.y);
+			if (magn) {
+				v.x *= 5 / magn;
+				v.y *= 5 / magn;
+			}
+			v.x = Math.round(v.x);
+			v.y = Math.round(v.y);
+			var purpleOrb = new PurpleOrb(this.game, this.x, this.y, v.x, v.y);
+			this.game.addEntity(purpleOrb);
+		} else if (this.attackingTime > 0)
+			this.attackingTime -= 50;
+		
 		if (this.canSee(this.game.hero) && !this.vulnerable) {
 			this.telOut = true;
 		}
