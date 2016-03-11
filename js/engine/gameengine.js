@@ -115,6 +115,7 @@ GameEngine.prototype.draw = function () {
 	var transX = -(this.camera.x - this.camera.width / 2);
 	var transY = -(this.camera.y - this.camera.height / 2);
 	this.ctx.translate(transX, transY);
+	this.map.draw(this.ctx);
 	for (var i = 0; i < this.entities.length; i++) {
 		if (this.entities[i] && (this.camera.onScreen(this.entities[i]) ||
 			this.entities[i] instanceof Map ||
@@ -132,13 +133,17 @@ GameEngine.prototype.update = function () {
 
 	for (var i = 0; i < entitiesCount; i++) {
 		var entity = this.entities[i];
-
+		// console.log(entity);
 		if (entity && !entity.removeFromWorld) {
 			entity.update();
 		}
 	}
 	
-	this.entities.sort(function(a, b) { return (a.y + a.height) - (b.y + b.height); });
+	this.entities.sort(function(a, b) {
+		if (a instanceof FlatTerrain) return -1;
+		if (b instanceof FlatTerrain) return 1;
+		return (a.y + a.height) - (b.y + b.height);
+	});
 	
 	for (var i = this.entities.length - 1; i >= 0; --i) {
 		if (!this.entities[i] || this.entities[i].removeFromWorld) {

@@ -49,8 +49,7 @@ function newGame() {
 	game.playerInfo = new PlayerInfo(game);
 
 	game.enemies = enemies;
-	game.terrain = terrain; 
-	game.addEntity(game.map); 
+	game.terrain = terrain;
 	game.addEntity(game.camera);
 	game.addEntity(game.hero);
 	game.bossesKilled = 0;
