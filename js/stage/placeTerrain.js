@@ -87,8 +87,10 @@ function getlocation(xMin, xMax, yMin, yMax) {
 		}
 		newXY = false;
 		for (var j = 0; j < this.game.terrain.length; j++) {
-			if (getDistance(this.game.terrain[j], location) <= 100)
+			if (getDistance(this.game.terrain[j], location) <= 100) {
 				newXY = true;
+				j = this.game.terrain.length;
+			}
 		}
 		if (!newXY)
 			break;
