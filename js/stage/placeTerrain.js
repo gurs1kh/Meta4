@@ -14,10 +14,10 @@ PlaceTerrain.prototype = new Entity();
 PlaceTerrain.prototype.constructor = PlaceTerrain;
 
 PlaceTerrain.prototype.placeTrees = function () {
-	this.placeTreesAtlocation(1950, 4450, 4300, 5900); //Bottom
-	this.placeTreesAtlocation(1950, 4450, 150, 2050); //Top
-	this.placeTreesAtlocation(350, 2300, 1950, 4300); //Left
-	this.placeTreesAtlocation(4100, 5900, 1950, 4450); //Right
+	this.placeTreesAtlocation(1950, 4150, 4300, 5900); //Bottom
+	this.placeTreesAtlocation(1950, 4150, 550, 2050); //Top
+	this.placeTreesAtlocation(550, 2300, 1950, 4300); //Left
+	this.placeTreesAtlocation(4400, 5900, 1950, 4150); //Right
 }
 
 PlaceTerrain.prototype.placeTreesAtlocation = function (xMin, xMax, yMin, yMax) {
@@ -31,36 +31,43 @@ PlaceTerrain.prototype.placeTreesAtlocation = function (xMin, xMax, yMin, yMax) 
 }
 PlaceTerrain.prototype.placeTombs = function () {
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(400, 1900, 4475, 6040);
+		var location = getlocation(400, 1400, 4475, 5540);
+		var which = getRandomNumber(0, 1);
 		var tombs;
-			tombs = new Tombstone(this.game, location.x, location.y);
+			if (which === 0) tombs = new Tombstone(this.game, location.x, location.y);
+			else tombs = new FalseFloorTomb(this.game, location.x, location.y);
 		this.game.terrain.push(tombs);
 		this.game.addEntity(tombs);
 	}
 }
 PlaceTerrain.prototype.placeSnowTrees = function () {
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(4475, 6040, 4475, 6040);
+		var location = getlocation(4775, 5640, 4475, 5640);
+		var which = getRandomNumber(0, 1);
 		var snowtrees;
-			snowtrees = new SnowTree(this.game, location.x, location.y);
+			if (which === 0) snowtrees = new SnowTree(this.game, location.x, location.y);
+			else snowtrees = new FalseFloorSnow(this.game, location.x, location.y);
 		this.game.terrain.push(snowtrees);
 		this.game.addEntity(snowtrees);
 	}
 }
 PlaceTerrain.prototype.placeRocks = function () {
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(400, 1900, 350, 1910);
+		var location = getlocation(400, 1500, 350, 1510);
 		var rocks;
-			rocks = new Rock(this.game, location.x, location.y);
+		var which = getRandomNumber(0, 1);
+		if (which === 0) rocks = new Rock(this.game, location.x, location.y);
+		else rocks = new FalseFloorHuman(this.game, location.x, location.y);
 		this.game.terrain.push(rocks);
 		this.game.addEntity(rocks);
 	}
 }
 PlaceTerrain.prototype.placeTrap = function () {
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(4475, 6040, 350, 1910);
+		var location = getlocation(4475, 6040, 350, 1710);
 		var pits;
-			pits = new Pit(this.game, location.x, location.y);
+		pits = new FalseFloorZombie(this.game, location.x, location.y); 
+		//	pits = new Pit(this.game, location.x, location.y);
 		this.game.terrain.push(pits);
 		this.game.addEntity(pits);
 	}

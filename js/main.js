@@ -56,7 +56,7 @@ function newGame() {
 	game.bossesKilled = 0;
 
 	new PlaceEnemies(game, 30);
-	new PlaceTerrain(game, 20);
+	new PlaceTerrain(game, 30);
 	
 	game.init(ctx);
 	game.start();
