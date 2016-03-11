@@ -1,6 +1,6 @@
 function Sword(game, x, y, pickedUp) {
 	Weapon.call(this, game, x, y, pickedUp);
-	this.attackDelay = 1000;
+	this.attackDelay = 500;
 	this.width = 28;
 	this.height = 25;
 	this.offX = 15;

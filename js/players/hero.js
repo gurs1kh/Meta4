@@ -107,7 +107,7 @@ Hero.prototype.update = function () {
 		this.currentWeapon.left = false;
 		this.currentWeapon.right = false;
 	} else {
-		this.currentWeapon.attackingTime = 0;
+		this.currentWeapon.attackingTime -= 100;
 	}
 	
 	this.x += velocity.x;
