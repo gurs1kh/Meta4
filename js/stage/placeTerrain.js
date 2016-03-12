@@ -77,23 +77,19 @@ PlaceTerrain.prototype.placeTrap = function () {
 	}
 }
 
-PlaceTerrain.prototype.placeFalse = function () {
-	
-}
-
 PlaceTerrain.prototype.getlocation = function(xMin, xMax, yMin, yMax) {
 	var location = {};
 	var newXY = true;
 	while (newXY) {
+		newXY = false;
 		location = {
 			x: getRandomNumber(xMin, xMax),
 			y: getRandomNumber(yMin, yMax)
 		}
-		newXY = false;
-		for (var j = 0; j < this.game.terrain.length; j++) {
-			if (getDistance(this.game.terrain[j], location) <= 500) {
+		for (var i = 0; i < this.game.terrain.length; i++) {
+			if (getDistance(this.game.terrain[i], location) <= 100) {
 				newXY = true;
-				j = this.game.terrain.length;
+				i = this.game.terrain.length;
 			}
 		}
 	}

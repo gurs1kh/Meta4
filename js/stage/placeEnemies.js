@@ -25,7 +25,7 @@ PlaceEnemies.prototype.placeBasics = function () {
 
 PlaceEnemies.prototype.placeBasicsAtlocation = function (xMin, xMax, yMin, yMax) {
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(xMin, xMax, yMin, yMax);
+		var location = this.getlocation(xMin, xMax, yMin, yMax);
 		var basic;
 		var which = getRandomNumber(0, 2);
 		if (which === 0)
@@ -46,7 +46,7 @@ PlaceEnemies.prototype.placeHuman = function () {
 	this.game.enemies.push(blackKnight);
 	this.game.addEntity(blackKnight);
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(400, 1900, 350, 1910);
+		var location = this.getlocation(400, 1900, 350, 1910);
 		var human;
 		var which = getRandomNumber(0, 2);
 		if (which === 0)
@@ -68,7 +68,7 @@ PlaceEnemies.prototype.placeTomb = function () {
 	this.game.addEntity(skeletonKing);
 
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(400, 1900, 4475, 6040);
+		var location = this.getlocation(400, 1900, 4475, 6040);
 		var tomb;
 		var which = getRandomNumber(0, 1);
 		if (!which)
@@ -88,7 +88,7 @@ PlaceEnemies.prototype.placeUndead = function () {
 	this.game.addEntity(death);
 
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(4475, 6040, 350, 1910);
+		var location = this.getlocation(4475, 6040, 350, 1910);
 		var undead;
 		var which = getRandomNumber(0, 2);
 		if (which === 0)
@@ -110,7 +110,7 @@ PlaceEnemies.prototype.placeGoblin = function () {
 	this.game.addEntity(armoredGoblin);
 
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(4475, 6040, 4475, 6040);
+		var location = this.getlocation(4475, 6040, 4475, 6040);
 		var goblin;
 		var which = getRandomNumber(0, 1);
 		if (!which)
@@ -126,24 +126,21 @@ function getRandomNumber(min, max) {
 	return Math.floor(Math.random() * (max - min + 1.0)) + min;
 }
 
-function getlocation(xMin, xMax, yMin, yMax) {
+PlaceEnemies.prototype.getlocation = function(xMin, xMax, yMin, yMax) {
 	var location = {};
 	var newXY = true;
-	while (true) {
-		if (newXY) {
-			location = {
-				x: getRandomNumber(xMin, xMax),
-				y: getRandomNumber(yMin, yMax)
+	while (newXY) {
+		newXY = false;
+		location = {
+			x: getRandomNumber(xMin, xMax),
+			y: getRandomNumber(yMin, yMax)
+		}
+		for (var i = 0; i < this.game.terrain.length; i++) {
+			if (getDistance(this.game.terrain[i], location) <= 500) {
+				newXY = true;
+				i = this.game.terrain.length;
 			}
 		}
-		newXY = false;
-		for (var j = 0; j < this.game.enemies.length; j++) {
-			if (getDistance(this.game.enemies[j], location) <= 100)
-				newXY = true;
-		}
-		if (!newXY)
-			break;
-		console.log("a");
 	}
 	return location;
 }

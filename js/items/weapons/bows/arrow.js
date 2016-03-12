@@ -36,6 +36,7 @@ Arrow.prototype.update = function () {
 				if (this.game.drDarkabolical.vulnerable)
 					this.game.drDarkabolical.vulnerable = false;
 			} else {
+				enemy.radius = 300;
 				enemy.hitpoints -= this.damage;
 				if (enemy.hitpoints <= 0) {
 					if (enemy instanceof Scarf || enemy instanceof Hood) {

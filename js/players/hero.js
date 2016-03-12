@@ -264,7 +264,8 @@ function collideCircleWithRotatedRectangle(circle, rect) {
 
 	// Determine collision
 	var collision = false;
-	var distance = getDistance(unrotatedCircleX, unrotatedCircleY, closestX, closestY);
+	var distance = getDistance({x:unrotatedCircleX, y:unrotatedCircleY},
+							   {x:closestX, y:closestY});
 
 	if (distance < circle.radius) {
 		collision = true;
@@ -274,8 +275,8 @@ function collideCircleWithRotatedRectangle(circle, rect) {
 	return collision;
 }
 
-function getDistance(fromX, fromY, toX, toY) {
-	var dX = Math.abs(fromX - toX);
-	var dY = Math.abs(fromY - toY);
+function getDistance(a, b) {
+	var dX = Math.abs(a.x - b.x);
+	var dY = Math.abs(a.y - b.y);
 	return Math.sqrt((dX * dX) + (dY * dY));
 }
