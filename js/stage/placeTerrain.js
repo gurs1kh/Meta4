@@ -16,7 +16,7 @@ PlaceTerrain.prototype.constructor = PlaceTerrain;
 PlaceTerrain.prototype.placeTrees = function () {
 	this.placeTreesAtlocation(1950, 4150, 4300, 5900); //Bottom
 	this.placeTreesAtlocation(1950, 4150, 550, 2050); //Top
-	this.placeTreesAtlocation(550, 2300, 1950, 4300); //Left
+	this.placeTreesAtlocation(550, 2000, 1950, 4300); //Left
 	this.placeTreesAtlocation(4400, 5900, 1950, 4150); //Right
 }
 
@@ -44,7 +44,7 @@ PlaceTerrain.prototype.placeTombs = function () {
 
 PlaceTerrain.prototype.placeSnowTrees = function () {
 	for (var i = 0; i < this.num; i++) {
-		var location = this.getlocation(4775, 5640, 4475, 5640);
+		var location = this.getlocation(4975, 5640, 4675, 5640);
 		var which = getRandomNumber(0, 1);
 		var snowtrees;
 			if (which === 0) snowtrees = new SnowTree(this.game, location.x, location.y);
@@ -68,7 +68,7 @@ PlaceTerrain.prototype.placeRocks = function () {
 
 PlaceTerrain.prototype.placeTrap = function () {
 	for (var i = 0; i < this.num; i++) {
-		var location = this.getlocation(4475, 6040, 350, 1710);
+		var location = this.getlocation(4775, 5840, 350, 1510);
 		var pits;
 		pits = new FalseFloorZombie(this.game, location.x, location.y); 
 		//	pits = new Pit(this.game, location.x, location.y);
