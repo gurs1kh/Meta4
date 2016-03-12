@@ -7,7 +7,7 @@ function FalseFloorZombie(game, x, y) {
 FalseFloorZombie.prototype = new FalseFloor();
 FalseFloorZombie.prototype.constructor = FalseFloorZombie;
 
-FalseFloor.prototype.update = function() {
+FalseFloorZombie.prototype.update = function() {
 	if (this.collide(this.game.hero)) {
 		this.removeFromWorld = true;
 		this.game.entities.push(new Pit(this.game, this.x, this.y));
