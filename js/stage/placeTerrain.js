@@ -24,7 +24,7 @@ PlaceTerrain.prototype.placeTreesAtlocation = function (xMin, xMax, yMin, yMax) 
 	for (var i = 0; i < this.num; i++) {
 		var location = this.getlocation(xMin, xMax, yMin, yMax);
 		var trees;
-			trees = new Tree(this.game, location.x, location.y);
+		trees = new Tree(this.game, location.x, location.y);
 		this.game.terrain.push(trees);
 		this.game.addEntity(trees);
 	}
@@ -35,8 +35,8 @@ PlaceTerrain.prototype.placeTombs = function () {
 		var location = this.getlocation(400, 1400, 4475, 5540);
 		var which = getRandomNumber(0, 1);
 		var tombs;
-			if (which === 0) tombs = new Tombstone(this.game, location.x, location.y);
-			else tombs = new FalseFloorTomb(this.game, location.x, location.y);
+		if (which === 0) tombs = new Tombstone(this.game, location.x, location.y);
+		else tombs = new FalseFloorTomb(this.game, location.x, location.y);
 		this.game.terrain.push(tombs);
 		this.game.addEntity(tombs);
 	}
@@ -47,8 +47,8 @@ PlaceTerrain.prototype.placeSnowTrees = function () {
 		var location = this.getlocation(4975, 5640, 4675, 5640);
 		var which = getRandomNumber(0, 1);
 		var snowtrees;
-			if (which === 0) snowtrees = new SnowTree(this.game, location.x, location.y);
-			else snowtrees = new FalseFloorSnow(this.game, location.x, location.y);
+		if (which === 0) snowtrees = new SnowTree(this.game, location.x, location.y);
+		else snowtrees = new FalseFloorSnow(this.game, location.x, location.y);
 		this.game.terrain.push(snowtrees);
 		this.game.addEntity(snowtrees);
 	}
