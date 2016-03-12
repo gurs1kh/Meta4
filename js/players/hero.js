@@ -163,7 +163,7 @@ Hero.prototype.update = function () {
 	for (var i = 0; i < this.game.enemies.length; i++) {
 		var enemy = this.game.enemies[i];
 		if (!this.invincible && !enemy.removeFromWorld && this.collide(enemy)) {
-			this.lives = this.lives - 0.5;
+			this.lives -= 0.5;
 			this.invincible = true;
 			this.speed *= 4 / 3;
 			this.num++;
@@ -176,6 +176,13 @@ Hero.prototype.update = function () {
 				}
 			}
 		}
+	}
+	
+	var hero = this;
+	if (this.game.entities.filter(function(d) { return d instanceof Pit && d.collide(hero); }).length > 0) {
+		console.log(1);
+		if (!this.invincible) this.lives--;
+		this.invincible = true;
 	}
 	
 	Player.prototype.update.call(this);
