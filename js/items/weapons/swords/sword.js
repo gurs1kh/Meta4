@@ -1,6 +1,6 @@
 function Sword(game, x, y, pickedUp) {
 	Weapon.call(this, game, x, y, pickedUp);
-	this.attackDelay = 500;
+	this.attackDelay = 5000;
 	this.width = 28;
 	this.height = 25;
 	this.offX = 15;
@@ -26,7 +26,7 @@ Sword.prototype.update = function () {
 		}
 	}
 
-	if (this.attacking && this.pickedUp) {
+	if (this.attacking && this.pickedUp && this.attackingTime >= this.attackDelay / 2) {
 		for (var i = 0; i < this.game.enemies.length; i++) {
 			var enemy = this.game.enemies[i];
 			if (this.collide(enemy)) {
@@ -59,7 +59,7 @@ Weapon.prototype.draw = function (ctx) {
 	ctx.save();
 	if (!this.pickedUp) {
 		this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-	} else if (this.attacking || this instanceof Bow) {
+	} else if ((this.attacking && this.attackingTime >= this.attackDelay / 2)|| this instanceof Bow) {
 		ctx.translate(this.game.camera.x, this.game.camera.y + 5);
 		var offX = 0, offY = 0;
 		if (this.up) {

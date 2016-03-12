@@ -180,7 +180,6 @@ Hero.prototype.update = function () {
 	
 	var hero = this;
 	if (this.game.entities.filter(function(d) { return d instanceof Pit && d.collide(hero); }).length > 0) {
-		console.log(1);
 		if (!this.invincible) this.lives--;
 		this.invincible = true;
 	}
@@ -200,13 +199,14 @@ Hero.prototype.draw = function (ctx) {
 		if (this.currentWeapon instanceof Bow) {
 			Player.prototype.draw.call(this, ctx);
 		} else {
-			if (this.down || this.currentWeapon.down) {
+			var attacking = this.currentWeapon.attackingTime >= this.currentWeapon.attackDelay / 2;
+			if (this.down || (this.currentWeapon.down && attacking)) {
 				this.downAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
-			} else if (this.up || this.currentWeapon.up) {
+			} else if (this.up || (this.currentWeapon.up && attacking)) {
 				this.upAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-			} else if (this.left || this.currentWeapon.left) {
+			} else if (this.left || (this.currentWeapon.left && attacking)) {
 				this.leftAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-			} else if (this.right || this.currentWeapon.right) {
+			} else if (this.right || (this.currentWeapon.right && attacking)) {
 				this.rightAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
 			} else {
 				this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);

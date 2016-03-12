@@ -22,16 +22,17 @@ PlaceTerrain.prototype.placeTrees = function () {
 
 PlaceTerrain.prototype.placeTreesAtlocation = function (xMin, xMax, yMin, yMax) {
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(xMin, xMax, yMin, yMax);
+		var location = this.getlocation(xMin, xMax, yMin, yMax);
 		var trees;
 			trees = new Tree(this.game, location.x, location.y);
 		this.game.terrain.push(trees);
 		this.game.addEntity(trees);
 	}
 }
+
 PlaceTerrain.prototype.placeTombs = function () {
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(400, 1400, 4475, 5540);
+		var location = this.getlocation(400, 1400, 4475, 5540);
 		var which = getRandomNumber(0, 1);
 		var tombs;
 			if (which === 0) tombs = new Tombstone(this.game, location.x, location.y);
@@ -40,9 +41,10 @@ PlaceTerrain.prototype.placeTombs = function () {
 		this.game.addEntity(tombs);
 	}
 }
+
 PlaceTerrain.prototype.placeSnowTrees = function () {
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(4775, 5640, 4475, 5640);
+		var location = this.getlocation(4775, 5640, 4475, 5640);
 		var which = getRandomNumber(0, 1);
 		var snowtrees;
 			if (which === 0) snowtrees = new SnowTree(this.game, location.x, location.y);
@@ -51,9 +53,10 @@ PlaceTerrain.prototype.placeSnowTrees = function () {
 		this.game.addEntity(snowtrees);
 	}
 }
+
 PlaceTerrain.prototype.placeRocks = function () {
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(400, 1500, 350, 1510);
+		var location = this.getlocation(400, 1500, 350, 1510);
 		var rocks;
 		var which = getRandomNumber(0, 1);
 		if (which === 0) rocks = new Rock(this.game, location.x, location.y);
@@ -62,9 +65,10 @@ PlaceTerrain.prototype.placeRocks = function () {
 		this.game.addEntity(rocks);
 	}
 }
+
 PlaceTerrain.prototype.placeTrap = function () {
 	for (var i = 0; i < this.num; i++) {
-		var location = getlocation(4475, 6040, 350, 1710);
+		var location = this.getlocation(4475, 6040, 350, 1710);
 		var pits;
 		pits = new FalseFloorZombie(this.game, location.x, location.y); 
 		//	pits = new Pit(this.game, location.x, location.y);
@@ -72,29 +76,26 @@ PlaceTerrain.prototype.placeTrap = function () {
 		this.game.addEntity(pits);
 	}
 }
+
 PlaceTerrain.prototype.placeFalse = function () {
 	
 }
-function getlocation(xMin, xMax, yMin, yMax) {
+
+PlaceTerrain.prototype.getlocation = function(xMin, xMax, yMin, yMax) {
 	var location = {};
 	var newXY = true;
-	while (true) {
-		if (newXY) {
-			location = {
-				x: getRandomNumber(xMin, xMax),
-				y: getRandomNumber(yMin, yMax)
-			}
+	while (newXY) {
+		location = {
+			x: getRandomNumber(xMin, xMax),
+			y: getRandomNumber(yMin, yMax)
 		}
 		newXY = false;
 		for (var j = 0; j < this.game.terrain.length; j++) {
-			if (getDistance(this.game.terrain[j], location) <= 100) {
+			if (getDistance(this.game.terrain[j], location) <= 500) {
 				newXY = true;
 				j = this.game.terrain.length;
 			}
 		}
-		if (!newXY)
-			break;
-		console.log("a");
 	}
 	return location;
 }

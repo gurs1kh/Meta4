@@ -1,11 +1,12 @@
 function Enemy(game, x, y, frameWidth, frameHeight) {
-	Player.call(this, game, x, y, frameWidth, frameHeight, 200);
+	Player.call(this, game, x, y, frameWidth, frameHeight, 300);
+	//this.radius = Math.max(this.game.camera.width / 2, this.game.camera.height / 2);
 	this.speed = 1;
 	this.hitpoints = 40;
-
+	
 	this.startingX = this.x;
 	this.startingY = this.y;
-
+	
 	this.atStarting = true;
 	this.attackedTime = 0;
 }
