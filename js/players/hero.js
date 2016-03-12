@@ -158,7 +158,7 @@ Hero.prototype.update = function () {
 			}
 		}
 	}
-
+	
 	//enemy collision
 	for (var i = 0; i < this.game.enemies.length; i++) {
 		var enemy = this.game.enemies[i];

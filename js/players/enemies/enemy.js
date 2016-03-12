@@ -68,7 +68,7 @@ Enemy.prototype.update = function () {
 	this.x += v.x;
 	this.y += v.y;
 
-	Entity.prototype.update.call(this);
+	Player.prototype.update.call(this);
 }
 
 function getRandomNumber(min, max) {

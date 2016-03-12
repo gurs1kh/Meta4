@@ -125,6 +125,7 @@ GameEngine.prototype.draw = function () {
 		}
 	}
 	this.playerInfo.draw(this.ctx);
+	
 	this.ctx.restore();
 };
 
