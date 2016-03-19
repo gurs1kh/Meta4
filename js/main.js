@@ -47,7 +47,7 @@ function newGame() {
 	game.hero = new Hero(game, 3180, 4100);
 	game.camera = new Camera(game, canvas.width, canvas.height);
 	game.playerInfo = new PlayerInfo(game);
-
+	
 	game.enemies = enemies;
 	game.terrain = terrain;
 	game.addEntity(game.camera);
